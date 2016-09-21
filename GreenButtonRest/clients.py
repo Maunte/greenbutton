@@ -14,7 +14,6 @@ class GreenButtonClient(object):
         method_map = {
             "/espi/1_1/resource/ApplicationInformation": self.application_information,
             "/espi/1_1/resource/Authorization": self.authorization,
-            "/espi/1_1/resource/IntervalBlock": self.interval_block,
             "/espi/1_1/resource/Batch/Bulk": self.batch_bulk,
             "/espi/1_1/resource/Batch/Subscription": self.batch_subscription,
             "/espi/1_1/resource/Batch/RetailCustomer": self.batch_retail_customer,
@@ -23,6 +22,7 @@ class GreenButtonClient(object):
             "/espi/1_1/resource/Subscription/ElectricPowerQualitySummarybyId": self.electric_power_usage_summary_by_id,
             "/espi/1_1/resource/Subscription/ElectricPowerUsageSummary": self.electric_power_usage_summary,
             "/espi/1_1/resource/Subscription/ElectricPowerUsageSummarybyId": self.electric_power_usage_summary_by_id,
+            "/espi/1_1/resource/IntervalBlock": self.interval_block,
             "/espi/1_1/resource/Subscription/IntervalBlock": self.all_interval_blocks,
             "/espi/1_1/resource/Subscription/IntervalBlockbyId": self.interval_block_by_id,
             "/espi/1_1/resource/LocalTimeParameters": self.local_time_parameters,
@@ -34,7 +34,6 @@ class GreenButtonClient(object):
             "/espi/1_1/resource/UsagePoint": self.usage_point,
             "/espi/1_1/resource/Subscription/UsagePoint": self.usage_points_by_subscription_id,
             "/espi/1_1/resource/Subscription/UsagePointbyId": self.usage_point_by_id,
-
         }
 
         result = method_map[self.endpoint](*args, **kwargs)

@@ -16,6 +16,10 @@ def main():
     print result
 
 
+def api_call(*args, **kwargs):
+    return
+
+
 def other(object):
     response = requests.request("GET", object.url, headers=object.headers)
     # / api / response?id = 5 & param = 9
