@@ -6,9 +6,10 @@ from clients import GreenButtonClient as GBC
 
 
 def main():
-    args = ["21"]
-    params = {}
-    app_info = GBC("Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3", "/espi/1_1/resource/Authorization", *args, **params)
+    args = [] # Required parameters go here
+    params = {} # Optional parameters go here
+    endpoint = "/espi/1_1/resource/Subscription/UsagePointbyId" # Check clients.py for reference
+    app_info = GBC("Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3", endpoint, *args, **params)
     # other(app_info)
     result = app_info.execute()
     print app_info.url
