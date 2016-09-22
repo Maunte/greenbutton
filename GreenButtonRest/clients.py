@@ -4,7 +4,7 @@ import requests
 class GreenButtonClient(object):
     def __init__(self, access_token, endpoint, *args, **kwargs):
         self.endpoint = endpoint
-        self.headers = {"authorization": access_token, "cache-control": "no cache"}
+        self.headers = {"Pragma": "no-cache", "authorization": access_token, "cache-control": "no cache"}
         self.url = "https://services.greenbuttondata.org:443/DataCustodian" + endpoint
         self.args = args
         self.kwargs = kwargs

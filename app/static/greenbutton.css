@@ -23,6 +23,11 @@ label {
     margin-top: 10px;
 }
 
+.sub_form_div {
+    border: 1px solid rgb(0,200,0);
+    background-color: rgb(240,255,240);
+}
+
 .form_header {
     color: rgb(0,150,0);
 }

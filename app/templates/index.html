@@ -3,7 +3,8 @@
 
 <head>
     <title>Green Button REST Client Test Page: DogPackDesign</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"
+          integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/css/tether.min.css">
     <link rel="stylesheet" href="../static/greenbutton.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -11,103 +12,322 @@
 <body>
 
 <div class="container">
-    <div id="page_header" class="d-block bg-success">
-       <h1 class="display-2 text-xs-center">Green Button REST API</h1>
-    </div>
+    <a href="/"><div id="page_header" class="d-block bg-success">
+        <h1 class="display-2 text-xs-center">Green Button REST API</h1>
+    </div></a>
     <br>
+    
+    <!-- Field names: access_token -->
     <div class="form-group row">
         <label for="access_token" class="col-xs-2 col-form-label text-xs-right">Access Token</label>
         <div class="col-xs-10">
             <div class="input-group">
-                <input type="text" name="access_token" value="Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3" class="form-control form-control-md" id="access_token" placeholder="Access Token">
+                <input type="text" name="access_token" value="Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3"
+                       class="required form-control form-control-md" id="access_token" placeholder="Access Token">
             </div>
         </div>
     </div>
 
     <ul class="list-group">
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#app_info">GET Application Information <i class="fa fa-chevron-down"></i></a></li>
+
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#app_info">
+            GET ApplicationInformation <i class="fa fa-chevron-down"></i></a></li>
         <div class="collapse" id="app_info">
+            
+            <!-- Field names: app_info_id -->
+            <!-- Button name: app_info_id_submit  -->
             <form class="form_div" method="post">
                 <h3 class="text-xs-center form_header">GET App Info by Id</h3>
                 <div class="form-group row">
                     <label for="app_id" class="col-xs-2 col-form-label text-xs-right">App Info Id</label>
                     <div class="col-xs-10">
                         <div class="input-group">
-                            <input type="text" name="app_info_id" class="form-control form-control-md" id="app_id" placeholder="App Info Id">
-                            <span class="input-group-btn"><button type="submit" name="app_info_id_submit" class="btn btn-success btn-md">Submit</button></span>
+                            <input type="text" name="app_info_id" class="required form-control form-control-md" id="app_id"
+                                   placeholder="App Info Id">
+                            <span class="input-group-btn"><button type="submit" name="app_info_id_submit"
+                                                                  class="btn btn-success btn-md">Submit</button></span>
                         </div>
                     </div>
                 </div>
             </form>
             
+            <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Button name: app_info_submit  ------------------------------------------------------------------------>
             <form class="form_div" method="post">
                 <h3 class="text-xs-center form_header">Get All App Info</h3>
                 <div class="form-group row">
                     <label for="app_info_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
                     <div class="col-xs-4">
-                        <input type="date" name="pub_min" class="form-control form-control-md" id="app_info_pub_min" placeholder="Published Min">
+                        <input type="date" name="published-min" class="form-control form-control-md"
+                        id="app_info_pub_min" placeholder="Published Min">
                     </div>
                     <label for="app_info_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
                     <div class="col-xs-4">
-                        <input type="date" name="pub_max" class="form-control form-control-md" id="app_info_pub_max" placeholder="Published Max">
+                        <input type="date" name="published-max" class="form-control form-control-md"
+                        id="app_info_pub_max" placeholder="Published Max">
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label for="app_info_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
                     <div class="col-xs-4">
-                        <input type="date" name="update_min" class="form-control form-control-md" id="app_info_update_min" placeholder="Updated Min">
+                        <input type="date" name="updated-min" class="form-control form-control-md"
+                        id="app_info_update_min" placeholder="Updated Min">
                     </div>
                     <label for="app_info_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
                     <div class="col-xs-4">
-                        <input type="date" name="update_max" class="form-control form-control-md" id="app_info_update_max" placeholder="Updated Max">
+                        <input type="date" name="updated-max" class="form-control form-control-md"
+                        id="app_info_update_max" placeholder="Updated Max">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="app_info_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
                     <div class="col-xs-10">
-                        <input type="text" name="max_results" class="form-control form-control-md" id="app_info_max_results" placeholder="Max Results">
+                        <input type="text" name="max-results" class="form-control form-control-md"
+                               id="app_info_max_results" placeholder="Max Results">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="app_info_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
                     <div class="col-xs-10">
-                        <input type="text" name="start_index" class="form-control form-control-md" id="app_info_start_index" placeholder="Start Index">
+                        <input type="text" name="start-index" class="form-control form-control-md"
+                               id="app_info_start_index" placeholder="Start Index">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="app_info_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
                     <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="app_info_depth" placeholder="Depth">
+                        <input type="text" name="depth" class="form-control form-control-md" id="app_info_depth"
+                               placeholder="Depth">
                     </div>
                 </div>
-                    <button type="submit" name="app_info_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+                <button type="submit" name="app_info_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
+                </button>
             </form>
         </div>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Authorization <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Interval Block <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Bulk Transfer from DataCustodian <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET GreenButton Subscription from DataCustodian <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific UsagePoint for Specific Retail Customer  <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Request a GreenButton Subscription from DataCustodian <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All Electirc Power Quality Summaries <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific Electric Power Quality Summary <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All Electric Power Usage Summaries <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific Electric Power Usage Summary <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All Interval Blocks <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific Interval Block <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All Interval Blocks for Specfic Subscription and Meter Reading <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific Interval Block for Specfic Subscription and Meter Reading <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Local Time Parameters <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Meter Readings <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All Meter Readings Associated with a Given UsagePoint <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific UsagePoint's Meter Reading for Specific Meter Reading <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Reading Types <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Data Custodian Resource Server's Status <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET UsagePoints <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET UsagePoints for Specific Subscription <i class="fa fa-chevron-down"></i></a></li>
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Application Information <i class="fa fa-chevron-down"></i></a></li>
-    </ul>
+
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#auth">GET
+            Authorization <i class="fa fa-chevron-down"></i></a></li>
+        <div class="collapse" id="auth">
+
+        <!-- Field names: auth_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+        <!-- Button name: auth_submit  -->
+        <form class="form_div" method="post">
+            <h3 class="text-xs-center form_header">GET Authorization</h3>
+            <div class="form-group row">
+                <label for="app_id" class="col-xs-2 col-form-label text-xs-right">Authorization Id</label>
+                <div class="col-xs-10">
+                    <div class="input-group">
+                        <input type="text" name="auth_info_id" class="form-control form-control-md" id="auth_id"
+                               placeholder="Authorization Id">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="auth_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                <div class="col-xs-4">
+                    <input type="date" name="published-min" class="form-control form-control-md" id="auth_pub_min"
+                    placeholder="Published Min">
+                </div>
+                <label for="auth_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                <div class="col-xs-4">
+                    <input type="date" name="published-max" class="form-control form-control-md" id="auth_pub_max"
+                    placeholder="Published Max">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="auth_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                <div class="col-xs-4">
+                    <input type="date" name="updated-min" class="form-control form-control-md" id="auth_update_min"
+                    placeholder="Updated Min">
+                </div>
+                <label for="auth_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                <div class="col-xs-4">
+                    <input type="date" name="updated-max" class="form-control form-control-md" id="auth_update_max"
+                    placeholder="Updated Max">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="auth_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
+                <div class="col-xs-10">
+                    <input type="text" name="max-results" class="form-control form-control-md" id="auth_max_results"
+                           placeholder="Max Results">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="auth_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
+                <div class="col-xs-10">
+                    <input type="text" name="start-index" class="form-control form-control-md" id="auth_start_index"
+                           placeholder="Start Index">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="auth_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                <div class="col-xs-10">
+                    <input type="text" name="depth" class="form-control form-control-md" id="auth_depth"
+                           placeholder="Depth">
+                </div>
+            </div>
+            <button type="submit" name="auth_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+        </form>
+        </div>
+
+
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#bulk">GET Bulk
+    Transfer from DataCustodian <i class="fa fa-chevron-down"></i></a></li>
+
+    <div class="collapse" id="bulk">
+
+        <!-- Id names: bulk_id, bulk_sub_id, bulk_customer_id, bulk_sub_usage
+        <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+        <!-- Button name: bulk_submit  -->
+        <form class="form_div" method="post">
+            <h3 class="text-xs-center form_header">GET Bulk Tranfer</h3>
+
+            <div class="sub_form_div">
+                <div class="form-group row">
+                    <label for="bulk_id" class="col-xs-2 col-form-label text-xs-right">Bulk Id</label>
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk" data-pair="bulk_id">
+                            </span>
+                            <input type="text" name="bulk_id" class="form-control form-control-md id_select" id="bulk_id"
+                                   placeholder="Bulk Id" data-group="bulk" data-pair="bulk_id">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id</label>
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk" data-pair="bulk_sub_id">
+                            </span>
+                            <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select" id="bulk_sub_id"
+                                   placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_id">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">Retail Customer Id</label>
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk" data-pair="bulk_customer_id">
+                            </span>
+                            <input type="text" name="bulk_customer_id" class="form-control form-control-md id_select" id="bulk_customer_id"
+                                   placeholder="Retail Customer Id" data-group="bulk" data-pair="bulk_customer_id">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id / UsagePoint Id</label>
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk" data-pair="bulk_sub_usage">
+                            </span>
+                            <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select" id="bulk_sub_with_usagepoint_id"
+                                   placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_usage">
+                            <span>
+                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select" id="bulk_usagepoint_with_sub_id"
+                                   placeholder="UsagePoint Id" data-group="bulk" data-pair="bulk_sub_usage">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="bulk_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                <div class="col-xs-4">
+                    <input type="date" name="published-min" class="form-control form-control-md" id="bulk_pub_min"
+                    placeholder="Published Min">
+                </div>
+                <label for="bulk_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                <div class="col-xs-4">
+                    <input type="date" name="published-max" class="form-control form-control-md" id="bulk_pub_max"
+                    placeholder="Published Max">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="bulk_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                <div class="col-xs-4">
+                    <input type="date" name="updated-min" class="form-control form-control-md" id="bulk_update_min"
+                    placeholder="Updated Min">
+                </div>
+                <label for="bulk_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                <div class="col-xs-4">
+                    <input type="date" name="updated-max" class="form-control form-control-md" id="bulk_update_max"
+                    placeholder="Updated Max">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="bulk_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
+                <div class="col-xs-10">
+                    <input type="text" name="max-results" class="form-control form-control-md" id="bulk_max_results"
+                           placeholder="Max Results">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="bulk_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
+                <div class="col-xs-10">
+                    <input type="text" name="start-index" class="form-control form-control-md" id="bulk_start_index"
+                           placeholder="Start Index">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="bulk_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                <div class="col-xs-10">
+                    <input type="text" name="depth" class="form-control form-control-md" id="bulk_depth"
+                           placeholder="Depth">
+                </div>
+            </div>
+            <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+        </form>
+        </div>
+
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
+    Electirc Power Quality Summaries <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
+    Electric Power Quality Summary <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
+    Electric Power Usage Summaries <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
+    Electric Power Usage Summary <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Interval
+    Block <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
+    Interval Blocks <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
+    Interval Block <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
+    Interval Blocks for Specfic Subscription and Meter Reading <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
+    Interval Block for Specfic Subscription and Meter Reading <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Local
+    Time Parameters <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Meter
+    Readings <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All Meter
+    Readings Associated with a Given UsagePoint <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
+    UsagePoint's Meter Reading for Specific Meter Reading <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Reading
+    Types <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Data
+    Custodian Resource Server's Status <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
+    UsagePoints <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
+    UsagePoints for Specific Subscription <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
+    Application Information <i class="fa fa-chevron-down"></i></a></li>
+</ul>
 </div>
 
 
@@ -118,19 +338,26 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
+        integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
+        crossorigin="anonymous"></script>
 <script src="../static/greenbutton.js"></script>
 <script>
     $(".form_div").submit( function(e) {
         var token = $("#access_token").val();
         if (token == "") {
             e.preventDefault();
+            $("#access_token").addClass("form-control-warning");
             alert("Enter an Access Token");
         } else {
             $("<input />").attr("type", "hidden").attr("name", "access_token").attr("value", token).appendTo(this);
             return True;
         }
+        if ($(".required").val() == "") {
+            e.preventDefault();
+        }
     });
+
 </script>
 </body>
 

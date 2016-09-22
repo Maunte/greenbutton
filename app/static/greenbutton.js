@@ -1,13 +1,17 @@
 $(document).ready( function() {
-//    $(".form_div").submit( function(e) {
-//        var token = $("#access_token").val();
-//        if (token == "") {
-//            e.preventDefault();
-//            alert("Enter an Access Token");
-//        } else {
-//            alert(this.id);
-//            $("<input />").attr("type", "hidden").attr("name", "access_token").attr("value", token).appendTo(this);
-//            return True;
-//        }
-//    });
+    $(document).on("click", ".id_select", function() {
+        var data_pair = $(this).attr("data-pair");
+        var data_group = $(this).attr("data-group");
+        var group = document.querySelectorAll("[data-group='"+data_group+"']");
+        for (i=0; i<group.length;i++) {
+            if ($(group[i]).attr("data-pair") != data_pair) {
+                if ($(group[i]).attr("type") == "text") {
+                    $(group[i]).prop("disabled", true);
+                }
+            } else {
+                $(group[i]).attr("disabled", false);
+                $(group[i]).prop("checked", true);
+            }
+        }
+    });
 });
