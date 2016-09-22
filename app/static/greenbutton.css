@@ -2,6 +2,10 @@ body {
     background-color: rgb(250,250,255);
 }
 
+#page_header {
+    border-radius: 10px;
+}
+
 label {
     font-size: 12px;
     font-weight: bold;
