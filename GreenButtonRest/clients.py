@@ -56,7 +56,7 @@ class GreenButtonClient(object):
                             self.params += "&"
                 i += 1
 
-    def application_information(self, *args, **kwargs):
+    def application_information(self):
         print "GETing Application Information..."
 
         if len(self.args) == 1:
@@ -70,7 +70,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def authorization(self, *args, **kwargs):
+    def authorization(self):
         print "GETing Authorizations"
 
         if len(self.args) == 1:
@@ -84,7 +84,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def batch_bulk(self, *args, **kwargs):
+    def batch_bulk(self):
         print "GETing Bulk Transfer from DataCustodian"
 
         if len(self.args) < 1:
@@ -100,7 +100,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def batch_subscription(self, *args, **kwargs):
+    def batch_subscription(self):
         print "GETing Subscription from DataCustodian"
 
         if len(self.args) < 1:
@@ -116,7 +116,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def batch_retail_customer(self, *args, **kwargs):
+    def batch_retail_customer(self):
         print "GETing UsagePoint for Retail Customer"
 
         if len(self.args) < 1:
@@ -132,7 +132,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def batch_subscription_usage(self, *args, **kwargs):
+    def batch_subscription_usage(self):
         print "GETing Authorizations"
 
         self.url = self.url[:-10]
@@ -149,7 +149,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def electric_power_quality_summary(self, *args, **kwargs):
+    def electric_power_quality_summary(self):
         print "GETing Electric Power Quality Summary"
 
         self.url = self.url[:-27]
@@ -166,7 +166,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def electric_power_quality_summary_by_id(self, *args, **kwargs):
+    def electric_power_quality_summary_by_id(self):
         print "GETing Electric Power Quality Summary"
 
         self.url = self.url[:-31]
@@ -183,7 +183,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def electric_power_usage_summary(self, *args, **kwargs):
+    def electric_power_usage_summary(self):
         print "GETing Electric Power Usage Summary"
 
         self.url = self.url[:-25]
@@ -200,7 +200,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def electric_power_usage_summary_by_id(self, *args, **kwargs):
+    def electric_power_usage_summary_by_id(self):
         print "GETing Electric Power Usage Summary"
 
         self.url = self.url[:-29]
@@ -217,14 +217,14 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def interval_block(self, *args, **kwargs):
+    def interval_block(self):
         print "GETing Interval Block"
         self.set_param_string()
         self.url += self.params
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def all_interval_blocks(self, *args, **kwargs):
+    def all_interval_blocks(self):
         print "GETing All Interval Blocks"
 
         self.url = self.url[:-13]
@@ -241,7 +241,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def interval_block_by_id(self, *args, **kwargs):
+    def interval_block_by_id(self):
         print "GETing Interval Block by Id"
 
         self.url = self.url[:-14]
@@ -258,21 +258,21 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def local_time_parameters(self, *args, **kwargs):
+    def local_time_parameters(self):
         print "GETing Local Time Parameters"
         self.set_param_string()
         self.url += self.params
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def meter_reading(self, *args, **kwargs):
+    def meter_reading(self):
         print "GETing Meter Reading"
         self.set_param_string()
         self.url += self.params
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def all_meter_readings_for_usage__point(self, *args, **kwargs):
+    def all_meter_readings_for_usage__point(self):
         print "GETing All Meter Readings for Usage Point"
 
         self.url = self.url[:-12]
@@ -289,7 +289,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def meter_reading_for_usage__point_by_id(self, *args, **kwargs):
+    def meter_reading_for_usage__point_by_id(self):
         print "GETing Meter Reading for Usage Point by Id"
 
         self.url = self.url[:-16]
@@ -306,28 +306,28 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def reading_type(self, *args, **kwargs):
+    def reading_type(self):
         print "GETing Reading Type"
         self.set_param_string()
         self.url += self.params
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def read_service_status(self, *args, **kwargs):
+    def read_service_status(self):
         print "GETing Read Service Status"
         self.set_param_string()
         self.url += self.params
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def usage_point(self, *args, **kwargs):
+    def usage_point(self):
         print "GETing Usage Point"
         self.set_param_string()
         self.url += self.params
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def usage_points_by_subscription_id(self, *args, **kwargs):
+    def usage_points_by_subscription_id(self):
         print "GETing UsagePoints for Subscription Id"
 
         self.url = self.url[:-11]
@@ -344,7 +344,7 @@ class GreenButtonClient(object):
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
-    def usage_point_by_id(self, *args, **kwargs):
+    def usage_point_by_id(self):
         print "GETing Usage Point by Id"
 
         self.url = self.url[:-10]
