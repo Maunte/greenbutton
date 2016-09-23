@@ -326,6 +326,12 @@ class GreenButtonClient(object):
 
     def reading_type(self):
         print "GETing Reading Type"
+
+        if len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
+
         self.set_param_string()
         self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
@@ -333,6 +339,12 @@ class GreenButtonClient(object):
 
     def read_service_status(self):
         print "GETing Read Service Status"
+
+        if len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
+
         self.set_param_string()
         self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
@@ -340,6 +352,12 @@ class GreenButtonClient(object):
 
     def usage_point(self):
         print "GETing Usage Point"
+
+        if len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
+
         self.set_param_string()
         self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
@@ -365,7 +383,7 @@ class GreenButtonClient(object):
     def usage_point_by_id(self):
         print "GETing Usage Point by Id"
 
-        self.url = self.url[:-10]
+        self.url = self.url[:-14]
         if len(self.paths) < 2:
             print "Subscription and UsagePoint Ids Required!"
         elif len(self.paths) == 2:

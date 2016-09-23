@@ -109,6 +109,27 @@ def main():
                 if "meter_id" in data:
                     paths.append(data["meter_id"])
             params = fill_params(data, "access_token", "meter_sub_id", "meter_usagepoint_id", "meter_id")
+        elif "reading_type_submit" in data:
+            endpoint = "/espi/1_1/resource/ReadingType"
+            if "reading_type_id" in data:
+                paths.append(data["reading_type_id"])
+            params = fill_params(data, "access_token", "reading_type_id")
+        elif "server_status_submit" in data:
+            endpoint = "/espi/1_1/resource/ReadServiceStatus"
+        elif "usagepoint_submit" in data:
+            if "usagepoint_sub_id" in data:
+                if "usagepoint_id" in data:
+                    endpoint = "/espi/1_1/resource/Subscription/UsagePointbyId"
+                    paths.append(data["usagepoint_sub_id"])
+                    paths.append(data["usagepoint_id"])
+                else:
+                    endpoint = "/espi/1_1/resource/Subscription/UsagePoint"
+                    paths.append(data["usagepoint_sub_id"])
+            else:
+                endpoint = "/espi/1_1/resource/UsagePoint"
+                if "usagepoint_id" in data:
+                    paths.append(data["usagepoint_id"])
+            params = fill_params(data, "access_token", "usagepoint_id", "usagepoint_sub_id")
         else:
             print "No endpoint defined!"
 
