@@ -12,11 +12,13 @@
 <body class="m-y-1">
 
 <div class="container">
-    <a href="/"><div id="page_header" class="d-block bg-success">
-        <h1 class="display-2 text-xs-center">Green Button REST API</h1>
-    </div></a>
+    <a href="/">
+        <div id="page_header" class="d-block bg-success">
+            <h1 class="display-2 text-xs-center">Green Button REST API</h1>
+        </div>
+    </a>
     <br>
-    
+
     <!-- Field names: access_token -->
     <div class="form-group row">
         <label for="access_token" class="col-xs-2 col-form-label text-xs-right">Access Token</label>
@@ -30,7 +32,8 @@
 
     <ul class="list-group">
 
-        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#app_info">
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse"
+                                                                                   href="#app_info">
             GET Application Information <i class="fa fa-chevron-down"></i></a></li>
         <div class="collapse" id="app_info">
 
@@ -42,7 +45,8 @@
                     <label for="app_id" class="col-xs-2 col-form-label text-xs-right">App Info Id</label>
                     <div class="col-xs-10">
                         <div class="input-group">
-                            <input type="text" name="app_info_id" class="required form-control form-control-md" id="app_id"
+                            <input type="text" name="app_info_id" class="required form-control form-control-md"
+                                   id="app_id"
                                    placeholder="App Info Id">
                             <span class="input-group-btn"><button type="submit" name="app_info_id_submit"
                                                                   class="btn btn-success btn-md">Submit</button></span>
@@ -59,12 +63,12 @@
                     <label for="app_info_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
                     <div class="col-xs-4">
                         <input type="date" name="published-min" class="form-control form-control-md"
-                        id="app_info_pub_min" placeholder="Published Min">
+                               id="app_info_pub_min" placeholder="Published Min">
                     </div>
                     <label for="app_info_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
                     <div class="col-xs-4">
                         <input type="date" name="published-max" class="form-control form-control-md"
-                        id="app_info_pub_max" placeholder="Published Max">
+                               id="app_info_pub_max" placeholder="Published Max">
                     </div>
                 </div>
 
@@ -72,12 +76,12 @@
                     <label for="app_info_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
                     <div class="col-xs-4">
                         <input type="date" name="updated-min" class="form-control form-control-md"
-                        id="app_info_update_min" placeholder="Updated Min">
+                               id="app_info_update_min" placeholder="Updated Min">
                     </div>
                     <label for="app_info_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
                     <div class="col-xs-4">
                         <input type="date" name="updated-max" class="form-control form-control-md"
-                        id="app_info_update_max" placeholder="Updated Max">
+                               id="app_info_update_max" placeholder="Updated Max">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -110,411 +114,625 @@
             Authorization <i class="fa fa-chevron-down"></i></a></li>
         <div class="collapse" id="auth">
 
-        <!-- Field names: auth_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
-        <!-- Button name: auth_submit  -->
-        <form id="auth_form" class="form_div" method="post">
-            <h3 class="text-xs-center form_header">GET Authorization</h3>
-            <div class="form-group row">
-                <label for="app_id" class="col-xs-2 col-form-label text-xs-right">Authorization Id</label>
-                <div class="col-xs-10">
-                    <div class="input-group">
-                        <input type="text" name="auth_info_id" class="form-control form-control-md" id="auth_id"
-                               placeholder="Authorization Id">
+            <!-- Field names: auth_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Button name: auth_submit  -->
+            <form id="auth_form" class="form_div" method="post">
+                <h3 class="text-xs-center form_header">GET Authorization</h3>
+                <div class="form-group row">
+                    <label for="auth_id" class="col-xs-2 col-form-label text-xs-right">Authorization Id</label>
+                    <div class="col-xs-10">
+                        <div class="input-group">
+                            <input type="text" name="auth_id" class="form-control form-control-md" id="auth_id"
+                                   placeholder="Authorization Id">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="auth_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                <div class="col-xs-4">
-                    <input type="date" name="published-min" class="form-control form-control-md" id="auth_pub_min"
-                    placeholder="Published Min">
+                <div class="form-group row">
+                    <label for="auth_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-min" class="form-control form-control-md" id="auth_pub_min"
+                               placeholder="Published Min">
+                    </div>
+                    <label for="auth_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-max" class="form-control form-control-md" id="auth_pub_max"
+                               placeholder="Published Max">
+                    </div>
                 </div>
-                <label for="auth_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                <div class="col-xs-4">
-                    <input type="date" name="published-max" class="form-control form-control-md" id="auth_pub_max"
-                    placeholder="Published Max">
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="auth_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                <div class="col-xs-4">
-                    <input type="date" name="updated-min" class="form-control form-control-md" id="auth_update_min"
-                    placeholder="Updated Min">
+                <div class="form-group row">
+                    <label for="auth_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-min" class="form-control form-control-md" id="auth_update_min"
+                               placeholder="Updated Min">
+                    </div>
+                    <label for="auth_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-max" class="form-control form-control-md" id="auth_update_max"
+                               placeholder="Updated Max">
+                    </div>
                 </div>
-                <label for="auth_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                <div class="col-xs-4">
-                    <input type="date" name="updated-max" class="form-control form-control-md" id="auth_update_max"
-                    placeholder="Updated Max">
+                <div class="form-group row">
+                    <label for="auth_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="max-results" class="form-control form-control-md" id="auth_max_results"
+                               placeholder="Max Results">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="auth_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                <div class="col-xs-10">
-                    <input type="text" name="max-results" class="form-control form-control-md" id="auth_max_results"
-                           placeholder="Max Results">
+                <div class="form-group row">
+                    <label for="auth_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="start-index" class="form-control form-control-md" id="auth_start_index"
+                               placeholder="Start Index">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="auth_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                <div class="col-xs-10">
-                    <input type="text" name="start-index" class="form-control form-control-md" id="auth_start_index"
-                           placeholder="Start Index">
+                <div class="form-group row">
+                    <label for="auth_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="depth" class="form-control form-control-md" id="auth_depth"
+                               placeholder="Depth">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="auth_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                <div class="col-xs-10">
-                    <input type="text" name="depth" class="form-control form-control-md" id="auth_depth"
-                           placeholder="Depth">
-                </div>
-            </div>
-            <button type="submit" name="auth_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
-        </form>
+                <button type="submit" name="auth_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+            </form>
         </div>
 
 
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#bulk">GET Bulk
-    Transfer from DataCustodian <i class="fa fa-chevron-down"></i></a></li>
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#bulk">GET
+            Bulk
+            Transfer from DataCustodian <i class="fa fa-chevron-down"></i></a></li>
 
-    <div class="collapse" id="bulk">
+        <div class="collapse" id="bulk">
 
-        <!-- Id names: bulk_id, bulk_sub_id, bulk_customer_id, bulk_sub_usage
-        <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
-        <!-- Button name: bulk_submit  -->
-        <form id="bulk_form" class="form_div" method="post">
-            <h3 class="text-xs-center form_header">GET Bulk Tranfer</h3>
+            <!-- Id names: bulk_id, bulk_sub_id, bulk_customer_id, bulk_sub_usage
+            <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Button name: bulk_submit  -->
+            <form id="bulk_form" class="form_div" method="post">
+                <h3 class="text-xs-center form_header">GET Bulk Tranfer</h3>
 
-            <div class="sub_form_div">
-                <div class="form-group row">
-                    <label for="bulk_id" class="col-xs-2 col-form-label text-xs-right">Bulk Id</label>
-                    <div class="col-xs-8">
-                        <div class="input-group">
+                <div class="sub_form_div">
+                    <div class="form-group row">
+                        <label for="bulk_id" class="col-xs-2 col-form-label text-xs-right">Bulk Id</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk" data-pair="bulk_id">
+                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
+                                       data-pair="bulk_id">
                             </span>
-                            <input type="text" name="bulk_id" class="form-control form-control-md id_select" id="bulk_id"
-                                   placeholder="Bulk Id" data-group="bulk" data-pair="bulk_id">
+                                <input type="text" name="bulk_id" class="form-control form-control-md id_select"
+                                       id="bulk_id"
+                                       placeholder="Bulk Id" data-group="bulk" data-pair="bulk_id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="bulk_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
+                                       data-pair="bulk_sub_id">
+                            </span>
+                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select"
+                                       id="bulk_sub_id"
+                                       placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="bulk_customer_id" class="col-xs-2 col-form-label text-xs-right">Retail Customer
+                            Id</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
+                                       data-pair="bulk_customer_id">
+                            </span>
+                                <input type="text" name="bulk_customer_id"
+                                       class="form-control form-control-md id_select" id="bulk_customer_id"
+                                       placeholder="Retail Customer Id" data-group="bulk" data-pair="bulk_customer_id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="bulk_sub_with_usagepoint_id" class="col-xs-2 col-form-label text-xs-right">Subscription
+                            Id / UsagePoint Id</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
+                                       data-pair="bulk_sub_usage">
+                            </span>
+                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select"
+                                       id="bulk_sub_with_usagepoint_id"
+                                       placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_usage">
+                                <span>
+                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select"
+                                       id="bulk_usagepoint_with_sub_id"
+                                       placeholder="UsagePoint Id" data-group="bulk" data-pair="bulk_sub_usage">
+                            </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="bulk_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id</label>
-                    <div class="col-xs-8">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk" data-pair="bulk_sub_id">
-                            </span>
-                            <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select" id="bulk_sub_id"
-                                   placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_id">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="bulk_customer_id" class="col-xs-2 col-form-label text-xs-right">Retail Customer Id</label>
-                    <div class="col-xs-8">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk" data-pair="bulk_customer_id">
-                            </span>
-                            <input type="text" name="bulk_customer_id" class="form-control form-control-md id_select" id="bulk_customer_id"
-                                   placeholder="Retail Customer Id" data-group="bulk" data-pair="bulk_customer_id">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="bulk_sub_with_usagepoint_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id / UsagePoint Id</label>
-                    <div class="col-xs-8">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk" data-pair="bulk_sub_usage">
-                            </span>
-                            <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select" id="bulk_sub_with_usagepoint_id"
-                                   placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_usage">
-                            <span>
-                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select" id="bulk_usagepoint_with_sub_id"
-                                   placeholder="UsagePoint Id" data-group="bulk" data-pair="bulk_sub_usage">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="bulk_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                <div class="col-xs-4">
-                    <input type="date" name="published-min" class="form-control form-control-md" id="bulk_pub_min"
-                    placeholder="Published Min">
+                <div class="form-group row">
+                    <label for="bulk_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-min" class="form-control form-control-md" id="bulk_pub_min"
+                               placeholder="Published Min">
+                    </div>
+                    <label for="bulk_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-max" class="form-control form-control-md" id="bulk_pub_max"
+                               placeholder="Published Max">
+                    </div>
                 </div>
-                <label for="bulk_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                <div class="col-xs-4">
-                    <input type="date" name="published-max" class="form-control form-control-md" id="bulk_pub_max"
-                    placeholder="Published Max">
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="bulk_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                <div class="col-xs-4">
-                    <input type="date" name="updated-min" class="form-control form-control-md" id="bulk_update_min"
-                    placeholder="Updated Min">
+                <div class="form-group row">
+                    <label for="bulk_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-min" class="form-control form-control-md" id="bulk_update_min"
+                               placeholder="Updated Min">
+                    </div>
+                    <label for="bulk_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-max" class="form-control form-control-md" id="bulk_update_max"
+                               placeholder="Updated Max">
+                    </div>
                 </div>
-                <label for="bulk_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                <div class="col-xs-4">
-                    <input type="date" name="updated-max" class="form-control form-control-md" id="bulk_update_max"
-                    placeholder="Updated Max">
+                <div class="form-group row">
+                    <label for="bulk_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="max-results" class="form-control form-control-md" id="bulk_max_results"
+                               placeholder="Max Results">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="bulk_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                <div class="col-xs-10">
-                    <input type="text" name="max-results" class="form-control form-control-md" id="bulk_max_results"
-                           placeholder="Max Results">
+                <div class="form-group row">
+                    <label for="bulk_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="start-index" class="form-control form-control-md" id="bulk_start_index"
+                               placeholder="Start Index">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="bulk_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                <div class="col-xs-10">
-                    <input type="text" name="start-index" class="form-control form-control-md" id="bulk_start_index"
-                           placeholder="Start Index">
+                <div class="form-group row">
+                    <label for="bulk_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="depth" class="form-control form-control-md" id="bulk_depth"
+                               placeholder="Depth">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="bulk_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                <div class="col-xs-10">
-                    <input type="text" name="depth" class="form-control form-control-md" id="bulk_depth"
-                           placeholder="Depth">
-                </div>
-            </div>
-            <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
-        </form>
+                <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+            </form>
         </div>
 
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#epower">GET
-    Electirc Power Quality and Usage Summaries <i class="fa fa-chevron-down"></i></a></li>
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse"
+                                                                                   href="#epower">GET
+            Electirc Power Quality and Usage Summaries <i class="fa fa-chevron-down"></i></a></li>
 
 
-     <div class="collapse" id="epower">
+        <div class="collapse" id="epower">
 
-        <!-- Id names: epower_sub_id, epower_usagepoint_id, epower_summary_id
-        <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
-        <!-- Button name: epower_submit  -->
-        <form id="epower_form" class="form_div" method="post">
-            <h3 class="text-xs-center form_header">GET Electrical Power Quality and Usage Summaries</h3>
+            <!-- Id names: epower_sub_id, epower_usagepoint_id, epower_summary_id
+            <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Button name: epower_submit  -->
+            <form id="epower_form" class="form_div" method="post">
+                <h3 class="text-xs-center form_header">GET Electrical Power Quality and Usage Summaries</h3>
 
-            <div class="sub_form_div">
-                <div class="form-group row">
-                    <label for="epower_summary_id" class="col-xs-3 col-form-label text-xs-right">Electrical Power Summary</label>
-                    <div class="form-check">
+                <div class="sub_form_div">
+                    <div class="form-group row">
+                        <label for="epower_summary_id" class="col-xs-3 col-form-label text-xs-right">Electrical Power
+                            Summary</label>
+                        <div class="form-check">
                             <label class="col-xs-2 form-check-label">
                                 Quality: <input type="radio" name="epower_radio" value="quality" checked>
                                 Usage: <input type="radio" name="epower_radio" value="usage">
                             </label>
                         </div>
-                    <div class="col-xs-7">
+                        <div class="col-xs-7">
+                            <div class="input-group">
+                                <input type="text" name="epower_summary_id"
+                                       class="form-control form-control-md id_select" id="epower_summary_id"
+                                       placeholder="Summary Id (Optional)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="epower_sub_id" class="col-xs-4 col-form-label text-xs-right">Subscription Id
+                            (Required)</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <input type="text" name="epower_sub_id" class="form-control form-control-md"
+                                       id="epower_sub_id"
+                                       placeholder="Subscription Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="epower_usagepoint_id" class="col-xs-4 col-form-label text-xs-right">UsagePoint Id
+                            (Required) </label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <input type="text" name="epower_usagepoint_id" class="form-control form-control-md"
+                                       id="epower_usagepoint_id"
+                                       placeholder="UsagePoint Id">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="epower_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-min" class="form-control form-control-md" id="epower_pub_min"
+                               placeholder="Published Min">
+                    </div>
+                    <label for="epower_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-max" class="form-control form-control-md" id="epower_pub_max"
+                               placeholder="Published Max">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="epower_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-min" class="form-control form-control-md"
+                               id="epower_update_min"
+                               placeholder="Updated Min">
+                    </div>
+                    <label for="epower_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-max" class="form-control form-control-md"
+                               id="epower_update_max"
+                               placeholder="Updated Max">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="epower_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="max-results" class="form-control form-control-md"
+                               id="epower_max_results"
+                               placeholder="Max Results">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="epower_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="start-index" class="form-control form-control-md"
+                               id="epower_start_index"
+                               placeholder="Start Index">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="epower_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="depth" class="form-control form-control-md" id="epower_depth"
+                               placeholder="Depth">
+                    </div>
+                </div>
+                <button type="submit" name="epower_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
+                </button>
+            </form>
+        </div>
+
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse"
+                                                                                   href="#interval">GET Interval
+            Block <i class="fa fa-chevron-down"></i></a></li>
+
+        <div class="collapse" id="interval">
+
+            <!-- Id names: interval_sub_id, interval_usagepoint_id, interval_meter_id, interval_id
+            <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Button name: interval_submit  -->
+            <form id="interval_form" class="form_div" method="post">
+                <h3 class="text-xs-center form_header">GET Interval Block</h3>
+
+                <div class="sub_form_div">
+                    <div class="form-group row">
+                        <label for="interval_select" class="col-xs-5 offset-xs-2">Include Subscription, UsagePoint, and
+                            Meter Reading Ids?</label>
+                        <input id="interval_select" class="form-check-input" type="checkbox" value="">
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="interval_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id
+                            (Required)</label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input type="text" name="interval_sub_id"
+                                       class="form-control form-control-md interval_select_input" id="interval_sub_id"
+                                       placeholder="Subscription Id" disabled>
+                            </div>
+                        </div>
+                        <label for="interval_usagepoint_id" class="col-xs-2 col-form-label text-xs-right">UsagePoint Id
+                            (Required) </label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input type="text" name="interval_usagepoint_id"
+                                       class="form-control form-control-md interval_select_input"
+                                       id="interval_usagepoint_id"
+                                       placeholder="UsagePoint Id" disabled>
+                            </div>
+                        </div>
+                        <label for="interval_meter_id" class="col-xs-2 col-form-label text-xs-right">Meter Reading Id
+                            (Required) </label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input type="text" name="interval_meter_id"
+                                       class="form-control form-control-md interval_select_input" id="interval_meter_id"
+                                       placeholder="Meter Reading Id" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="interval_id" class="col-xs-2 col-form-label text-xs-right">Interval Block Id</label>
+                    <div class="col-xs-10">
                         <div class="input-group">
-                            <input type="text" name="epower_summary_id" class="form-control form-control-md id_select" id="epower_summary_id"
-                                   placeholder="Summary Id (Optional)">
+                            <input type="text" name="interval_id" class="form-control form-control-md id_select"
+                                   id="interval_id"
+                                   placeholder="Interval Block Id (Optional)">
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="epower_sub_id" class="col-xs-4 col-form-label text-xs-right">Subscription Id (Required)</label>
-                    <div class="col-xs-8">
+                    <label for="interval_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-min" class="form-control form-control-md"
+                               id="interval_pub_min"
+                               placeholder="Published Min">
+                    </div>
+                    <label for="interval_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-max" class="form-control form-control-md"
+                               id="interval_pub_max"
+                               placeholder="Published Max">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="interval_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-min" class="form-control form-control-md"
+                               id="interval_update_min"
+                               placeholder="Updated Min">
+                    </div>
+                    <label for="interval_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-max" class="form-control form-control-md"
+                               id="interval_update_max"
+                               placeholder="Updated Max">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="interval_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="max-results" class="form-control form-control-md"
+                               id="interval_max_results"
+                               placeholder="Max Results">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="interval_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="start-index" class="form-control form-control-md"
+                               id="interval_start_index"
+                               placeholder="Start Index">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="interval_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="depth" class="form-control form-control-md" id="interval_depth"
+                               placeholder="Depth">
+                    </div>
+                </div>
+                <button type="submit" name="interval_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
+                </button>
+            </form>
+        </div>
+
+
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse"
+                                                                                   href="#local_time">GET Local
+            Time Parameters <i class="fa fa-chevron-down"></i></a></li>
+
+        <div class="collapse" id="local_time">
+
+            <!-- Field names: local_time_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Button name: local_time_submit  -->
+            <form id="local_time_form" class="form_div" method="post">
+                <h3 class="text-xs-center form_header">GET local_time Parameter</h3>
+                <div class="form-group row">
+                    <label for="local_time_id" class="col-xs-2 col-form-label text-xs-right">Local Time Parameter
+                        Id</label>
+                    <div class="col-xs-10">
                         <div class="input-group">
-                            <input type="text" name="epower_sub_id" class="form-control form-control-md" id="epower_sub_id"
-                                   placeholder="Subscription Id">
+                            <input type="text" name="local_time_id" class="form-control form-control-md"
+                                   id="local_time_id"
+                                   placeholder="Local Time Parameter Id">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="local_time_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-min" class="form-control form-control-md"
+                               id="local_time_pub_min"
+                               placeholder="Published Min">
+                    </div>
+                    <label for="local_time_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-max" class="form-control form-control-md"
+                               id="local_time_pub_max"
+                               placeholder="Published Max">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="local_time_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-min" class="form-control form-control-md"
+                               id="local_time_update_min"
+                               placeholder="Updated Min">
+                    </div>
+                    <label for="local_time_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-max" class="form-control form-control-md"
+                               id="local_time_update_max"
+                               placeholder="Updated Max">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="local_time_max_results" class="col-xs-2 col-form-label text-xs-right">Max
+                        Results</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="max-results" class="form-control form-control-md"
+                               id="local_time_max_results"
+                               placeholder="Max Results">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="local_time_start_index" class="col-xs-2 col-form-label text-xs-right">Start
+                        Index</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="start-index" class="form-control form-control-md"
+                               id="local_time_start_index"
+                               placeholder="Start Index">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="local_time_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="depth" class="form-control form-control-md" id="local_time_depth"
+                               placeholder="Depth">
+                    </div>
+                </div>
+                <button type="submit" name="local_time_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
+                </button>
+            </form>
+        </div>
+
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#meter">GET Meter Readings <i class="fa fa-chevron-down"></i></a></li>
+
+        <div class="collapse" id="meter">
+
+            <!-- Id names: meter_sub_id, meter_usagepoint_id, meter_meter_id, meter_id
+            <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Button name: meter_submit  -->
+            <form id="meter_form" class="form_div" method="post">
+                <h3 class="text-xs-center form_header">GET Meter Readings</h3>
+
+                <div class="sub_form_div">
+                    <div class="form-group row">
+                        <label for="meter_select" class="col-xs-5 offset-xs-2">Include Subscription and UsagePoint Ids?</label>
+                        <input id="meter_select" class="form-check-input" type="checkbox" value="">
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="meter_sub_id" class="col-xs-3 col-form-label text-xs-right">Subscription Id (Required)</label>
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <input type="text" name="meter_sub_id"
+                                       class="form-control form-control-md meter_select_input" id="meter_sub_id"
+                                       placeholder="Subscription Id" disabled>
+                            </div>
+                        </div>
+                        <label for="meter_usagepoint_id" class="col-xs-3 col-form-label text-xs-right">UsagePoint Id (Required) </label>
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <input type="text" name="meter_usagepoint_id"
+                                       class="form-control form-control-md meter_select_input"
+                                       id="meter_usagepoint_id"
+                                       placeholder="UsagePoint Id" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="meter_id" class="col-xs-2 col-form-label text-xs-right">Meter Reading Id</label>
+                    <div class="col-xs-10">
+                        <div class="input-group">
+                            <input type="text" name="meter_id" class="form-control form-control-md id_select"
+                                   id="meter_id"
+                                   placeholder="Meter Reading Id (Optional)">
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="epower_usagepoint_id" class="col-xs-4 col-form-label text-xs-right">UsagePoint Id (Required) </label>
-                    <div class="col-xs-8">
-                        <div class="input-group">
-                            <input type="text" name="epower_usagepoint_id" class="form-control form-control-md" id="epower_usagepoint_id"
-                                   placeholder="UsagePoint Id">
-                        </div>
+                    <label for="meter_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-min" class="form-control form-control-md"
+                               id="meter_pub_min"
+                               placeholder="Published Min">
+                    </div>
+                    <label for="meter_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="published-max" class="form-control form-control-md"
+                               id="meter_pub_max"
+                               placeholder="Published Max">
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="epower_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                <div class="col-xs-4">
-                    <input type="date" name="published-min" class="form-control form-control-md" id="epower_pub_min"
-                    placeholder="Published Min">
-                </div>
-                <label for="epower_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                <div class="col-xs-4">
-                    <input type="date" name="published-max" class="form-control form-control-md" id="epower_pub_max"
-                    placeholder="Published Max">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="epower_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                <div class="col-xs-4">
-                    <input type="date" name="updated-min" class="form-control form-control-md" id="epower_update_min"
-                    placeholder="Updated Min">
-                </div>
-                <label for="epower_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                <div class="col-xs-4">
-                    <input type="date" name="updated-max" class="form-control form-control-md" id="epower_update_max"
-                    placeholder="Updated Max">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="epower_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                <div class="col-xs-10">
-                    <input type="text" name="max-results" class="form-control form-control-md" id="epower_max_results"
-                           placeholder="Max Results">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="epower_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                <div class="col-xs-10">
-                    <input type="text" name="start-index" class="form-control form-control-md" id="epower_start_index"
-                           placeholder="Start Index">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="epower_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                <div class="col-xs-10">
-                    <input type="text" name="depth" class="form-control form-control-md" id="epower_depth"
-                           placeholder="Depth">
-                </div>
-            </div>
-            <button type="submit" name="epower_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
-        </form>
-        </div>   
-
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#interval">GET Interval
-    Block <i class="fa fa-chevron-down"></i></a></li>
-        
-    <div class="collapse" id="interval">
-
-        <!-- Id names: interval_sub_id, interval_usagepoint_id, interval_meter_id, interval_id
-        <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
-        <!-- Button name: interval_submit  -->
-        <form id="interval_form" class="form_div" method="post">
-            <h3 class="text-xs-center form_header">GET Interval Block</h3>
-
-            <div class="sub_form_div">
                 <div class="form-group row">
-                    <label for="interval_select" class="col-xs-5 offset-xs-2">Include Subscription, UsagePoint, and Meter Reading Ids?</label>
-                    <input id="interval_select" class="form-check-input" type="checkbox" value="">
+                    <label for="meter_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-min" class="form-control form-control-md"
+                               id="meter_update_min"
+                               placeholder="Updated Min">
+                    </div>
+                    <label for="meter_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                    <div class="col-xs-4">
+                        <input type="date" name="updated-max" class="form-control form-control-md"
+                               id="meter_update_max"
+                               placeholder="Updated Max">
+                    </div>
                 </div>
-                <hr>
                 <div class="form-group row">
-                    <label for="interval_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id (Required)</label>
-                    <div class="col-xs-2">
-                        <div class="input-group">
-                            <input type="text" name="interval_sub_id" class="form-control form-control-md interval_select_input" id="interval_sub_id"
-                                    placeholder="Subscription Id" disabled>
-                        </div>
-                    </div>
-                    <label for="interval_usagepoint_id" class="col-xs-2 col-form-label text-xs-right">UsagePoint Id (Required) </label>
-                    <div class="col-xs-2">
-                        <div class="input-group">
-                            <input type="text" name="interval_usagepoint_id" class="form-control form-control-md interval_select_input" id="interval_usagepoint_id"
-                                   placeholder="UsagePoint Id" disabled>
-                        </div>
-                    </div>
-                    <label for="interval_meter_id" class="col-xs-2 col-form-label text-xs-right">Meter Reading Id (Required) </label>
-                    <div class="col-xs-2">
-                        <div class="input-group">
-                            <input type="text" name="interval_meter_id" class="form-control form-control-md interval_select_input" id="interval_meter_id"
-                                   placeholder="Meter Reading Id" disabled>
-                        </div>
+                    <label for="meter_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="max-results" class="form-control form-control-md"
+                               id="meter_max_results"
+                               placeholder="Max Results">
                     </div>
                 </div>
-            </div>
+                <div class="form-group row">
+                    <label for="meter_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="start-index" class="form-control form-control-md"
+                               id="meter_start_index"
+                               placeholder="Start Index">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="meter_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                    <div class="col-xs-10">
+                        <input type="text" name="depth" class="form-control form-control-md" id="meter_depth"
+                               placeholder="Depth">
+                    </div>
+                </div>
+                <button type="submit" name="meter_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
+                </button>
+            </form>
+        </div>
 
-            <div class="form-group row">
-                <label for="interval_id" class="col-xs-2 col-form-label text-xs-right">Interval Block Id</label>
-                <div class="col-xs-10">
-                    <div class="input-group">
-                        <input type="text" name="interval_id" class="form-control form-control-md id_select" id="interval_id"
-                               placeholder="Interval Block Id (Optional)">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="interval_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                <div class="col-xs-4">
-                    <input type="date" name="published-min" class="form-control form-control-md" id="interval_pub_min"
-                    placeholder="Published Min">
-                </div>
-                <label for="interval_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                <div class="col-xs-4">
-                    <input type="date" name="published-max" class="form-control form-control-md" id="interval_pub_max"
-                    placeholder="Published Max">
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="interval_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                <div class="col-xs-4">
-                    <input type="date" name="updated-min" class="form-control form-control-md" id="interval_update_min"
-                    placeholder="Updated Min">
-                </div>
-                <label for="interval_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                <div class="col-xs-4">
-                    <input type="date" name="updated-max" class="form-control form-control-md" id="interval_update_max"
-                    placeholder="Updated Max">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="interval_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                <div class="col-xs-10">
-                    <input type="text" name="max-results" class="form-control form-control-md" id="interval_max_results"
-                           placeholder="Max Results">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="interval_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                <div class="col-xs-10">
-                    <input type="text" name="start-index" class="form-control form-control-md" id="interval_start_index"
-                           placeholder="Start Index">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="interval_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                <div class="col-xs-10">
-                    <input type="text" name="depth" class="form-control form-control-md" id="interval_depth"
-                           placeholder="Depth">
-                </div>
-            </div>
-            <button type="submit" name="interval_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
-        </form>
-        </div>   
-        
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
-    Interval Blocks <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
-    Interval Block <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
-    Interval Blocks for Specfic Subscription and Meter Reading <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
-    Interval Block for Specfic Subscription and Meter Reading <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Local
-    Time Parameters <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Meter
-    Readings <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All Meter
-    Readings Associated with a Given UsagePoint <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
-    UsagePoint's Meter Reading for Specific Meter Reading <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Reading
-    Types <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Data
-    Custodian Resource Server's Status <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
-    UsagePoints <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
-    UsagePoints for Specific Subscription <i class="fa fa-chevron-down"></i></a></li>
-</ul>
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
+            Reading
+            Types <i class="fa fa-chevron-down"></i></a></li>
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
+            Data
+            Custodian Resource Server's Status <i class="fa fa-chevron-down"></i></a></li>
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
+            UsagePoints <i class="fa fa-chevron-down"></i></a></li>
+        <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
+            UsagePoints for Specific Subscription <i class="fa fa-chevron-down"></i></a></li>
+    </ul>
 </div>
 
 

@@ -43,7 +43,7 @@ def main():
             endpoint = "/espi/1_1/resource/Authorization"
             if "auth_id" in data:
                 paths.append(data["auth_id"])
-            params = fill_params(data, "access_token", "auth_info_id")
+            params = fill_params(data, "access_token", "auth_id")
         elif "bulk_submit" in data:
             if "bulk_id" in data:
                 endpoint = "/espi/1_1/resource/Batch/Bulk"
@@ -90,6 +90,25 @@ def main():
                 if "interval_id" in data:
                     paths.append(data["interval_id"])
             params = fill_params(data, "access_token", "interval_sub_id", "interval_usage_id", "interval_meter_id", "interval_id")
+        elif "local_time_submit" in data:
+            endpoint = "/espi/1_1/resource/LocalTimeParameters"
+            if "local_time_id" in data:
+                paths.append(data["local_time_id"])
+            params = fill_params(data, "access_token", "local_time_id")
+        elif "meter_submit" in data:
+            if "meter_sub_id" in data:
+                paths.append(data["meter_sub_id"])
+                paths.append(data["meter_usagepoint_id"])
+                if "meter_id" in data:
+                    endpoint = "/espi/1_1/resource/Subscription/MeterReadingbyId"
+                    paths.append(data["meter_id"])
+                else:
+                    endpoint = "/espi/1_1/resource/Subscription/MeterReading"
+            else:
+                endpoint = "/espi/1_1/resource/MeterReading"
+                if "meter_id" in data:
+                    paths.append(data["meter_id"])
+            params = fill_params(data, "access_token", "meter_sub_id", "meter_usagepoint_id", "meter_id")
         else:
             print "No endpoint defined!"
 

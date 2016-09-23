@@ -266,6 +266,12 @@ class GreenButtonClient(object):
 
     def local_time_parameters(self):
         print "GETing Local Time Parameters"
+
+        if len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
+
         self.set_param_string()
         self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
@@ -273,6 +279,12 @@ class GreenButtonClient(object):
 
     def meter_reading(self):
         print "GETing Meter Reading"
+
+        if len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
+
         self.set_param_string()
         self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)

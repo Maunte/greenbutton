@@ -48,4 +48,11 @@ $(document).ready( function() {
             $(".interval_select_input").prop("disabled", true);
         }
     });
+    $(document).on("click", "#meter_select", function() {
+        if ($("#meter_select").prop("checked")) {
+            $(".meter_select_input").prop("disabled", false);
+        } else {
+            $(".meter_select_input").prop("disabled", true);
+        }
+    });
 });
