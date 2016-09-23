@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../static/greenbutton.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
-<body>
+<body class="m-y-1">
 
 <div class="container">
     <a href="/"><div id="page_header" class="d-block bg-success">
@@ -31,7 +31,7 @@
     <ul class="list-group">
 
         <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#app_info">
-            GET ApplicationInformation <i class="fa fa-chevron-down"></i></a></li>
+            GET Application Information <i class="fa fa-chevron-down"></i></a></li>
         <div class="collapse" id="app_info">
             
             <!-- Field names: app_info_id -->
@@ -200,7 +200,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id</label>
+                    <label for="bulk_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id</label>
                     <div class="col-xs-8">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -212,7 +212,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">Retail Customer Id</label>
+                    <label for="bulk_customer_id" class="col-xs-2 col-form-label text-xs-right">Retail Customer Id</label>
                     <div class="col-xs-8">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -224,7 +224,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id / UsagePoint Id</label>
+                    <label for="bulk_sub_with_usagepoint_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id / UsagePoint Id</label>
                     <div class="col-xs-8">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -291,14 +291,104 @@
         </form>
         </div>
 
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
-    Electirc Power Quality Summaries <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
-    Electric Power Quality Summary <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
-    Electric Power Usage Summaries <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Specific
-    Electric Power Usage Summary <i class="fa fa-chevron-down"></i></a></li>
+<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#epower">GET
+    Electirc Power Quality and Usage Summaries <i class="fa fa-chevron-down"></i></a></li>
+        
+        
+     <div class="collapse" id="epower">
+
+        <!-- Id names: epower_sub_id, epower_usagepoint_id, epower_summary_id
+        <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+        <!-- Button name: epower_submit  -->
+        <form class="form_div" method="post">
+            <h3 class="text-xs-center form_header">GET Electrical Power Quality and Usage Summaries</h3>
+
+            <div class="sub_form_div">
+                <div class="form-group row">
+                    <label for="epower_summary_id" class="col-xs-3 col-form-label text-xs-right">Electrical Power Summary</label>
+                    <div class="form-check">
+                            <label class="col-xs-2 form-check-label">
+                                Quality: <input type="radio" name="epower_radio" value="quality" checked>
+                                Usage: <input type="radio" name="epower_radio" value="usage">
+                            </label>
+                        </div>
+                    <div class="col-xs-7">
+                        <div class="input-group">
+                            <input type="text" name="epower_summary_id" class="form-control form-control-md id_select" id="epower_summary_id"
+                                   placeholder="Summary Id (Optional)">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="epower_sub_id" class="col-xs-4 col-form-label text-xs-right">Subscription Id (Required)</label>
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <input type="text" name="epower_sub_id" class="form-control form-control-md" id="epower_sub_id"
+                                   placeholder="Subscription Id">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="epower_usagepoint_id" class="col-xs-4 col-form-label text-xs-right">UsagePoint Id (Required) </label>
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <input type="text" name="epower_usagepoint_id" class="form-control form-control-md" id="epower_usagepoint_id"
+                                   placeholder="UsagePoint Id">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="epower_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
+                <div class="col-xs-4">
+                    <input type="date" name="published-min" class="form-control form-control-md" id="epower_pub_min"
+                    placeholder="Published Min">
+                </div>
+                <label for="epower_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
+                <div class="col-xs-4">
+                    <input type="date" name="published-max" class="form-control form-control-md" id="epower_pub_max"
+                    placeholder="Published Max">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="epower_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
+                <div class="col-xs-4">
+                    <input type="date" name="updated-min" class="form-control form-control-md" id="epower_update_min"
+                    placeholder="Updated Min">
+                </div>
+                <label for="epower_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
+                <div class="col-xs-4">
+                    <input type="date" name="updated-max" class="form-control form-control-md" id="epower_update_max"
+                    placeholder="Updated Max">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="epower_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
+                <div class="col-xs-10">
+                    <input type="text" name="max-results" class="form-control form-control-md" id="epower_max_results"
+                           placeholder="Max Results">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="epower_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
+                <div class="col-xs-10">
+                    <input type="text" name="start-index" class="form-control form-control-md" id="epower_start_index"
+                           placeholder="Start Index">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="epower_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
+                <div class="col-xs-10">
+                    <input type="text" name="depth" class="form-control form-control-md" id="epower_depth"
+                           placeholder="Depth">
+                </div>
+            </div>
+            <button type="submit" name="epower_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+        </form>
+        </div>   
+
 <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET Interval
     Block <i class="fa fa-chevron-down"></i></a></li>
 <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET All
@@ -325,8 +415,6 @@
     UsagePoints <i class="fa fa-chevron-down"></i></a></li>
 <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
     UsagePoints for Specific Subscription <i class="fa fa-chevron-down"></i></a></li>
-<li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#">GET
-    Application Information <i class="fa fa-chevron-down"></i></a></li>
 </ul>
 </div>
 

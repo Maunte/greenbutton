@@ -55,10 +55,27 @@ def main():
                 args.append(data["bulk_sub_id"])
             kwargs = fill_kwargs(data, "access_token","bulk_radio", "bulk_id", "bulk_sub_id", "bulk_customer_id",
                                  "bulk_sub_usage_id")
+        elif "epower_submit" in data:
+            args.append(data["epower_sub_id"])
+            args.append(data["epower_usagepoint_id"])
+            if data["epower_radio"] == "quality":
+                if data["epower_summary_id"] == "":
+                    endpoint = "/espi/1_1/resource/Subscription/ElectricPowerQualitySummary"
+                else:
+                    endpoint = "/espi/1_1/resource/Subscription/ElectricPowerQualitySummarybyId"
+                    args.append(data["epower_summary_id"])
+            else:
+                if data["epower_summary"] == "":
+                    endpoint = "/espi/1_1/resource/Subscription/ElectricPowerUsageSummary"
+                else:
+                    endpoint = "/espi/1_1/resource/Subscription/ElectricPowerUsageSummarybyId"
+                    args.append(data["epower_summary_id"])
+            kwargs = fill_kwargs(data, "access_token", "epower_sub_id", "epower_usagepoint_id", "epower_summary_id", "epower_radio")
         else:
             print "No endpoint defined!"
 
         call = gbc(token, endpoint, *args, **kwargs)
+        print call.url
         response = call.execute()
         print call.url
         print response
