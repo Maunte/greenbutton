@@ -15,66 +15,85 @@ app.config.update(dict(
 app.config.from_envvar('APP_SETTINGS', silent=True)
 
 
-def fill_kwargs(data, *exclude):
-    kwargs = {}
+def fill_params(data, *exclude):
+    params = {}
     for key, value in data.iteritems():
         if key not in exclude and value != "":
-            kwargs[key] = value
-    return kwargs
+            params[key] = value
+    return params
 
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    data = request.form
+    data = {}
+    for key, value in request.form.iteritems():
+        if value != "" or "_submit" in key:
+            data[key] = value
+
     if "access_token" in request.form:
         token = data["access_token"]
-        args, kwargs = [], {}
+        paths, params = [], {}
         if "app_info_submit" in request.form:
             endpoint = "/espi/1_1/resource/ApplicationInformation"
-            kwargs = fill_kwargs(data, "access_token" )
+            params = fill_params(data, "access_token" )
         elif "app_info_id_submit" in data:
             endpoint = "/espi/1_1/resource/ApplicationInformation"
-            args.append(data["app_info_id"])
+            paths.append(data["app_info_id"])
         elif "auth_submit" in data:
             endpoint = "/espi/1_1/resource/Authorization"
             if "auth_id" in data:
-                args.append(data["auth_id"])
-            kwargs = fill_kwargs(data, "access_token", "auth_info_id")
+                paths.append(data["auth_id"])
+            params = fill_params(data, "access_token", "auth_info_id")
         elif "bulk_submit" in data:
             if "bulk_id" in data:
                 endpoint = "/espi/1_1/resource/Batch/Bulk"
-                args.append(data["bulk_id"])
+                paths.append(data["bulk_id"])
             elif "bulk_sub_id" in data:
                 endpoint = "/espi/1_1/resource/Batch/Subscription"
-                args.append(data["bulk_sub_id"])
+                paths.append(data["bulk_sub_id"])
             elif "bulk_customer_id" in data:
                 endpoint = "/espi/1_1/resource/Batch/RetailCustomer"
-                args.append(data["bulk_customer_id"])
+                paths.append(data["bulk_customer_id"])
             elif "bulk_sub_usage_id" in data:
                 endpoint = "/espi/1_1/resource/Batch/Subscription/UsagePoint"
-                args.append(data["bulk_sub_id"])
-            kwargs = fill_kwargs(data, "access_token","bulk_radio", "bulk_id", "bulk_sub_id", "bulk_customer_id",
+                paths.append(data["bulk_sub_id"])
+            params = fill_params(data, "access_token","bulk_radio", "bulk_id", "bulk_sub_id", "bulk_customer_id",
                                  "bulk_sub_usage_id")
         elif "epower_submit" in data:
-            args.append(data["epower_sub_id"])
-            args.append(data["epower_usagepoint_id"])
+            paths.append(data["epower_sub_id"])
+            paths.append(data["epower_usagepoint_id"])
             if data["epower_radio"] == "quality":
                 if data["epower_summary_id"] == "":
                     endpoint = "/espi/1_1/resource/Subscription/ElectricPowerQualitySummary"
                 else:
                     endpoint = "/espi/1_1/resource/Subscription/ElectricPowerQualitySummarybyId"
-                    args.append(data["epower_summary_id"])
+                    paths.append(data["epower_summary_id"])
             else:
                 if data["epower_summary"] == "":
                     endpoint = "/espi/1_1/resource/Subscription/ElectricPowerUsageSummary"
                 else:
                     endpoint = "/espi/1_1/resource/Subscription/ElectricPowerUsageSummarybyId"
-                    args.append(data["epower_summary_id"])
-            kwargs = fill_kwargs(data, "access_token", "epower_sub_id", "epower_usagepoint_id", "epower_summary_id", "epower_radio")
+                    paths.append(data["epower_summary_id"])
+            params = fill_params(data, "access_token", "epower_sub_id", "epower_usagepoint_id", "epower_summary_id", "epower_radio")
+        elif "interval_submit" in data:
+            if "interval_sub_id" in data:
+                paths.append(data["interval_sub_id"])
+                paths.append(data["interval_usagepoint_id"])
+                paths.append(data["interval_meter_id"])
+                if "interval_id" in data:
+                    endpoint = "/espi/1_1/resource/Subscription/IntervalBlockbyId"
+                    paths.append(data["interval_id"])
+                else:
+                    endpoint = "/espi/1_1/resource/Subscription/IntervalBlock"
+            else:
+                endpoint = "/espi/1_1/resource/IntervalBlock"
+                if "interval_id" in data:
+                    paths.append(data["interval_id"])
+            params = fill_params(data, "access_token", "interval_sub_id", "interval_usage_id", "interval_meter_id", "interval_id")
         else:
             print "No endpoint defined!"
 
-        call = gbc(token, endpoint, *args, **kwargs)
+        call = gbc(token, endpoint, *paths, **params)
         print call.url
         response = call.execute()
         print call.url

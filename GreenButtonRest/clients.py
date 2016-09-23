@@ -2,15 +2,15 @@ import requests
 
 
 class GreenButtonClient(object):
-    def __init__(self, access_token, endpoint, *args, **kwargs):
+    def __init__(self, access_token, endpoint, *paths, **params):
         self.endpoint = endpoint
         self.headers = {"Pragma": "no-cache", "authorization": access_token, "cache-control": "no cache"}
         self.url = "https://services.greenbuttondata.org:443/DataCustodian" + endpoint
-        self.args = args
-        self.kwargs = kwargs
-        self.params = ""
+        self.paths = paths
+        self.params = params
+        self.param_str = ""
 
-    def execute(self, *args, **kwargs):
+    def execute(self, *paths, **params):
         method_map = {
             "/espi/1_1/resource/ApplicationInformation": self.application_information,
             "/espi/1_1/resource/Authorization": self.authorization,
@@ -36,36 +36,36 @@ class GreenButtonClient(object):
             "/espi/1_1/resource/Subscription/UsagePointbyId": self.usage_point_by_id,
         }
 
-        result = method_map[self.endpoint](*args, **kwargs)
+        result = method_map[self.endpoint](*paths, **params)
         return result
 
     def set_param_string(self):
         i = 1
-        if len(self.kwargs) == 0:
-            self.params = ""
+        if len(self.params) == 0:
+            self.param_str = ""
         else:
-            for kwarg in self.kwargs:
-                if len(self.kwargs) == 1:
-                    self.params = "?" + kwarg + "=" + self.kwargs[kwarg]
+            for param in self.params:
+                if len(self.params) == 1:
+                    self.param_str = "?" + param + "=" + self.params[param]
                 else:
                     if i == 1:
-                        self.params = "?" + kwarg + "=" + self.kwargs[kwarg] + "&"
+                        self.param_str = "?" + param + "=" + self.params[param] + "&"
                     else:
-                        self.params = self.params + kwarg + "=" + self.kwargs[kwarg]
-                        if i != len(self.kwargs):
-                            self.params += "&"
+                        self.param_str = self.param_str + param + "=" + self.params[param]
+                        if i != len(self.params):
+                            self.param_str += "&"
                 i += 1
 
     def application_information(self):
         print "GETing Application Information..."
 
-        if len(self.args) == 1:
-            self.url += "/" + self.args[0]
-        elif len(self.args) > 1:
-            print "Too many *args"
+        if len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -73,13 +73,13 @@ class GreenButtonClient(object):
     def authorization(self):
         print "GETing Authorizations"
 
-        if len(self.args) == 1:
-            self.url += "/" + self.args[0]
-        elif len(self.args) > 1:
-            print "Too many *args"
+        if len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -87,15 +87,15 @@ class GreenButtonClient(object):
     def batch_bulk(self):
         print "GETing Bulk Transfer from DataCustodian"
 
-        if len(self.args) < 1:
+        if len(self.paths) < 1:
             print "Bulk Id Required!"
-        elif len(self.args) == 1:
-            self.url += "/" + self.args[0]
-        elif len(self.args) > 1:
-            print "Too many *args"
+        elif len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -103,15 +103,15 @@ class GreenButtonClient(object):
     def batch_subscription(self):
         print "GETing Subscription from DataCustodian"
 
-        if len(self.args) < 1:
+        if len(self.paths) < 1:
             print "Subscription Id Required!"
-        elif len(self.args) == 1:
-            self.url += "/" + self.args[0]
-        elif len(self.args) > 1:
-            print "Too many *args"
+        elif len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -119,15 +119,15 @@ class GreenButtonClient(object):
     def batch_retail_customer(self):
         print "GETing UsagePoint for Retail Customer"
 
-        if len(self.args) < 1:
+        if len(self.paths) < 1:
             print "Customer Id Required!"
-        elif len(self.args) == 1:
-            self.url += "/" + self.args[0] + "/UsagePoint"
-        elif len(self.args) > 1:
-            print "Too many *args"
+        elif len(self.paths) == 1:
+            self.url += "/" + self.paths[0] + "/UsagePoint"
+        elif len(self.paths) > 1:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -136,15 +136,15 @@ class GreenButtonClient(object):
         print "GETing Authorizations"
 
         self.url = self.url[:-10]
-        if len(self.args) < 2:
+        if len(self.paths) < 2:
             print "Subscription and UsagePoint Ids Required!"
-        elif len(self.args) == 2:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1]
-        elif len(self.args) > 2:
-            print "Too many *args"
+        elif len(self.paths) == 2:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1]
+        elif len(self.paths) > 2:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -153,15 +153,15 @@ class GreenButtonClient(object):
         print "GETing Electric Power Quality Summary"
 
         self.url = self.url[:-27]
-        if len(self.args) < 2:
+        if len(self.paths) < 2:
             print "Subscription and UsagePoint Ids Required!"
-        elif len(self.args) == 2:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1] + "/ElectricPowerQualitySummary"
-        elif len(self.args) > 2:
-            print "Too many *args"
+        elif len(self.paths) == 2:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerQualitySummary"
+        elif len(self.paths) > 2:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -170,15 +170,15 @@ class GreenButtonClient(object):
         print "GETing Electric Power Quality Summary"
 
         self.url = self.url[:-31]
-        if len(self.args) < 3:
+        if len(self.paths) < 3:
             print "Subscription, UsagePoint, and Electric Power Quality Summary Ids Required!"
-        elif len(self.args) == 3:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1] + "/ElectricPowerQualitySummary/" + self.args[2]
-        elif len(self.args) > 3:
-            print "Too many *args"
+        elif len(self.paths) == 3:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerQualitySummary/" + self.paths[2]
+        elif len(self.paths) > 3:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -187,15 +187,15 @@ class GreenButtonClient(object):
         print "GETing Electric Power Usage Summary"
 
         self.url = self.url[:-25]
-        if len(self.args) < 2:
+        if len(self.paths) < 2:
             print "Subscription and UsagePoint Ids Required!"
-        elif len(self.args) == 2:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1] + "/ElectricPowerUsageSummary"
-        elif len(self.args) > 2:
-            print "Too many *args"
+        elif len(self.paths) == 2:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerUsageSummary"
+        elif len(self.paths) > 2:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -204,23 +204,29 @@ class GreenButtonClient(object):
         print "GETing Electric Power Usage Summary"
 
         self.url = self.url[:-29]
-        if len(self.args) < 3:
+        if len(self.paths) < 3:
             print "Subscription, UsagePoint, and Electric Power Usage Summary Ids Required!"
-        elif len(self.args) == 3:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1] + "/ElectricPowerUsageSummary/" + self.args[2]
-        elif len(self.args) > 3:
-            print "Too many *args"
+        elif len(self.paths) == 3:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerUsageSummary/" + self.paths[2]
+        elif len(self.paths) > 3:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
     def interval_block(self):
         print "GETing Interval Block"
+
+        if len(self.paths) == 1:
+            self.url += "/" + self.paths[0]
+        elif len(self.paths) > 1:
+            print "Too many *paths"
+
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
@@ -228,15 +234,15 @@ class GreenButtonClient(object):
         print "GETing All Interval Blocks"
 
         self.url = self.url[:-13]
-        if len(self.args) < 3:
+        if len(self.paths) < 3:
             print "Subscription, UsagePoint, and Meter Reading Ids Required!"
-        elif len(self.args) == 3:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1] + "/MeterReading/" + self.args[2] + "/IntervalBlock"
-        elif len(self.args) > 3:
-            print "Too many *args"
+        elif len(self.paths) == 3:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[2] + "/IntervalBlock"
+        elif len(self.paths) > 3:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -245,15 +251,15 @@ class GreenButtonClient(object):
         print "GETing Interval Block by Id"
 
         self.url = self.url[:-14]
-        if len(self.args) < 4:
+        if len(self.paths) < 4:
             print "Subscription, UsagePoint, Meter Reading, and Interval Block Ids Required!"
-        elif len(self.args) == 4:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1] + "/MeterReading/" + self.args[2] + "/IntervalBlock/" + self.args[3]
-        elif len(self.args) > 4:
-            print "Too many *args"
+        elif len(self.paths) == 4:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[2] + "/IntervalBlock/" + self.paths[3]
+        elif len(self.paths) > 4:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -261,14 +267,14 @@ class GreenButtonClient(object):
     def local_time_parameters(self):
         print "GETing Local Time Parameters"
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
     def meter_reading(self):
         print "GETing Meter Reading"
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
@@ -276,15 +282,15 @@ class GreenButtonClient(object):
         print "GETing All Meter Readings for Usage Point"
 
         self.url = self.url[:-12]
-        if len(self.args) < 2:
+        if len(self.paths) < 2:
             print "Subscription and UsagePoint Ids Required!"
-        elif len(self.args) == 2:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1] + "/MeterReading/"
-        elif len(self.args) > 2:
-            print "Too many *args"
+        elif len(self.paths) == 2:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/"
+        elif len(self.paths) > 2:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -293,15 +299,15 @@ class GreenButtonClient(object):
         print "GETing Meter Reading for Usage Point by Id"
 
         self.url = self.url[:-16]
-        if len(self.args) < 3:
+        if len(self.paths) < 3:
             print "Subscription and UsagePoint Ids Required!"
-        elif len(self.args) == 3:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1] + "/MeterReading/" + self.args[2]
-        elif len(self.args) > 3:
-            print "Too many *args"
+        elif len(self.paths) == 3:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[2]
+        elif len(self.paths) > 3:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -309,21 +315,21 @@ class GreenButtonClient(object):
     def reading_type(self):
         print "GETing Reading Type"
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
     def read_service_status(self):
         print "GETing Read Service Status"
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
     def usage_point(self):
         print "GETing Usage Point"
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 
@@ -331,15 +337,15 @@ class GreenButtonClient(object):
         print "GETing UsagePoints for Subscription Id"
 
         self.url = self.url[:-11]
-        if len(self.args) < 1:
+        if len(self.paths) < 1:
             print "Subscription Id Required!"
-        elif len(self.args) == 1:
-            self.url += "/" + self.args[0] + "/UsagePoint"
-        elif len(self.args) > 1:
-            print "Too many *args"
+        elif len(self.paths) == 1:
+            self.url += "/" + self.paths[0] + "/UsagePoint"
+        elif len(self.paths) > 1:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
@@ -348,15 +354,15 @@ class GreenButtonClient(object):
         print "GETing Usage Point by Id"
 
         self.url = self.url[:-10]
-        if len(self.args) < 2:
+        if len(self.paths) < 2:
             print "Subscription and UsagePoint Ids Required!"
-        elif len(self.args) == 2:
-            self.url = self.url + self.args[0] + "/UsagePoint/" + self.args[1]
-        elif len(self.args) > 2:
-            print "Too many *args"
+        elif len(self.paths) == 2:
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1]
+        elif len(self.paths) > 2:
+            print "Too many *paths"
 
         self.set_param_string()
-        self.url += self.params
+        self.url += self.param_str
 
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
