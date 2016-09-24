@@ -8,23 +8,19 @@ $(document).ready( function() {
         } else {
             $("<input />").attr("type", "hidden").attr("name", "access_token").attr("value", token).appendTo(this);
         }
-        if ($(".required").val() == "") {
-            e.preventDefault();
+        var form = document.getElementById(this.id).elements;
+        for (var i=0; i<form.length; i++) {
+            if (form[i].classList.contains("required")) {
+                if (form[i].value == "" && $(form[i]).prop("disabled") != true) {
+                    e.preventDefault();
+                    console.log(form[i].id);
+                    var alert = "<br><div class='alert alert-danger'><strong>Submission Error!</strong> You left a required field empty!</div>";
+                    $("#"+form[i].id).css("border", "4px solid red");
+                    $("#"+form[i].id+"_alert").append(alert);
+                }
+            }
         }
     });
-
-//    $(document).on("submit", ".form_div", function(e) {
-//        e.preventDefault();
-//        var form = document.getElementById(this.id).elements;
-//        for (var i=0; i<form.length; i++) {
-//            if (form[i].classList.contains("required")) {
-//                if (form[i].value == "") {
-//                    $(form[i].id).css("border", "4px solid red");
-//
-//                }
-//            }
-//        }
-//    });
 
     $(document).on("click", ".id_select", function() {
         var data_pair = $(this).attr("data-pair");
@@ -44,15 +40,21 @@ $(document).ready( function() {
     $(document).on("click", "#interval_select", function() {
         if ($("#interval_select").prop("checked")) {
             $(".interval_select_input").prop("disabled", false);
+            $(".interval_select_input").addClass("required");
         } else {
             $(".interval_select_input").prop("disabled", true);
+            $(".interval_select_input").removeClass("required");
+            $(".interval_select_input").css("border", "none");
         }
     });
     $(document).on("click", "#meter_select", function() {
         if ($("#meter_select").prop("checked")) {
             $(".meter_select_input").prop("disabled", false);
+            $(".meter_select_input").addClass("required");
         } else {
             $(".meter_select_input").prop("disabled", true);
+            $(".meter_select_input").removeClass("required");
+            $(".meter_select_input").css("border", "none");
         }
     });
 });
