@@ -59,52 +59,9 @@
             <!-- Button name: app_info_submit  ------------------------------------------------------------------------>
             <form id="app_info_form" class="form_div" method="post">
                 <h3 class="text-xs-center form_header">Get All App Info</h3>
-                <div class="form-group row">
-                    <label for="app_info_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md"
-                               id="app_info_pub_min" placeholder="Published Min">
-                    </div>
-                    <label for="app_info_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md"
-                               id="app_info_pub_max" placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="app_info_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md"
-                               id="app_info_update_min" placeholder="Updated Min">
-                    </div>
-                    <label for="app_info_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md"
-                               id="app_info_update_max" placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="app_info_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md"
-                               id="app_info_max_results" placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="app_info_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md"
-                               id="app_info_start_index" placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="app_info_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="app_info_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="app_info" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="app_info_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -128,52 +85,9 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="auth_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md" id="auth_pub_min"
-                               placeholder="Published Min">
-                    </div>
-                    <label for="auth_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md" id="auth_pub_max"
-                               placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="auth_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md" id="auth_update_min"
-                               placeholder="Updated Min">
-                    </div>
-                    <label for="auth_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md" id="auth_update_max"
-                               placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="auth_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md" id="auth_max_results"
-                               placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="auth_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md" id="auth_start_index"
-                               placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="auth_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="auth_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="auth" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="auth_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
@@ -257,52 +171,9 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="bulk_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md" id="bulk_pub_min"
-                               placeholder="Published Min">
-                    </div>
-                    <label for="bulk_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md" id="bulk_pub_max"
-                               placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="bulk_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md" id="bulk_update_min"
-                               placeholder="Updated Min">
-                    </div>
-                    <label for="bulk_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md" id="bulk_update_max"
-                               placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="bulk_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md" id="bulk_max_results"
-                               placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="bulk_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md" id="bulk_start_index"
-                               placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="bulk_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="bulk_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="bulk" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
@@ -362,56 +233,9 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="epower_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md" id="epower_pub_min"
-                               placeholder="Published Min">
-                    </div>
-                    <label for="epower_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md" id="epower_pub_max"
-                               placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="epower_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md"
-                               id="epower_update_min"
-                               placeholder="Updated Min">
-                    </div>
-                    <label for="epower_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md"
-                               id="epower_update_max"
-                               placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="epower_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md"
-                               id="epower_max_results"
-                               placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="epower_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md"
-                               id="epower_start_index"
-                               placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="epower_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="epower_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="epower" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="epower_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -478,58 +302,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="interval_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md"
-                               id="interval_pub_min"
-                               placeholder="Published Min">
-                    </div>
-                    <label for="interval_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md"
-                               id="interval_pub_max"
-                               placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="interval_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md"
-                               id="interval_update_min"
-                               placeholder="Updated Min">
-                    </div>
-                    <label for="interval_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md"
-                               id="interval_update_max"
-                               placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="interval_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md"
-                               id="interval_max_results"
-                               placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="interval_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md"
-                               id="interval_start_index"
-                               placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="interval_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="interval_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="interval" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="interval_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -558,60 +333,9 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="local_time_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md"
-                               id="local_time_pub_min"
-                               placeholder="Published Min">
-                    </div>
-                    <label for="local_time_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md"
-                               id="local_time_pub_max"
-                               placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="local_time_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md"
-                               id="local_time_update_min"
-                               placeholder="Updated Min">
-                    </div>
-                    <label for="local_time_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md"
-                               id="local_time_update_max"
-                               placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="local_time_max_results" class="col-xs-2 col-form-label text-xs-right">Max
-                        Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md"
-                               id="local_time_max_results"
-                               placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="local_time_start_index" class="col-xs-2 col-form-label text-xs-right">Start
-                        Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md"
-                               id="local_time_start_index"
-                               placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="local_time_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="local_time_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="local_time" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="local_time_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -664,58 +388,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="meter_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md"
-                               id="meter_pub_min"
-                               placeholder="Published Min">
-                    </div>
-                    <label for="meter_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md"
-                               id="meter_pub_max"
-                               placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="meter_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md"
-                               id="meter_update_min"
-                               placeholder="Updated Min">
-                    </div>
-                    <label for="meter_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md"
-                               id="meter_update_max"
-                               placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="meter_max_results" class="col-xs-2 col-form-label text-xs-right">Max Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md"
-                               id="meter_max_results"
-                               placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="meter_start_index" class="col-xs-2 col-form-label text-xs-right">Start Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md"
-                               id="meter_start_index"
-                               placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="meter_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="meter_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="meter" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="meter_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -741,60 +416,9 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="reading_type_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md"
-                               id="reading_type_pub_min"
-                               placeholder="Published Min">
-                    </div>
-                    <label for="reading_type_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md"
-                               id="reading_type_pub_max"
-                               placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="reading_type_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md"
-                               id="reading_type_update_min"
-                               placeholder="Updated Min">
-                    </div>
-                    <label for="reading_type_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md"
-                               id="reading_type_update_max"
-                               placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="reading_type_max_results" class="col-xs-2 col-form-label text-xs-right">Max
-                        Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md"
-                               id="reading_type_max_results"
-                               placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="reading_type_start_index" class="col-xs-2 col-form-label text-xs-right">Start
-                        Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md"
-                               id="reading_type_start_index"
-                               placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="reading_type_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="reading_type_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="reading_type" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="reading_type_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
@@ -838,60 +462,9 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="usagepoint_pub_min" class="col-xs-2 col-form-label text-xs-right">Published Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-min" class="form-control form-control-md"
-                               id="usagepoint_pub_min"
-                               placeholder="Published Min">
-                    </div>
-                    <label for="usagepoint_pub_max" class="col-xs-2 col-form-label text-xs-right">Published Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="published-max" class="form-control form-control-md"
-                               id="usagepoint_pub_max"
-                               placeholder="Published Max">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="usagepoint_update_min" class="col-xs-2 col-form-label text-xs-right">Updated Min</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-min" class="form-control form-control-md"
-                               id="usagepoint_update_min"
-                               placeholder="Updated Min">
-                    </div>
-                    <label for="usagepoint_update_max" class="col-xs-2 col-form-label text-xs-right">Updated Max</label>
-                    <div class="col-xs-4">
-                        <input type="date" name="updated-max" class="form-control form-control-md"
-                               id="usagepoint_update_max"
-                               placeholder="Updated Max">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="usagepoint_max_results" class="col-xs-2 col-form-label text-xs-right">Max
-                        Results</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="max-results" class="form-control form-control-md"
-                               id="usagepoint_max_results"
-                               placeholder="Max Results">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="usagepoint_start_index" class="col-xs-2 col-form-label text-xs-right">Start
-                        Index</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="start-index" class="form-control form-control-md"
-                               id="usagepoint_start_index"
-                               placeholder="Start Index">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="usagepoint_depth" class="col-xs-2 col-form-label text-xs-right">Depth</label>
-                    <div class="col-xs-10">
-                        <input type="text" name="depth" class="form-control form-control-md" id="usagepoint_depth"
-                               placeholder="Depth">
-                    </div>
-                </div>
+                {% with param="usagepoint" %}
+                    {% include "param_form.html" %}
+                {% endwith %}
                 <button type="submit" name="usagepoint_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>

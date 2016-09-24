@@ -25,6 +25,7 @@ def fill_params(data, *exclude):
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
+
     data = {}
     for key, value in request.form.iteritems():
         if value != "" or "_submit" in key:
