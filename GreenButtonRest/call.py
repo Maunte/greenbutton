@@ -2,7 +2,7 @@ import requests
 
 import xml.etree.ElementTree as ET
 
-from clients import GreenButtonClient as GBC
+from .clients import GreenButtonClient as GBC
 
 
 def main():
@@ -12,8 +12,8 @@ def main():
     app_info = GBC("Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3", endpoint, *args, **params)
     # other(app_info)
     result = app_info.execute()
-    print app_info.url
-    print result
+    print(app_info.url)
+    print(result)
 
 
 def api_call(*args, **kwargs):
@@ -26,7 +26,7 @@ def other(object):
     root = ET.fromstring(response.text)
 
     for child in root:
-        print child.tag
+        print(child.tag)
 
 
 if __name__ == '__main__':

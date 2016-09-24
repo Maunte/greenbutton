@@ -57,12 +57,12 @@ class GreenButtonClient(object):
                 i += 1
 
     def application_information(self):
-        print "GETing Application Information..."
+        print("GETing Application Information...")
 
         if len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -71,12 +71,12 @@ class GreenButtonClient(object):
         return response.text
 
     def authorization(self):
-        print "GETing Authorizations"
+        print("GETing Authorizations")
 
         if len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -85,14 +85,14 @@ class GreenButtonClient(object):
         return response.text
 
     def batch_bulk(self):
-        print "GETing Bulk Transfer from DataCustodian"
+        print("GETing Bulk Transfer from DataCustodian")
 
         if len(self.paths) < 1:
-            print "Bulk Id Required!"
+            print("Bulk Id Required!")
         elif len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -101,14 +101,14 @@ class GreenButtonClient(object):
         return response.text
 
     def batch_subscription(self):
-        print "GETing Subscription from DataCustodian"
+        print("GETing Subscription from DataCustodian")
 
         if len(self.paths) < 1:
-            print "Subscription Id Required!"
+            print("Subscription Id Required!")
         elif len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -117,14 +117,14 @@ class GreenButtonClient(object):
         return response.text
 
     def batch_retail_customer(self):
-        print "GETing UsagePoint for Retail Customer"
+        print("GETing UsagePoint for Retail Customer")
 
         if len(self.paths) < 1:
-            print "Customer Id Required!"
+            print("Customer Id Required!")
         elif len(self.paths) == 1:
             self.url += "/" + self.paths[0] + "/UsagePoint"
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -133,15 +133,15 @@ class GreenButtonClient(object):
         return response.text
 
     def batch_subscription_usage(self):
-        print "GETing Authorizations"
+        print("GETing Authorizations")
 
         self.url = self.url[:-10]
         if len(self.paths) < 2:
-            print "Subscription and UsagePoint Ids Required!"
+            print("Subscription and UsagePoint Ids Required!")
         elif len(self.paths) == 2:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1]
         elif len(self.paths) > 2:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -150,15 +150,15 @@ class GreenButtonClient(object):
         return response.text
 
     def electric_power_quality_summary(self):
-        print "GETing Electric Power Quality Summary"
+        print("GETing Electric Power Quality Summary")
 
         self.url = self.url[:-27]
         if len(self.paths) < 2:
-            print "Subscription and UsagePoint Ids Required!"
+            print("Subscription and UsagePoint Ids Required!")
         elif len(self.paths) == 2:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerQualitySummary"
         elif len(self.paths) > 2:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -167,15 +167,15 @@ class GreenButtonClient(object):
         return response.text
 
     def electric_power_quality_summary_by_id(self):
-        print "GETing Electric Power Quality Summary"
+        print("GETing Electric Power Quality Summary")
 
         self.url = self.url[:-31]
         if len(self.paths) < 3:
-            print "Subscription, UsagePoint, and Electric Power Quality Summary Ids Required!"
+            print("Subscription, UsagePoint, and Electric Power Quality Summary Ids Required!")
         elif len(self.paths) == 3:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerQualitySummary/" + self.paths[2]
         elif len(self.paths) > 3:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -184,15 +184,15 @@ class GreenButtonClient(object):
         return response.text
 
     def electric_power_usage_summary(self):
-        print "GETing Electric Power Usage Summary"
+        print("GETing Electric Power Usage Summary")
 
         self.url = self.url[:-25]
         if len(self.paths) < 2:
-            print "Subscription and UsagePoint Ids Required!"
+            print("Subscription and UsagePoint Ids Required!")
         elif len(self.paths) == 2:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerUsageSummary"
         elif len(self.paths) > 2:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -201,15 +201,15 @@ class GreenButtonClient(object):
         return response.text
 
     def electric_power_usage_summary_by_id(self):
-        print "GETing Electric Power Usage Summary"
+        print("GETing Electric Power Usage Summary")
 
         self.url = self.url[:-29]
         if len(self.paths) < 3:
-            print "Subscription, UsagePoint, and Electric Power Usage Summary Ids Required!"
+            print("Subscription, UsagePoint, and Electric Power Usage Summary Ids Required!")
         elif len(self.paths) == 3:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerUsageSummary/" + self.paths[2]
         elif len(self.paths) > 3:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -218,12 +218,12 @@ class GreenButtonClient(object):
         return response.text
 
     def interval_block(self):
-        print "GETing Interval Block"
+        print("GETing Interval Block")
 
         if len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -231,15 +231,15 @@ class GreenButtonClient(object):
         return response.text
 
     def all_interval_blocks(self):
-        print "GETing All Interval Blocks"
+        print("GETing All Interval Blocks")
 
         self.url = self.url[:-13]
         if len(self.paths) < 3:
-            print "Subscription, UsagePoint, and Meter Reading Ids Required!"
+            print("Subscription, UsagePoint, and Meter Reading Ids Required!")
         elif len(self.paths) == 3:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[2] + "/IntervalBlock"
         elif len(self.paths) > 3:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -248,15 +248,15 @@ class GreenButtonClient(object):
         return response.text
 
     def interval_block_by_id(self):
-        print "GETing Interval Block by Id"
+        print("GETing Interval Block by Id")
 
         self.url = self.url[:-14]
         if len(self.paths) < 4:
-            print "Subscription, UsagePoint, Meter Reading, and Interval Block Ids Required!"
+            print("Subscription, UsagePoint, Meter Reading, and Interval Block Ids Required!")
         elif len(self.paths) == 4:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[2] + "/IntervalBlock/" + self.paths[3]
         elif len(self.paths) > 4:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -265,12 +265,12 @@ class GreenButtonClient(object):
         return response.text
 
     def local_time_parameters(self):
-        print "GETing Local Time Parameters"
+        print("GETing Local Time Parameters")
 
         if len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -278,12 +278,12 @@ class GreenButtonClient(object):
         return response.text
 
     def meter_reading(self):
-        print "GETing Meter Reading"
+        print("GETing Meter Reading")
 
         if len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -291,15 +291,15 @@ class GreenButtonClient(object):
         return response.text
 
     def all_meter_readings_for_usage__point(self):
-        print "GETing All Meter Readings for Usage Point"
+        print("GETing All Meter Readings for Usage Point")
 
         self.url = self.url[:-12]
         if len(self.paths) < 2:
-            print "Subscription and UsagePoint Ids Required!"
+            print("Subscription and UsagePoint Ids Required!")
         elif len(self.paths) == 2:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/"
         elif len(self.paths) > 2:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -308,15 +308,15 @@ class GreenButtonClient(object):
         return response.text
 
     def meter_reading_for_usage__point_by_id(self):
-        print "GETing Meter Reading for Usage Point by Id"
+        print("GETing Meter Reading for Usage Point by Id")
 
         self.url = self.url[:-16]
         if len(self.paths) < 3:
-            print "Subscription and UsagePoint Ids Required!"
+            print("Subscription and UsagePoint Ids Required!")
         elif len(self.paths) == 3:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[2]
         elif len(self.paths) > 3:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -325,12 +325,12 @@ class GreenButtonClient(object):
         return response.text
 
     def reading_type(self):
-        print "GETing Reading Type"
+        print("GETing Reading Type")
 
         if len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -338,12 +338,12 @@ class GreenButtonClient(object):
         return response.text
 
     def read_service_status(self):
-        print "GETing Read Service Status"
+        print("GETing Read Service Status")
 
         if len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -351,12 +351,12 @@ class GreenButtonClient(object):
         return response.text
 
     def usage_point(self):
-        print "GETing Usage Point"
+        print("GETing Usage Point")
 
         if len(self.paths) == 1:
             self.url += "/" + self.paths[0]
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -364,15 +364,15 @@ class GreenButtonClient(object):
         return response.text
 
     def usage_points_by_subscription_id(self):
-        print "GETing UsagePoints for Subscription Id"
+        print("GETing UsagePoints for Subscription Id")
 
         self.url = self.url[:-11]
         if len(self.paths) < 1:
-            print "Subscription Id Required!"
+            print("Subscription Id Required!")
         elif len(self.paths) == 1:
             self.url += "/" + self.paths[0] + "/UsagePoint"
         elif len(self.paths) > 1:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str
@@ -381,15 +381,15 @@ class GreenButtonClient(object):
         return response.text
 
     def usage_point_by_id(self):
-        print "GETing Usage Point by Id"
+        print("GETing Usage Point by Id")
 
         self.url = self.url[:-14]
         if len(self.paths) < 2:
-            print "Subscription and UsagePoint Ids Required!"
+            print("Subscription and UsagePoint Ids Required!")
         elif len(self.paths) == 2:
             self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1]
         elif len(self.paths) > 2:
-            print "Too many *paths"
+            print("Too many *paths")
 
         self.set_param_string()
         self.url += self.param_str

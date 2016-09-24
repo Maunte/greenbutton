@@ -17,7 +17,7 @@ app.config.from_envvar('APP_SETTINGS', silent=True)
 
 def fill_params(data, *exclude):
     params = {}
-    for key, value in data.iteritems():
+    for key, value in data.items():
         if key not in exclude and value != "":
             params[key] = value
     return params
@@ -27,7 +27,7 @@ def fill_params(data, *exclude):
 def main():
 
     data = {}
-    for key, value in request.form.iteritems():
+    for key, value in request.form.items():
         if value != "" or "_submit" in key:
             data[key] = value
 
@@ -132,13 +132,13 @@ def main():
                     paths.append(data["usagepoint_id"])
             params = fill_params(data, "access_token", "usagepoint_id", "usagepoint_sub_id")
         else:
-            print "No endpoint defined!"
+            print("No endpoint defined!")
 
         call = gbc(token, endpoint, *paths, **params)
-        print call.url
+        print(call.url)
         response = call.execute()
-        print call.url
-        print response
+        print(call.url)
+        print(response)
 
     return render_template("index.html")
 
