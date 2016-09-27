@@ -18,7 +18,9 @@
         </div>
     </a>
     <br>
+    <div>
 
+    </div>
     <!-- Field names: access_token -->
     <div class="form-group row">
         <label for="access_token" class="col-xs-2 col-form-label text-xs-right">Access Token</label>
@@ -37,7 +39,18 @@
                                                                                    href="#app_info">
             GET Application Information <i class="fa fa-chevron-down"></i></a></li>
         <div class="collapse" id="app_info">
-
+            <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/ApplicationInformation</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/ApplicationInformation/{applicationInformationId}</li>
+                    </ul>
+                </div>
+            </div>
             <!-- Field names: app_info_id -->
             <!-- Button name: app_info_id_submit  -->
             <form id="app_info_id_form" class="form_div" method="post">
@@ -72,6 +85,18 @@
         <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#auth">GET
             Authorization <i class="fa fa-chevron-down"></i></a></li>
         <div class="collapse" id="auth">
+            <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Authorization</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Authorization/{authorizationId}</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Field names: auth_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: auth_submit  -->
@@ -100,6 +125,20 @@
             Transfer from DataCustodian <i class="fa fa-chevron-down"></i></a></li>
 
         <div class="collapse" id="bulk">
+            <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Batch/Bulk/{bulkId}</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Batch/Subscription/{subscriptionId}</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}/UsagePoint</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Id names: bulk_id, bulk_sub_id, bulk_customer_id, bulk_sub_usage
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
@@ -117,7 +156,7 @@
                                 <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
                                        data-pair="bulk_id">
                             </span>
-                                <input type="text" name="bulk_id" class="form-control form-control-md id_select"
+                                <input type="text" name="bulk_id" class="form-control form-control-md id_select required"
                                        id="bulk_id"
                                        placeholder="Bulk Id" data-group="bulk" data-pair="bulk_id">
                             </div>
@@ -131,7 +170,7 @@
                                 <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
                                        data-pair="bulk_sub_id">
                             </span>
-                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select"
+                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select required"
                                        id="bulk_sub_id"
                                        placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_id">
                             </div>
@@ -147,7 +186,7 @@
                                        data-pair="bulk_customer_id">
                             </span>
                                 <input type="text" name="bulk_customer_id"
-                                       class="form-control form-control-md id_select" id="bulk_customer_id"
+                                       class="form-control form-control-md id_select required" id="bulk_customer_id"
                                        placeholder="Retail Customer Id" data-group="bulk" data-pair="bulk_customer_id">
                             </div>
                         </div>
@@ -161,11 +200,11 @@
                                 <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
                                        data-pair="bulk_sub_usage">
                             </span>
-                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select"
+                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select required"
                                        id="bulk_sub_with_usagepoint_id"
                                        placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_usage">
                                 <span>
-                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select"
+                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select required"
                                        id="bulk_usagepoint_with_sub_id"
                                        placeholder="UsagePoint Id" data-group="bulk" data-pair="bulk_sub_usage">
                             </span>
@@ -187,6 +226,19 @@
 
 
         <div class="collapse" id="epower">
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary/{electricPowerQualitySummaryId}</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricUsageQualitySummary</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricUsageQualitySummary/{electricUsageQualitySummaryId}</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Id names: epower_sub_id, epower_usagepoint_id, epower_summary_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
@@ -251,6 +303,20 @@
             Block <i class="fa fa-chevron-down"></i></a></li>
 
         <div class="collapse" id="interval">
+            <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/IntervalBlock</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/IntervalBlock/{intervalBlockId}</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Id names: interval_sub_id, interval_usagepoint_id, interval_meter_id, interval_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
@@ -321,6 +387,18 @@
             Time Parameters <i class="fa fa-chevron-down"></i></a></li>
 
         <div class="collapse" id="local_time">
+            <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/LocalTimeParameters</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/LocalTimeParameters/{localTimeParameterId}</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Field names: local_time_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: local_time_submit  -->
@@ -349,6 +427,20 @@
         <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#meter">GET Meter Readings <i class="fa fa-chevron-down"></i></a></li>
 
         <div class="collapse" id="meter">
+            <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/MeterReading</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/MeterReading/{meterReadingId}</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Id names: meter_sub_id, meter_usagepoint_id, meter_meter_id, meter_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
@@ -405,6 +497,18 @@
         <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#reading_type">GET Reading Types <i class="fa fa-chevron-down"></i></a></li>
         
         <div class="collapse" id="reading_type">
+            <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/ReadingType</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/ReadingType/{readingTypeId}</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Field names: reading_type_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: reading_type_submit  -->
@@ -432,6 +536,19 @@
 
             <!-- Button name: server_status_submit  -->
             <div id="server_status" class="collapse">
+                <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/ReadServiceStatus</li>
+                    </ul>
+                </div>
+            </div>
+
+
                 <form id="server_status_form" class="form_div" method="post">
                     <h3 class="text-xs-center form_header">GET Server Status</h3>
                     <button type="submit" name="server_status_submit" class="btn btn-success btn-md btn-block m-y-1">Click to Get Server Status</button>
@@ -441,6 +558,20 @@
         <li class="list-group-item list-group-item-action list-group-item-info"><a data-toggle="collapse" href="#usagepoint">GET UsagePoints <i class="fa fa-chevron-down"></i></a></li>
         
         <div class="collapse" id="usagepoint">
+            <br>
+            <div class="card card-outline-success endpoint_links">
+                <div class="card-header text-xs-center bg-success">
+                    <h6>ENDPOINTS COVERED HERE</h6>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/UsagePoint/</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/UsagePoint/{usagePointId}</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint</li>
+                        <li class="list-group-item list-group-item-info">GET /espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Field names: usagepoint_id, usagepoint_sub_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: usagepoint_submit  -->

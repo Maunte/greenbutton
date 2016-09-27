@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request
 
 from GreenButtonRest.clients import GreenButtonClient as gbc
+from GreenButtonRest.parser import ParseXml
 
 app = Flask(__name__)
 
@@ -133,14 +134,20 @@ def main():
             params = fill_params(data, "access_token", "usagepoint_id", "usagepoint_sub_id")
         else:
             print("No endpoint defined!")
-
-        call = gbc(token, endpoint, *paths, **params)
-        print(call.url)
-        response = call.execute()
-        print(call.url)
-        print(response)
-
-    return render_template("index.html")
+        try:
+            call = gbc(token, endpoint, *paths, **params)
+            print(call.url)
+            response = call.execute()
+            print(call.url)
+            xml = ParseXml(response)
+            xml.parse()
+            error = "false"
+        except:
+            error = "true"
+    try:
+        return render_template("index.html", error=error)
+    except:
+        return render_template("index.html")
 
 
 if __name__ == "__main__":

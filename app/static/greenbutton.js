@@ -13,10 +13,17 @@ $(document).ready( function() {
             if (form[i].classList.contains("required")) {
                 if (form[i].value == "" && $(form[i]).prop("disabled") != true) {
                     e.preventDefault();
-                    console.log(form[i].id);
-                    var alert = "<br><div class='alert alert-danger'><strong>Submission Error!</strong> You left a required field empty!</div>";
-                    $("#"+form[i].id).css("border", "4px solid red");
-                    $("#"+form[i].id+"_alert").append(alert);
+                    if ($("#"+form[i].id+"_alert_msg").length == 0 ) {
+                        var alert = "<br><div id='"+form[i].id+"_alert_msg' "
+                        +"class='alert alert-danger'><strong>Submission Error!</strong> You left a required field "
+                        +form[i].id+" empty!</div>";
+                        $("#"+form[i].id).css("border", "4px solid red");
+                        $("#"+form[i].id+"_alert").append(alert);
+                    }
+
+                if ($(form[i]).attr("data-group") == "bulk") {
+                    console.log($(form[i]).attr("data-pair"));
+                }
                 }
             }
         }
