@@ -64,4 +64,8 @@ $(document).ready( function() {
             $(".meter_select_input").css("border", "none");
         }
     });
+
+    $(document).on("click", "#toggle_xml", function() {
+        $("#xml_div").toggle();
+    });
 });

@@ -6,9 +6,12 @@ class ParseXml(object):
         self.xml = xml
 
     def parse(self):
+        print("Parsing XML Response: ")
         root = ET.fromstring(self.xml)
         for child in root:
-            print(root.attrib)
+            for item in child:
+                if "id" in item.tag:
+                    print(item.tag, item.text)
 
     def __str__(self):
         return self.xml

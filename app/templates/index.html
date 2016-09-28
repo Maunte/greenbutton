@@ -18,7 +18,18 @@
         </div>
     </a>
     <br>
-    <div>
+    <div style="width:100%">
+
+    {% if response %}
+        <div>
+            <button id="toggle_xml" class="btn btn-primary m-x-auto" style="display:block">SHOW/HIDE XML Resposne</button>
+            <div id="xml_div" style="display:none">
+                <pre><code>
+                    {{ response }}
+                </code></pre>
+            </div>
+        </div>
+    {% endif %}
 
     </div>
     <!-- Field names: access_token -->

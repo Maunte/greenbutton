@@ -66,7 +66,7 @@ class GreenButtonClient(object):
 
         self.set_param_string()
         self.url += self.param_str
-
+        print(self.url)
         response = requests.request("GET", self.url, headers=self.headers)
         return response.text
 

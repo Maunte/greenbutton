@@ -136,16 +136,14 @@ def main():
             print("No endpoint defined!")
         try:
             call = gbc(token, endpoint, *paths, **params)
-            print(call.url)
             response = call.execute()
-            print(call.url)
             xml = ParseXml(response)
             xml.parse()
             error = "false"
         except:
             error = "true"
     try:
-        return render_template("index.html", error=error)
+        return render_template("index.html", error=error, response=response)
     except:
         return render_template("index.html")
 
