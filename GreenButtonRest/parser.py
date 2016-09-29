@@ -15,4 +15,3 @@ class ParseXml(object):
 
     def __str__(self):
         return self.xml
-

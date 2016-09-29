@@ -1,5 +1,3 @@
-import os
-
 from flask import Flask, render_template, request
 
 from GreenButtonRest.clients import GreenButtonClient as gbc
@@ -26,7 +24,6 @@ def fill_params(data, *exclude):
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-
     data = {}
     for key, value in request.form.items():
         if value != "" or "_submit" in key:
@@ -37,7 +34,7 @@ def main():
         paths, params = [], {}
         if "app_info_submit" in request.form:
             endpoint = "/espi/1_1/resource/ApplicationInformation"
-            params = fill_params(data, "access_token" )
+            params = fill_params(data, "access_token")
         elif "app_info_id_submit" in data:
             endpoint = "/espi/1_1/resource/ApplicationInformation"
             paths.append(data["app_info_id"])
@@ -59,7 +56,7 @@ def main():
             elif "bulk_sub_usage_id" in data:
                 endpoint = "/espi/1_1/resource/Batch/Subscription/UsagePoint"
                 paths.append(data["bulk_sub_id"])
-            params = fill_params(data, "access_token","bulk_radio", "bulk_id", "bulk_sub_id", "bulk_customer_id",
+            params = fill_params(data, "access_token", "bulk_radio", "bulk_id", "bulk_sub_id", "bulk_customer_id",
                                  "bulk_sub_usage_id")
         elif "epower_submit" in data:
             paths.append(data["epower_sub_id"])
@@ -76,7 +73,8 @@ def main():
                 else:
                     endpoint = "/espi/1_1/resource/Subscription/ElectricPowerUsageSummarybyId"
                     paths.append(data["epower_summary_id"])
-            params = fill_params(data, "access_token", "epower_sub_id", "epower_usagepoint_id", "epower_summary_id", "epower_radio")
+            params = fill_params(data, "access_token", "epower_sub_id", "epower_usagepoint_id", "epower_summary_id",
+                                 "epower_radio")
         elif "interval_submit" in data:
             if "interval_sub_id" in data:
                 paths.append(data["interval_sub_id"])
@@ -91,7 +89,8 @@ def main():
                 endpoint = "/espi/1_1/resource/IntervalBlock"
                 if "interval_id" in data:
                     paths.append(data["interval_id"])
-            params = fill_params(data, "access_token", "interval_sub_id", "interval_usage_id", "interval_meter_id", "interval_id")
+            params = fill_params(data, "access_token", "interval_sub_id", "interval_usage_id", "interval_meter_id",
+                                 "interval_id")
         elif "local_time_submit" in data:
             endpoint = "/espi/1_1/resource/LocalTimeParameters"
             if "local_time_id" in data:
