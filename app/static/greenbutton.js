@@ -1,4 +1,5 @@
 $(document).ready( function() {
+
     $(".form_div").submit( function(e) {
         var token = $("#access_token").val();
         if (token == "") {
