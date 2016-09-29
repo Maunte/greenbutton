@@ -8,31 +8,43 @@ app2 = Flask(__name__)
 
 @app2.route("/", methods=['GET', 'POST'])
 def main():
+    """
+    Take form data and put in 'data' dictionary. Ignores submit button name.
+    Any form field with a blank value will be given a value of None in 'data'.
+    """
     data = {}
     for key, value in request.form.items():
-        if "_submit" not in key:
-            if value == "":
-                data[key] = None
-            else:
-                data[key] = value
+        if value == "":
+            data[key] = None
         else:
-            pass
+            data[key] = value
 
+    print(data)
     # gc = GreenClient(token=data["access_token"])
     gc = GreenClient()
-    paths, params = [], {}
+
+    # The GreenClient method that will be called depends on the name of the button used to submit the form.
+    # Many submit button names handle several different methods.
+
+    # Application Information Endpoint: No Application Information Id: GET Requests
     if "app_info_submit" in request.form:
         response = gc.execute(method="ApplicationInformation", published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
+
+    # Application Information Endpoint with Id. Note that only the Id is taken as a parameter: GET Requests
     elif "app_info_id_submit" in data:
         response = gc.execute(method="ApplicationInformation", id=data["app_info_id"])
+
+    # Authorization Endpoints: GET Requests
     elif "auth_submit" in data:
         response = gc.execute(method="Authorization", id=data["auth_id"], published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
+
+    # Bulk Transfer Endpoints: GET Requests
     elif "bulk_submit" in data:
         if "bulk_id" in data:
             response = gc.execute(method="Batch/Bulk", bulk_id=data["bulk_id"], published_max=data["published-max"],
@@ -57,6 +69,8 @@ def main():
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
                                   start_index=data["start-index"], depth=data["depth"])
+
+    # Electric Power Summaries, both Quality and Usage, Endpoints: Get Requests
     elif "epower_submit" in data:
         if data["epower_radio"] == "quality":
             if data["summary_id"] == "":
@@ -86,6 +100,8 @@ def main():
                                       updated_max=data["updated-max"], updated_min=data["updated-min"],
                                       max_results=data["max-results"], start_index=data["start-index"],
                                       depth=data["depth"])
+
+    # Interval Block Endpoints: GET Requests
     elif "interval_submit" in data:
         if "sub_id" in data:
             if "interval_id" in data:
@@ -108,11 +124,15 @@ def main():
                                   updated_max=data["updated-max"], updated_min=data["updated-min"],
                                   max_results=data["max-results"], start_index=data["start-index"],
                                   depth=data["depth"])
+
+    # Local Time Parameters Endpoint: GET Requests
     elif "local_time_submit" in data:
         response = gc.execute(method="LocalTimeParameters", id=data["local_time_id"],
                               published_max=data["published-max"], published_min=data["published-min"],
                               updated_max=data["updated-max"], updated_min=data["updated-min"],
                               max_results=data["max-results"], start_index=data["start-index"], depth=data["depth"])
+
+    # Meter Reading Endpoints: GET Requests
     elif "meter_submit" in data:
         if "sub_id" in data:
             if "meter_id" in data:
@@ -133,14 +153,20 @@ def main():
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
                                   start_index=data["start-index"], depth=data["depth"])
+
+    # Reading Type Endpoints: GET Requests
     elif "reading_type_submit" in data:
         response = gc.execute(method="ReadingType", id=data["reading_type_id"],
                               published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
+
+    # Service Status Endpoint: GET Request
     elif "server_status_submit" in data:
         response = gc.execute(method="ReadServiceStatus")
+
+    # UsagePoint Endpoints: GET Requests
     elif "usagepoint_submit" in data:
         if "sub_id" in data:
             if "usagep_id" in data:
