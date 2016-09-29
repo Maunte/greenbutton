@@ -1,0 +1,6 @@
+
+
+.idea/
+*.pyc
+/python3
+/app/templates/test.xml
