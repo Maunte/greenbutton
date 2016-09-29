@@ -58,7 +58,7 @@ def main():
                 paths.append(data["bulk_customer_id"])
             elif "bulk_sub_usage_id" in data:
                 endpoint = "/espi/1_1/resource/Batch/Subscription/UsagePoint"
-                paths.append(data["bulk_sub_id"])
+                paths.append(data["bulk_sub_usage_id"])
             params = fill_params(data, "access_token","bulk_radio", "bulk_id", "bulk_sub_id", "bulk_customer_id",
                                  "bulk_sub_usage_id")
         elif "epower_submit" in data:

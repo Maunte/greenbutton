@@ -10,7 +10,7 @@ class GreenButtonClient(object):
         self.params = params
         self.param_str = ""
 
-    def execute(self, *paths, **params):
+    def execute(self):
         method_map = {
             "/espi/1_1/resource/ApplicationInformation": self.application_information,
             "/espi/1_1/resource/Authorization": self.authorization,
@@ -36,7 +36,7 @@ class GreenButtonClient(object):
             "/espi/1_1/resource/Subscription/UsagePointbyId": self.usage_point_by_id,
         }
 
-        result = method_map[self.endpoint](*paths, **params)
+        result = method_map[self.endpoint]()
         return result
 
     def set_param_string(self):
@@ -55,6 +55,36 @@ class GreenButtonClient(object):
                         if i != len(self.params):
                             self.param_str += "&"
                 i += 1
+
+    # def app_info(self, id=None, published_max=None, published_min=None, updated_max=None, updated_min=None,
+    #              max_results=None, start_index=None, depth=None ):
+    #     if id != None:
+    #         self.url += id + "/"
+    #     else:
+    #         pass
+    #
+    #     params = {"published-max": published_max, "published-min": published_min, "updated-max": updated_max,
+    #               "updated-min": updated_min, "max-results": max_results, "start-index": start_index, "depth": depth}
+    #     param_count = 0
+    #
+    #     for value in params.values():
+    #         if value != None:
+    #             param_count += 1
+    #         else:
+    #             pass
+    #     param_str = ""
+    #     count = 0
+    #     if param_count > 0:
+    #         for key, value in params.items():
+    #
+    #     for key, value in params.items():
+    #         if value != None:
+    #             if count == 1:
+    #                 param_str += "?" + key + "=" + value + "&"
+    #             count += 1
+    #         else:
+    #             pass
+    #     return
 
     def application_information(self):
         print("GETing Application Information...")
