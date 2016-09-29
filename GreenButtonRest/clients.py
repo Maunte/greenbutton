@@ -203,7 +203,8 @@ class GreenButtonClient(object):
         if len(self.paths) < 3:
             print("Subscription, UsagePoint, and Electric Power Quality Summary Ids Required!")
         elif len(self.paths) == 3:
-            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerQualitySummary/" + self.paths[2]
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerQualitySummary/" + \
+                       self.paths[2]
         elif len(self.paths) > 3:
             print("Too many *paths")
 
@@ -237,7 +238,8 @@ class GreenButtonClient(object):
         if len(self.paths) < 3:
             print("Subscription, UsagePoint, and Electric Power Usage Summary Ids Required!")
         elif len(self.paths) == 3:
-            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerUsageSummary/" + self.paths[2]
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/ElectricPowerUsageSummary/" + \
+                       self.paths[2]
         elif len(self.paths) > 3:
             print("Too many *paths")
 
@@ -267,7 +269,8 @@ class GreenButtonClient(object):
         if len(self.paths) < 3:
             print("Subscription, UsagePoint, and Meter Reading Ids Required!")
         elif len(self.paths) == 3:
-            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[2] + "/IntervalBlock"
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[
+                2] + "/IntervalBlock"
         elif len(self.paths) > 3:
             print("Too many *paths")
 
@@ -284,7 +287,8 @@ class GreenButtonClient(object):
         if len(self.paths) < 4:
             print("Subscription, UsagePoint, Meter Reading, and Interval Block Ids Required!")
         elif len(self.paths) == 4:
-            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[2] + "/IntervalBlock/" + self.paths[3]
+            self.url = self.url + self.paths[0] + "/UsagePoint/" + self.paths[1] + "/MeterReading/" + self.paths[
+                2] + "/IntervalBlock/" + self.paths[3]
         elif len(self.paths) > 4:
             print("Too many *paths")
 
