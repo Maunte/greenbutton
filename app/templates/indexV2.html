@@ -68,7 +68,7 @@
             <form id="app_info_id_form" class="form_div" method="post">
                 <h3 class="text-xs-center form_header">GET App Info by Id</h3>
                 <div class="form-group row">
-                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">App Info Id</label>
+                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">App Info Id (Required)</label>
                     <div class="col-xs-10">
                         <div id="app_id_alert"></div>
                         <div class="input-group">
@@ -152,7 +152,7 @@
                 </div>
             </div>
 
-            <!-- Id names: bulk_id, bulk_sub_id, bulk_customer_id, bulk_sub_usage
+            <!-- Id names: bulk_id, sub_id, customer_id, usage_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: bulk_submit  -->
             <form id="bulk_form" class="form_div" method="post">
@@ -252,7 +252,7 @@
                 </div>
             </div>
 
-            <!-- Id names: epower_sub_id, epower_usagepoint_id, epower_summary_id
+            <!-- Id names: sub_id, usage_id, summary_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: epower_submit  -->
             <form id="epower_form" class="form_div" method="post">
@@ -330,7 +330,7 @@
                 </div>
             </div>
 
-            <!-- Id names: interval_sub_id, interval_usagepoint_id, interval_meter_id, interval_id
+            <!-- Id names: sub_id, usage_id, meter_id, interval_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: interval_submit  -->
             <form id="interval_form" class="form_div" method="post">
@@ -454,7 +454,7 @@
                 </div>
             </div>
 
-            <!-- Id names: meter_sub_id, meter_usagepoint_id, meter_meter_id, meter_id
+            <!-- Id names: sub_id, usage_id, meter_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: meter_submit  -->
             <form id="meter_form" class="form_div" method="post">
@@ -585,7 +585,7 @@
                 </div>
             </div>
 
-            <!-- Field names: usagepoint_id, usagepoint_sub_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Field names: usage_id, sub_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: usagepoint_submit  -->
             <form id="usagepoint_form" class="form_div" method="post">
                 <h3 class="text-xs-center form_header">GET UsagePoint</h3>
