@@ -52,4 +52,12 @@ label {
     font-size: 0.9em;
 }
 
-.endpoint_links.
+.form_info {
+    background-color: #d9edf7;
+    border: 2px solid #bcdff1;
+    color: #31708f;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 2px;
+}

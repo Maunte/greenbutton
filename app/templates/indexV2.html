@@ -115,7 +115,7 @@
             <form id="auth_form" class="form_div" method="post">
                 <h3 class="text-xs-center form_header">GET Authorization</h3>
                 <div class="form-group row">
-                    <label for="auth_id" class="col-xs-2 col-form-label text-xs-right">Authorization Id</label>
+                    <label for="auth_id" class="col-xs-2 col-form-label text-xs-right">Authorization Id (Optional)</label>
                     <div class="col-xs-10">
                         <div class="input-group">
                             <input type="text" name="auth_id" class="form-control form-control-md" id="auth_id"
@@ -159,6 +159,10 @@
                 <h3 class="text-xs-center form_header">GET Bulk Tranfer</h3>
 
                 <div class="sub_form_div">
+
+                    <div class=" text-xs-center form_info">
+                        <p>Ids are <strong>optional</strong>. A UsagePoint Id must be accompanied by a Subscription Id</p>
+                    </div>
 
                     <div class="form-group row">
                         <label for="bulk_id" class="col-xs-2 col-form-label text-xs-right">Bulk Id</label>

@@ -137,7 +137,8 @@ def main():
             call = gbc(token, endpoint, *paths, **params)
             response = call.execute()
             xml = ParseXml(response)
-            xml.parse()
+            # xml.parse()
+            xml.tojson()
             error = "false"
         except:
             error = "true"
