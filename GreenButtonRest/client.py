@@ -10,7 +10,7 @@ Usage::
   >>> from GreenButtonRest.clientV2 import GreenClient
   >>> gc = GreenClient()
   >>> execute = gc.execute("authorization")
-  >>> print(execute.text)
+  >>> print(execute)
   >>> print(gc.API_CALLS_MADE)
 """
 
@@ -44,7 +44,10 @@ class GreenClient:
                     "local_time_parameter": self.get_local_time_parameters,
                     "meter_reading": self.get_meter_reading,
                     "meter_reading_subscription_usage": self.get_subscription_usage_meter_reading,
-                    "reading_type": self.get_reading_type
+                    "reading_type": self.get_reading_type,
+                    "service_status": self.get_read_service_status,
+                    "usage": self.get_usage_point,
+                    "usage_by_subscription": self.get_usage_point_by_subscription,
                 }
                 result = method_map[method](*args, **kwargs)
                 self.API_CALLS_MADE += 1
@@ -605,6 +608,99 @@ class GreenClient:
 
         if reading_type_id is not None:
             url_built += str(reading_type_id)
+
+        result = requests.get(url=url_built, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    # --------- SERVICE STATUS ---------
+
+    def get_read_service_status(self):
+        """ Gets service status.
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        self.authenticate()
+
+        headers = {
+            "authorization": self.token
+        }
+
+        url_built = self.host + "/ReadServiceStatus"
+
+        result = requests.get(url=url_built, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    # --------- USAGE POINT ---------
+
+    def get_usage_point(self,
+                        usage_point_id=None,
+                        published_max=None,
+                        published_min=None,
+                        updated_max=None,
+                        updated_min=None,
+                        max_results=None,
+                        start_index=None,
+                        depth=None):
+        """ Gets all usage points. If an id is included, get single
+
+        :param usage_point_id: (optional) Id of the Usage Point.
+        :type usage_point_id: str
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+        url_built = self.host + "/UsagePoint/"
+
+        if usage_point_id is not None:
+            url_built += str(usage_point_id)
+
+        result = requests.get(url=url_built, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    def get_usage_point_by_subscription(self,
+                                        subscription_id,
+                                        usage_point_id=None,
+                                        published_max=None,
+                                        published_min=None,
+                                        updated_max=None,
+                                        updated_min=None,
+                                        max_results=None,
+                                        start_index=None,
+                                        depth=None):
+        """ Gets all usage points by subscription. If an id is included, get single
+
+        :param subscription_id: (required) The Subscription's Id.
+        :type subscription_id: str
+        :param usage_point_id: (optional) Id of the Usage Point.
+        :type usage_point_id: str
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+        url_built = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/"
+
+        if usage_point_id is not None:
+            url_built += str(usage_point_id)
 
         result = requests.get(url=url_built, headers=headers)
 
