@@ -37,8 +37,8 @@ class GreenClient:
                     "batch_subscription": self.get_batch_subscription,
                     "batch_retail": self.get_batch_retail_customer,
                     "batch_subscription_usage": self.get_batch_subscription_usage,
-                    "electric_power_summary_quality": self.get_electric_power_quality_summary,
-                    "electric_power_summary_usage": self.get_electric_power_usage_summary,
+                    "electric_power_quality_summary": self.get_electric_power_quality_summary,
+                    "electric_power_usage_summary": self.get_electric_power_usage_summary,
                     "interval_block": self.get_interval_block,
                     "interval_block_subscription_meter_usage": self.get_subscription_meter_usage_interval,
                     "local_time_parameter": self.get_local_time_parameters,
@@ -181,7 +181,8 @@ class GreenClient:
         built_url = self.host + "/Authorization"
 
         if authorization_id is not None:
-            built_url += str(authorization_id)
+            built_url += "/" + str(authorization_id)
+            print(built_url)
 
         result = requests.get(url=built_url, headers=headers)
 
@@ -343,7 +344,7 @@ class GreenClient:
             usage_point_id) + "/ElectricPowerQualitySummary/"
 
         if electric_power_quality_summary_id is not None:
-            built_url += built_url + str(electric_power_quality_summary_id)
+            built_url += str(electric_power_quality_summary_id)
 
         result = requests.get(url=built_url, headers=headers)
 

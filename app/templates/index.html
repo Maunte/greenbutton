@@ -38,6 +38,7 @@ Test Page Version: 0.2.1
                     </code></pre>
                 </div>
                 <div id="table_div" class="data_div">
+                    {% if data_json %}
                     <h3 class="text-xs-center">{{ data_json.title|safe }}</h3>
                     <hr>
                     <table id="data_div">
@@ -51,6 +52,9 @@ Test Page Version: 0.2.1
                         </table>
                         {% endfor %}
                     </table>
+                    {% else %}
+                    <h3 class="text-xs-center">Unable to Parse XML</h3>
+                    {% endif %}
                 </div>
             </div>
         </div>
