@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+__title__ = 'greenbuttonclient'
+__version__ = '1.0'
+__author__ = 'Eric Proulx'
+__license__ = 'Apache 2.0'
+__copyright__ = 'Copyright 2016 Eric Proulx'
 
 """
 greenbutton.client
@@ -44,12 +49,13 @@ class GreenClient:
                     "application_information": self.get_application_info,
                     "application_information_by_id": self.get_application_info_id,
                     "authorization": self.get_authorization,
-                    "authorization_id": self.get_authorization_id,
+                    "authorization_by_id": self.get_authorization_id,
                     "batch_bulk": self.get_batch_bulk,
                     "batch_subscription": self.get_batch_subscription,
                     "batch_retail": self.get_batch_retail_customer,
-                    "batch_subscription_usage": self.get_batch_subscription_usage
-
+                    "batch_subscription_usage": self.get_batch_subscription_usage,
+                    "electric_power_summary": self.get_electric_power_quality_summary,
+                    "electric_power_summary_by_id": self.get_electric_power_quality_summary_by_id
                 }
                 result = method_map[method](*args, **kwargs)
                 self.API_CALLS_MADE += 1
@@ -208,19 +214,32 @@ class GreenClient:
 
         return result.text
 
-    def get_authorization_id(self, authorization_id):
+    def get_authorization_id(self, authorization_id, published_max=None, published_min=None, updated_max=None,
+                             updated_min=None,
+                             max_results=None, start_index=None, depth=None):
         """ Gets authorization by id.
 
-        :param authorization_id: (required) Id of the Authorization to be retrieved.
-        :type authorization_id: str
+        :param published_max: (optional) The upper bound on the published date of the Application Information.
+        :type published_max: date
+        :param published_min: (optional) The lower bound on the published date of the Application Information.
+        :type published_min: date
+        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
+        :type updated_max: date
+        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
+        :type updated_min: date
+        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
+        :type max_results: long
+        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
+        :type start_index: long
+        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
+        :type depth: long
         :return: xml result
         :rtype text/xsl
         """
 
-        self.authenticate()
-        headers = {
-            "authorization": self.token
-        }
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+
         result = requests.get(url=self.host + "/Authorization/" + str(authorization_id),
                               headers=headers)
 
@@ -369,6 +388,95 @@ class GreenClient:
 
         result = requests.get(
             url=self.host + "/Batch/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(usage_point_id),
+            headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    # --------- ELECTRIC POWER QUALITY SUMMARY ---------
+
+    def get_electric_power_quality_summary(self, subscription_id, usage_point_id, published_max=None,
+                                           published_min=None,
+                                           updated_max=None,
+                                           updated_min=None,
+                                           max_results=None, start_index=None, depth=None):
+        """ Gets all electric power quality summaries.
+
+        :param subscription_id: (required) The Subscription's Id.
+        :type subscription_id: str
+        :param usage_point_id: (required) Id of the UsagePoint the Electric Power Quality Summary references.
+        :type usage_point_id: str
+        :param published_max: (optional) The upper bound on the published date of the Application Information.
+        :type published_max: date
+        :param published_min: (optional) The lower bound on the published date of the Application Information.
+        :type published_min: date
+        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
+        :type updated_max: date
+        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
+        :type updated_min: date
+        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
+        :type max_results: long
+        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
+        :type start_index: long
+        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
+        :type depth: long
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+
+        result = requests.get(
+            url=self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
+                usage_point_id) + "/ElectricPowerQualitySummary",
+            headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    def get_electric_power_quality_summary_by_id(self, subscription_id, usage_point_id,
+                                                 electric_power_quality_summary_id, published_max=None,
+                                                 published_min=None,
+                                                 updated_max=None,
+                                                 updated_min=None,
+                                                 max_results=None, start_index=None, depth=None):
+        """ Gets a single electric power quality summary.
+
+        :param subscription_id: (required) The Subscription's Id.
+        :type subscription_id: str
+        :param usage_point_id: (required) Id of the UsagePoint the Electric Power Quality Summary references.
+        :type usage_point_id: str
+        :param electric_power_quality_summary_id: (required) Id of the Electric Power Quality Summary to be retrieved.
+        :type electric_power_quality_summary_id: str
+        :param published_max: (optional) The upper bound on the published date of the Application Information.
+        :type published_max: date
+        :param published_min: (optional) The lower bound on the published date of the Application Information.
+        :type published_min: date
+        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
+        :type updated_max: date
+        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
+        :type updated_min: date
+        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
+        :type max_results: long
+        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
+        :type start_index: long
+        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
+        :type depth: long
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+
+        result = requests.get(
+            url=self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
+                usage_point_id) + "/ElectricPowerQualitySummary/" + str(electric_power_quality_summary_id),
             headers=headers)
 
         if result is None: raise Exception("Empty Response")

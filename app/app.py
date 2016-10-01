@@ -1,7 +1,7 @@
 import json
 from flask import Flask, render_template, request
 
-from GreenButtonRest.clients import GreenButtonClient as gbc
+from GreenButtonRest.clients_deprecated import GreenButtonClient as gbc
 from GreenButtonRest.parser import ParseXml
 
 

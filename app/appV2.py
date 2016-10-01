@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from GreenButtonRest.clientV2 import GreenClient
+from GreenButtonRest.client import GreenClient
 from GreenButtonRest.parser import ParseXml
 
 app2 = Flask(__name__)
