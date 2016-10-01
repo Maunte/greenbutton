@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 from GreenButtonRest.clients import GreenButtonClient as gbc
 from GreenButtonRest.parser import ParseXml
 
+
 app = Flask(__name__)
 
 app.config.update(dict(
@@ -138,6 +139,10 @@ def main():
         try:
             call = gbc(token, endpoint, *paths, **params)
             response = call.execute()
+            filename = "xml/" + call.endpoint.split("/")[-1] + ".xml"
+            xml_file = open(filename, "w")
+            for line in response.text:
+                xml_file.write(line)
             context["response"] = response.text
             try:
                 xml = ParseXml(response)
