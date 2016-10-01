@@ -3,8 +3,7 @@ import xml.etree.ElementTree as ET
 
 class ParseXml(object):
     def __init__(self, xml):
-        self.xml = xml
-        self.text = xml.text
+        self.xml_text = xml
 
     def parse_entry(self, child):
         entry = {}
@@ -38,7 +37,7 @@ class ParseXml(object):
 
         data = {}
         data["entries"] = []
-        root = ET.fromstring(self.text)
+        root = ET.fromstring(self.xml_text)
         if "feed" in root.tag:
             data = self.parse_root(root, data)
         elif "entry" in root.tag:

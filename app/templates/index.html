@@ -1,3 +1,7 @@
+<!--
+Test Page Version: 0.2.1
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,7 +92,7 @@
             <form id="app_info_id_form" class="form_div" method="post">
                 <h3 class="text-xs-center form_header">GET App Info by Id</h3>
                 <div class="form-group row">
-                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">App Info Id</label>
+                    <label for="app_id" class="col-xs-2 col-form-label text-xs-right">App Info Id (Required)</label>
                     <div class="col-xs-10">
                         <div id="app_id_alert"></div>
                         <div class="input-group">
@@ -135,7 +139,7 @@
             <form id="auth_form" class="form_div" method="post">
                 <h3 class="text-xs-center form_header">GET Authorization</h3>
                 <div class="form-group row">
-                    <label for="auth_id" class="col-xs-2 col-form-label text-xs-right">Authorization Id</label>
+                    <label for="auth_id" class="col-xs-2 col-form-label text-xs-right">Authorization Id (Optional)</label>
                     <div class="col-xs-10">
                         <div class="input-group">
                             <input type="text" name="auth_id" class="form-control form-control-md" id="auth_id"
@@ -172,13 +176,17 @@
                 </div>
             </div>
 
-            <!-- Id names: bulk_id, bulk_sub_id, bulk_customer_id, bulk_sub_usage
+            <!-- Id names: bulk_id, sub_id, customer_id, usage_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: bulk_submit  -->
             <form id="bulk_form" class="form_div" method="post">
                 <h3 class="text-xs-center form_header">GET Bulk Tranfer</h3>
 
                 <div class="sub_form_div">
+
+                    <div class=" text-xs-center form_info">
+                        <p>Ids are <strong>optional</strong>. A UsagePoint Id must be accompanied by a Subscription Id</p>
+                    </div>
 
                     <div class="form-group row">
                         <label for="bulk_id" class="col-xs-2 col-form-label text-xs-right">Bulk Id</label>
@@ -202,7 +210,7 @@
                                 <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
                                        data-pair="bulk_sub_id">
                             </span>
-                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select required"
+                                <input type="text" name="sub_id" class="form-control form-control-md id_select required"
                                        id="bulk_sub_id"
                                        placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_id">
                             </div>
@@ -217,7 +225,7 @@
                                 <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
                                        data-pair="bulk_customer_id">
                             </span>
-                                <input type="text" name="bulk_customer_id"
+                                <input type="text" name="customer_id"
                                        class="form-control form-control-md id_select required" id="bulk_customer_id"
                                        placeholder="Retail Customer Id" data-group="bulk" data-pair="bulk_customer_id">
                             </div>
@@ -232,11 +240,11 @@
                                 <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
                                        data-pair="bulk_sub_usage">
                             </span>
-                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select required"
+                                <input type="text" name="sub_id" class="form-control form-control-md id_select required"
                                        id="bulk_sub_with_usagepoint_id"
                                        placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_usage">
                                 <span>
-                                <input type="text" name="bulk_sub_id" class="form-control form-control-md id_select required"
+                                <input type="text" name="usage_id" class="form-control form-control-md id_select required"
                                        id="bulk_usagepoint_with_sub_id"
                                        placeholder="UsagePoint Id" data-group="bulk" data-pair="bulk_sub_usage">
                             </span>
@@ -272,7 +280,7 @@
                 </div>
             </div>
 
-            <!-- Id names: epower_sub_id, epower_usagepoint_id, epower_summary_id
+            <!-- Id names: sub_id, usage_id, summary_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: epower_submit  -->
             <form id="epower_form" class="form_div" method="post">
@@ -290,7 +298,7 @@
                         </div>
                         <div class="col-xs-7">
                             <div class="input-group">
-                                <input type="text" name="epower_summary_id"
+                                <input type="text" name="summary_id"
                                        class="form-control form-control-md id_select" id="epower_summary_id"
                                        placeholder="Summary Id (Optional)">
                             </div>
@@ -302,7 +310,7 @@
                         <div class="col-xs-8">
                             <div id="epower_sub_id_alert"></div>
                             <div class="input-group">
-                                <input type="text" name="epower_sub_id" class="required form-control form-control-md"
+                                <input type="text" name="sub_id" class="required form-control form-control-md"
                                        id="epower_sub_id"
                                        placeholder="Subscription Id">
                             </div>
@@ -314,7 +322,7 @@
                         <div class="col-xs-8">
                             <div class="epower_usage_id_alert"></div>
                             <div class="input-group">
-                                <input type="text" name="epower_usagepoint_id" class="required form-control form-control-md"
+                                <input type="text" name="usage_id" class="required form-control form-control-md"
                                        id="epower_usagepoint_id"
                                        placeholder="UsagePoint Id">
                             </div>
@@ -350,7 +358,7 @@
                 </div>
             </div>
 
-            <!-- Id names: interval_sub_id, interval_usagepoint_id, interval_meter_id, interval_id
+            <!-- Id names: sub_id, usage_id, meter_id, interval_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: interval_submit  -->
             <form id="interval_form" class="form_div" method="post">
@@ -368,7 +376,7 @@
                             (Required)</label>
                         <div class="col-xs-2">
                             <div class="input-group">
-                                <input type="text" name="interval_sub_id"
+                                <input type="text" name="sub_id"
                                        class="form-control form-control-md interval_select_input" id="interval_sub_id"
                                        placeholder="Subscription Id" disabled>
                             </div>
@@ -377,7 +385,7 @@
                             (Required) </label>
                         <div class="col-xs-2">
                             <div class="input-group">
-                                <input type="text" name="interval_usagepoint_id"
+                                <input type="text" name="usage_id"
                                        class="form-control form-control-md interval_select_input"
                                        id="interval_usagepoint_id"
                                        placeholder="UsagePoint Id" disabled>
@@ -387,7 +395,7 @@
                             (Required) </label>
                         <div class="col-xs-2">
                             <div class="input-group">
-                                <input type="text" name="interval_meter_id"
+                                <input type="text" name="meter_id"
                                        class="form-control form-control-md interval_select_input" id="interval_meter_id"
                                        placeholder="Meter Reading Id" disabled>
                             </div>
@@ -474,7 +482,7 @@
                 </div>
             </div>
 
-            <!-- Id names: meter_sub_id, meter_usagepoint_id, meter_meter_id, meter_id
+            <!-- Id names: sub_id, usage_id, meter_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: meter_submit  -->
             <form id="meter_form" class="form_div" method="post">
@@ -490,7 +498,7 @@
                         <label for="meter_sub_id" class="col-xs-3 col-form-label text-xs-right">Subscription Id (Required)</label>
                         <div class="col-xs-3">
                             <div class="input-group">
-                                <input type="text" name="meter_sub_id"
+                                <input type="text" name="sub_id"
                                        class="form-control form-control-md meter_select_input" id="meter_sub_id"
                                        placeholder="Subscription Id" disabled>
                             </div>
@@ -498,7 +506,7 @@
                         <label for="meter_usagepoint_id" class="col-xs-3 col-form-label text-xs-right">UsagePoint Id (Required) </label>
                         <div class="col-xs-3">
                             <div class="input-group">
-                                <input type="text" name="meter_usagepoint_id"
+                                <input type="text" name="usage_id"
                                        class="form-control form-control-md meter_select_input"
                                        id="meter_usagepoint_id"
                                        placeholder="UsagePoint Id" disabled>
@@ -605,7 +613,7 @@
                 </div>
             </div>
 
-            <!-- Field names: usagepoint_id, usagepoint_sub_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
+            <!-- Field names: usage_id, sub_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: usagepoint_submit  -->
             <form id="usagepoint_form" class="form_div" method="post">
                 <h3 class="text-xs-center form_header">GET UsagePoint</h3>
@@ -613,7 +621,7 @@
                     <label for="usagepoint_id" class="col-xs-2 col-form-label text-xs-right">UsagePoint Id</label>
                     <div class="col-xs-10">
                         <div class="input-group">
-                            <input type="text" name="usagepoint_id" class="form-control form-control-md"
+                            <input type="text" name="usage_id" class="form-control form-control-md"
                                    id="usagepoint_id"
                                    placeholder="UsagePoint Id">
                         </div>
@@ -623,7 +631,7 @@
                     <label for="usagepoint_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id</label>
                     <div class="col-xs-10">
                         <div class="input-group">
-                            <input type="text" name="usagepoint_sub_id" class="form-control form-control-md"
+                            <input type="text" name="sub_id" class="form-control form-control-md"
                                    id="usagepoint_sub_id"
                                    placeholder="Subscription Id">
                         </div>
@@ -651,7 +659,6 @@
 var api_data = {{ api_data|safe }};
 {% endif %}
 </script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
