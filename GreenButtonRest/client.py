@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+__title__ = 'greenbuttonclient'
+__version__ = '1.0'
+__author__ = 'Eric Proulx'
+__license__ = 'Apache 2.0'
+__copyright__ = 'Copyright 2016 Eric Proulx'
 
 """
 greenbutton.client

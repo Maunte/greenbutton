@@ -1,4 +1,4 @@
-from GreenButtonRest.clientV2 import GreenClient
+from GreenButtonRest.client import GreenClient
 
 
 def main():
