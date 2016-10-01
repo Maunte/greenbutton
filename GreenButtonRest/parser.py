@@ -1,10 +1,4 @@
-import json, re
 import xml.etree.ElementTree as ET
-from xml.etree.ElementTree import fromstring
-from xmljson import BadgerFish
-from collections import OrderedDict
-from json import dumps
-from bs4 import BeautifulSoup as bs
 
 
 class ParseXml(object):
