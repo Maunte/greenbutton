@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import requests
 
-from GreenButtonRest.exceptions import GreenException
+from greenbuttonrest.exceptions import GreenException
 
 """Client for GreenButton RESTful APIs.
 
 Usage::
 
-  >>> from GreenButtonRest.clientV2 import GreenClient
+  >>> from greenbuttonrest.clientV2 import GreenClient
   >>> gc = GreenClient()
   >>> execute = gc.execute("authorization")
   >>> print(execute)

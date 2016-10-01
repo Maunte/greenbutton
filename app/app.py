@@ -1,8 +1,9 @@
 import json
+
 from flask import Flask, render_template, request
 
-from GreenButtonRest.client import GreenClient
-from GreenButtonRest.parser import ParseXml
+from greenbuttonrest.client import GreenClient
+from greenbuttonrest.parser import ParseXml
 
 app2 = Flask(__name__)
 
@@ -13,6 +14,7 @@ def main():
     Take form data and put in 'data' dictionary. Ignores submit button name.
     Any form field with a blank value will be given a value of None in 'data'.
     """
+    response = None
     data, context = {}, {}
 
     for key, value in request.form.items():
@@ -37,8 +39,8 @@ def main():
 
     # Application Information Endpoint with Id. Note that only the Id is taken as a parameter: GET Requests
     elif "app_info_id_submit" in data:
-        method = "application_information_by_id"
-        response = gc.execute(method=method, id=data["app_info_id"])
+        method = "application_information"
+        response = gc.execute(method=method, application_information_id=data["app_info_id"])
 
     # Authorization Endpoints: GET Requests
     elif "auth_submit" in data:
@@ -196,25 +198,25 @@ def main():
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
                                   start_index=data["start-index"], depth=data["depth"])
-
-    try:
-        context["response"] = response
+    if response is not None:
         try:
-            filename = "xml/" + method + ".xml"
-            xml_file = open(filename, "w")
-            for line in response:
-                xml_file.write(line)
+            context["response"] = response
+            try:
+                filename = "xml/" + method + ".xml"
+                xml_file = open(filename, "w")
+                for line in response:
+                    xml_file.write(line)
+            except ValueError:
+                print("No XML file saved")
+            try:
+                xml = ParseXml(response)
+                api_data = xml.parse()
+                context["data_json"] = api_data
+                context["api_data"] = json.dumps(api_data)
+            except:
+                print("Problem with parsing XML response.")
         except ValueError:
-            print("No XML file saved")
-        try:
-            xml = ParseXml(response)
-            api_data = xml.parse()
-            context["data_json"] = api_data
-            context["api_data"] = json.dumps(api_data)
-        except:
-            print("Problem with parsing XML response.")
-    except ValueError:
-        print("Context does not exist")
+            print("Context does not exist")
 
     if context != {}:
         return render_template("index.html", **context)
