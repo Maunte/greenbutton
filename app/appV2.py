@@ -31,7 +31,7 @@ def main():
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
-
+        print(response)
     # Application Information Endpoint with Id. Note that only the Id is taken as a parameter: GET Requests
     elif "app_info_id_submit" in data:
         response = gc.execute(method="application_information_by_id", id=data["app_info_id"])
