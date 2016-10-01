@@ -47,15 +47,14 @@ class GreenClient:
 
                 method_map = {
                     "application_information": self.get_application_info,
-                    "application_information_by_id": self.get_application_info_id,
                     "authorization": self.get_authorization,
-                    "authorization_by_id": self.get_authorization_id,
                     "batch_bulk": self.get_batch_bulk,
                     "batch_subscription": self.get_batch_subscription,
                     "batch_retail": self.get_batch_retail_customer,
                     "batch_subscription_usage": self.get_batch_subscription_usage,
-                    "electric_power_summary": self.get_electric_power_quality_summary,
-                    "electric_power_summary_by_id": self.get_electric_power_quality_summary_by_id
+                    "electric_power_summary_quality": self.get_electric_power_quality_summary,
+                    "electric_power_summary_usage": self.get_electric_power_usage_summary,
+                    "interval_block": self.get_interval_block
                 }
                 result = method_map[method](*args, **kwargs)
                 self.API_CALLS_MADE += 1
@@ -93,9 +92,11 @@ class GreenClient:
         :type updated_max: date
         :param updated_min: (optional) The lower bound on the updated date of the Application Information.
         :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
+        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this
+            response.
         :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
+        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information
+            that should be transferred as the first entry of this request.
         :type start_index: long
         :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
         :type depth: long
@@ -127,24 +128,20 @@ class GreenClient:
 
     # --------- APPLICATION INFORMATION ---------
 
-    def get_application_info(self, published_max=None, published_min=None, updated_max=None, updated_min=None,
-                             max_results=None, start_index=None, depth=None):
-        """ Gets application information.
+    def get_application_info(self,
+                             application_information_id=None,
+                             published_max=None,
+                             published_min=None,
+                             updated_max=None,
+                             updated_min=None,
+                             max_results=None,
+                             start_index=None,
+                             depth=None):
+        """ Gets all application information. If an id is provided, get single
 
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
+        :param application_information_id: (optional) The Id of the Application Information to be retrieved.
+        :type application_information_id: str
+
         :return: xml result
         :rtype text/xsl
         """
@@ -152,28 +149,12 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        result = requests.get(url=self.host + "/ApplicationInformation", headers=headers)
+        url_built = self.host + "/ApplicationInformation/"
 
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
+        if application_information_id is not None:
+            url_built += str(application_information_id)
 
-        return result.text
-
-    def get_application_info_id(self, application_information_id):
-        """ Gets application information.
-
-        :param application_information_id: (required) The Id of the Application Information to be retrieved.
-        :type application_information_id: str
-        :return: xml result
-        :rtype text/xsl
-        """
-
-        self.authenticate()
-        headers = {
-            "authorization": self.token
-        }
-        result = requests.get(url=self.host + "/ApplicationInformation/" + str(application_information_id),
-                              headers=headers)
+        result = requests.get(url=url_built, headers=headers)
 
         if result is None: raise Exception("Empty Response")
         if result.status_code == 403: raise GreenException(result)
@@ -182,24 +163,20 @@ class GreenClient:
 
     # --------- AUTHORIZATION ---------
 
-    def get_authorization(self, published_max=None, published_min=None, updated_max=None, updated_min=None,
-                          max_results=None, start_index=None, depth=None):
-        """ Gets authorization information.
+    def get_authorization(self,
+                          authorization_id=None,
+                          published_max=None,
+                          published_min=None,
+                          updated_max=None,
+                          updated_min=None,
+                          max_results=None,
+                          start_index=None,
+                          depth=None):
+        """ Gets authorization information. If an id is provided, get single
 
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
+        :param authorization_id: (optional) The Id of the Authorization Information to be retrieved.
+        :type authorization_id: str
+
         :return: xml result
         :rtype text/xsl
         """
@@ -207,41 +184,12 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        result = requests.get(url=self.host + "/Authorization", headers=headers)
+        built_url = self.host + "/Authorization"
 
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
+        if authorization_id is not None:
+            built_url += str(authorization_id)
 
-        return result.text
-
-    def get_authorization_id(self, authorization_id, published_max=None, published_min=None, updated_max=None,
-                             updated_min=None,
-                             max_results=None, start_index=None, depth=None):
-        """ Gets authorization by id.
-
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
-        :return: xml result
-        :rtype text/xsl
-        """
-
-        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
-                                    depth)
-
-        result = requests.get(url=self.host + "/Authorization/" + str(authorization_id),
-                              headers=headers)
+        result = requests.get(url=built_url, headers=headers)
 
         if result is None: raise Exception("Empty Response")
         if result.status_code == 403: raise GreenException(result)
@@ -250,26 +198,20 @@ class GreenClient:
 
     # --------- BATCH ---------
 
-    def get_batch_bulk(self, bulk_id, published_max=None, published_min=None, updated_max=None, updated_min=None,
-                       max_results=None, start_index=None, depth=None):
+    def get_batch_bulk(self,
+                       bulk_id,
+                       published_max=None,
+                       published_min=None,
+                       updated_max=None,
+                       updated_min=None,
+                       max_results=None,
+                       start_index=None,
+                       depth=None):
         """ Gets batch information.
 
         :param bulk_id: (required) The Bulk Id as specified in the OAuth2 SCOPE string.
         :type bulk_id: str
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
+
         :return: xml result
         :rtype text/xsl
         """
@@ -284,27 +226,20 @@ class GreenClient:
 
         return result.text
 
-    def get_batch_subscription(self, subscription_id, published_max=None, published_min=None, updated_max=None,
+    def get_batch_subscription(self,
+                               subscription_id,
+                               published_max=None,
+                               published_min=None,
+                               updated_max=None,
                                updated_min=None,
-                               max_results=None, start_index=None, depth=None):
+                               max_results=None,
+                               start_index=None,
+                               depth=None):
         """ Gets batch subscription by subscriptionId.
 
         :param subscription_id: (required) The Subscription's Id.
         :type subscription_id: str
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
+
         :return: xml result
         :rtype text/xsl
         """
@@ -319,27 +254,20 @@ class GreenClient:
 
         return result.text
 
-    def get_batch_retail_customer(self, retail_customer_id, published_max=None, published_min=None, updated_max=None,
+    def get_batch_retail_customer(self,
+                                  retail_customer_id,
+                                  published_max=None,
+                                  published_min=None,
+                                  updated_max=None,
                                   updated_min=None,
-                                  max_results=None, start_index=None, depth=None):
+                                  max_results=None,
+                                  start_index=None,
+                                  depth=None):
         """ Gets batch retail customer usage.
 
         :param retail_customer_id: (required) The Retail Customer's Id.
         :type retail_customer_id: str
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
+
         :return: xml result
         :rtype text/xsl
         """
@@ -355,30 +283,23 @@ class GreenClient:
 
         return result.text
 
-    def get_batch_subscription_usage(self, subscription_id, usage_point_id, published_max=None, published_min=None,
+    def get_batch_subscription_usage(self,
+                                     subscription_id,
+                                     usage_point_id,
+                                     published_max=None,
+                                     published_min=None,
                                      updated_max=None,
                                      updated_min=None,
-                                     max_results=None, start_index=None, depth=None):
+                                     max_results=None,
+                                     start_index=None,
+                                     depth=None):
         """ Gets batch information.
 
         :param subscription_id: (required) The Subscription's Id.
         :type subscription_id: str
         :param usage_point_id: (required) The UsagePoint's Id.
         :type usage_point_id: str
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
+
         :return: xml result
         :rtype text/xsl
         """
@@ -397,31 +318,26 @@ class GreenClient:
 
     # --------- ELECTRIC POWER QUALITY SUMMARY ---------
 
-    def get_electric_power_quality_summary(self, subscription_id, usage_point_id, published_max=None,
+    def get_electric_power_quality_summary(self,
+                                           subscription_id,
+                                           usage_point_id,
+                                           electric_power_quality_summary_id=None,
+                                           published_max=None,
                                            published_min=None,
                                            updated_max=None,
                                            updated_min=None,
-                                           max_results=None, start_index=None, depth=None):
-        """ Gets all electric power quality summaries.
+                                           max_results=None,
+                                           start_index=None,
+                                           depth=None):
+        """ Gets all electric power quality summaries. If an id is provided, get single
 
         :param subscription_id: (required) The Subscription's Id.
         :type subscription_id: str
         :param usage_point_id: (required) Id of the UsagePoint the Electric Power Quality Summary references.
         :type usage_point_id: str
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
+        :param electric_power_quality_summary_id: (optional) Id of the Electric Power Quality Summary to be retrieved.
+        :type electric_power_quality_summary_id: str
+
         :return: xml result
         :rtype text/xsl
         """
@@ -429,44 +345,41 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        result = requests.get(
-            url=self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
-                usage_point_id) + "/ElectricPowerQualitySummary",
-            headers=headers)
+        built_url = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
+            usage_point_id) + "/ElectricPowerQualitySummary/"
+
+        if electric_power_quality_summary_id is not None:
+            built_url += built_url + str(electric_power_quality_summary_id)
+
+        result = requests.get(url=built_url, headers=headers)
 
         if result is None: raise Exception("Empty Response")
         if result.status_code == 403: raise GreenException(result)
 
         return result.text
 
-    def get_electric_power_quality_summary_by_id(self, subscription_id, usage_point_id,
-                                                 electric_power_quality_summary_id, published_max=None,
-                                                 published_min=None,
-                                                 updated_max=None,
-                                                 updated_min=None,
-                                                 max_results=None, start_index=None, depth=None):
-        """ Gets a single electric power quality summary.
+    # --------- ELECTRIC POWER USAGE SUMMARY ---------
+
+    def get_electric_power_usage_summary(self,
+                                         subscription_id,
+                                         usage_point_id,
+                                         electric_power_usage_summary_id=None,
+                                         published_max=None,
+                                         published_min=None,
+                                         updated_max=None,
+                                         updated_min=None,
+                                         max_results=None,
+                                         start_index=None,
+                                         depth=None):
+        """ Gets all electric power usage summary. If an id is provided, get single
 
         :param subscription_id: (required) The Subscription's Id.
         :type subscription_id: str
         :param usage_point_id: (required) Id of the UsagePoint the Electric Power Quality Summary references.
         :type usage_point_id: str
-        :param electric_power_quality_summary_id: (required) Id of the Electric Power Quality Summary to be retrieved.
-        :type electric_power_quality_summary_id: str
-        :param published_max: (optional) The upper bound on the published date of the Application Information.
-        :type published_max: date
-        :param published_min: (optional) The lower bound on the published date of the Application Information.
-        :type published_min: date
-        :param updated_max: (optional) The upper bound on the updated date of the Application Information.
-        :type updated_max: date
-        :param updated_min: (optional) The lower bound on the updated date of the Application Information.
-        :type updated_min: date
-        :param max_results: (optional) The upper bound on the number of entries to be contained in a reply to this response.
-        :type max_results: long
-        :param start_index: (optional) The one based offset in the DataCustodian's collection of Application Information that should be transferred as the first entry of this request.
-        :type start_index: long
-        :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
-        :type depth: long
+        :param electric_power_usage_summary_id: (optional) Id of the Electric Power Quality Summary to be retrieved.
+        :type electric_power_usage_summary_id: str
+
         :return: xml result
         :rtype text/xsl
         """
@@ -474,10 +387,83 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        result = requests.get(
-            url=self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
-                usage_point_id) + "/ElectricPowerQualitySummary/" + str(electric_power_quality_summary_id),
-            headers=headers)
+        built_url = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
+            usage_point_id) + "/ElectricPowerUsageSummary/"
+
+        if electric_power_usage_summary_id is not None:
+            built_url += str(electric_power_usage_summary_id)
+
+        result = requests.get(url=built_url, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    # --------- INTERVAL BLOCK ---------
+
+    def get_interval_block(self,
+                           interval_block_id=None,
+                           published_max=None,
+                           published_min=None,
+                           updated_max=None,
+                           updated_min=None,
+                           max_results=None,
+                           start_index=None,
+                           depth=None):
+        """ Gets all interval blocks. If an intervalBlockId is included, get single
+
+        :param interval_block_id: (optional) Id of the Interval Block to be retrieved.
+        :type interval_block_id: str
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+        url_built = self.host + "/IntervalBlock/"
+
+        if interval_block_id is not None:
+            url_built += str(interval_block_id)
+
+        result = requests.get(url=url_built, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    def get_subscription_meter_usage_interval(self,
+                                              subscription_id,
+                                              usage_point_id,
+                                              meter_reading_id,
+                                              interval_block_id=None,
+                                              published_max=None,
+                                              published_min=None,
+                                              updated_max=None,
+                                              updated_min=None,
+                                              max_results=None,
+                                              start_index=None,
+                                              depth=None):
+
+        """ Gets all interval blocks for usage and subscription and meter. If an intervalBlockId is included, get single
+
+        :param interval_block_id: (optional) Id of the Interval Block to be retrieved.
+        :type interval_block_id: str
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+        url_built = self.host + "/IntervalBlock/"
+
+        if interval_block_id is not None:
+            url_built += str(interval_block_id)
+
+        result = requests.get(url=url_built, headers=headers)
 
         if result is None: raise Exception("Empty Response")
         if result.status_code == 403: raise GreenException(result)
