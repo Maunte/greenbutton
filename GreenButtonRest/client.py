@@ -1,24 +1,9 @@
 # -*- coding: utf-8 -*-
-__title__ = 'greenbuttonclient'
-__version__ = '1.0'
-__author__ = 'Eric Proulx'
-__license__ = 'Apache 2.0'
-__copyright__ = 'Copyright 2016 Eric Proulx'
-
-"""
-greenbutton.client
-~~~~~~~~~~~~
-
-This module implements the GreenButton API.
-
-:copyright: (c) 2016 by Eric Proulx.
-"""
-
 import requests
 
 from GreenButtonRest.exceptions import GreenException
 
-"""Constructs and sends a :class:`Request <Request>`.
+"""Client for GreenButton RESTful APIs.
 
 Usage::
 
@@ -54,12 +39,18 @@ class GreenClient:
                     "batch_subscription_usage": self.get_batch_subscription_usage,
                     "electric_power_summary_quality": self.get_electric_power_quality_summary,
                     "electric_power_summary_usage": self.get_electric_power_usage_summary,
-                    "interval_block": self.get_interval_block
+                    "interval_block": self.get_interval_block,
+                    "interval_block_subscription_meter_usage": self.get_subscription_meter_usage_interval,
+                    "local_time_parameter": self.get_local_time_parameters,
+                    "meter_reading": self.get_meter_reading,
+                    "meter_reading_subscription_usage": self.get_subscription_usage_meter_reading,
+                    "reading_type": self.get_reading_type
                 }
                 result = method_map[method](*args, **kwargs)
                 self.API_CALLS_MADE += 1
             except GreenException as e:
                 # TODO: Identify authentication errors
+                # TODO: Include handling response codes: 200, 400, 403
                 if e.code in [601, 602]:
                     self.authenticate()
                     continue
@@ -449,6 +440,12 @@ class GreenClient:
 
         """ Gets all interval blocks for usage and subscription and meter. If an intervalBlockId is included, get single
 
+        :param subscription_id: (required) Id of the Retail Customer the Interval Block references.
+        :type subscription_id: str
+        :param usage_point_id: (required) Id of the UsagePoint the Interval Block references.
+        :type usage_point_id: str
+        :param meter_reading_id: (required) Id of the MeterReading the Interval Block references.
+        :type meter_reading_id: str
         :param interval_block_id: (optional) Id of the Interval Block to be retrieved.
         :type interval_block_id: str
 
@@ -458,10 +455,156 @@ class GreenClient:
 
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
-        url_built = self.host + "/IntervalBlock/"
+        url_built = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
+            usage_point_id) + "/MeterReading/" + str(meter_reading_id) + "/IntervalBlock/"
 
         if interval_block_id is not None:
             url_built += str(interval_block_id)
+
+        result = requests.get(url=url_built, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    # --------- LOCAL TIME PARAMETERS ---------
+
+    def get_local_time_parameters(self,
+                                  local_time_parameter_id=None,
+                                  published_max=None,
+                                  published_min=None,
+                                  updated_max=None,
+                                  updated_min=None,
+                                  max_results=None,
+                                  start_index=None,
+                                  depth=None):
+
+        """ Gets all local time parameters. If an id is included, get single
+
+        :param local_time_parameter_id: (optional) Id of the Interval Block to be retrieved.
+        :type local_time_parameter_id: str
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+        url_built = self.host + "/LocalTimeParameters/"
+
+        if local_time_parameter_id is not None:
+            url_built += str(local_time_parameter_id)
+
+        result = requests.get(url=url_built, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    # --------- METER READING ---------
+
+    def get_meter_reading(self,
+                          meter_reading_id=None,
+                          published_max=None,
+                          published_min=None,
+                          updated_max=None,
+                          updated_min=None,
+                          max_results=None,
+                          start_index=None,
+                          depth=None):
+
+        """ Gets all meter readings. If an id is included, get single
+
+        :param meter_reading_id: (optional) Id of the Meter Reading.
+        :type meter_reading_id: str
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+        url_built = self.host + "/MeterReading/"
+
+        if meter_reading_id is not None:
+            url_built += str(meter_reading_id)
+
+        result = requests.get(url=url_built, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    def get_subscription_usage_meter_reading(self,
+                                             subscription_id,
+                                             usage_id,
+                                             meter_reading_id=None,
+                                             published_max=None,
+                                             published_min=None,
+                                             updated_max=None,
+                                             updated_min=None,
+                                             max_results=None,
+                                             start_index=None,
+                                             depth=None):
+
+        """ Gets all meter readings usage readings. If an id is included, get single
+
+        :param subscription_id: (required) Id of the Subscription associated with the Usage Point containing the Meter
+            Reading.
+        :type subscription_id: str
+        :param usage_id: (required) Id of the UsagePoint the Meter Reading references.
+        :type usage_id: str
+        :param meter_reading_id: (optional) Id of the Meter Reading.
+        :type meter_reading_id: str
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+        url_built = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
+            usage_id) + "/MeterReading/"
+
+        if meter_reading_id is not None:
+            url_built += str(meter_reading_id)
+
+        result = requests.get(url=url_built, headers=headers)
+
+        if result is None: raise Exception("Empty Response")
+        if result.status_code == 403: raise GreenException(result)
+
+        return result.text
+
+    # --------- READING TYPE ---------
+
+    def get_reading_type(self,
+                         reading_type_id=None,
+                         published_max=None,
+                         published_min=None,
+                         updated_max=None,
+                         updated_min=None,
+                         max_results=None,
+                         start_index=None,
+                         depth=None):
+        """ Gets all reading types. If an id is included, get single
+
+        :param reading_type_id: (optional) ID of the Reading Type.
+        :type reading_type_id: str
+
+        :return: xml result
+        :rtype text/xsl
+        """
+
+        headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
+                                    depth)
+        url_built = self.host + "/ReadingType/"
+
+        if reading_type_id is not None:
+            url_built += str(reading_type_id)
 
         result = requests.get(url=url_built, headers=headers)
 
