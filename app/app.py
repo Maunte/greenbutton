@@ -21,6 +21,12 @@ def main():
         else:
             data[key] = value
 
+    for param in ["published-max", "published-min", "updated-max", "updated-min", "max-results", "start-index", "depth"]:
+        if param not in data:
+            data[param] = None
+        else:
+            pass
+
     # gc = GreenClient(token=data["access_token"])
     gc = GreenClient()
 
@@ -28,22 +34,21 @@ def main():
     # Many submit button names handle several different methods.
 
     # Application Information Endpoint: No Application Information Id: GET Requests
-    if "app_info_submit" in request.form:
+    if "app_info_submit" in data or "app_info_id_submit" in data:
         method = "application_information"
-        response = gc.execute(method=method, published_max=data["published-max"],
+        if "app_info_id_submit" in request.form:
+            app_info_id = data["app_info_id"]
+        else:
+            app_info_id = None
+        response = gc.execute(method, application_information_id=app_info_id,published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
 
-    # Application Information Endpoint with Id. Note that only the Id is taken as a parameter: GET Requests
-    elif "app_info_id_submit" in data:
-        method = "application_information_by_id"
-        response = gc.execute(method=method, id=data["app_info_id"])
-
     # Authorization Endpoints: GET Requests
     elif "auth_submit" in data:
         method = "authorization"
-        response = gc.execute(method=method, id=data["auth_id"], published_max=data["published-max"],
+        response = gc.execute(method, authorization_id=data["auth_id"], published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
@@ -52,27 +57,27 @@ def main():
     elif "bulk_submit" in data:
         if "bulk_id" in data:
             method = "batch_bulk"
-            response = gc.execute(method=method, bulk_id=data["bulk_id"], published_max=data["published-max"],
+            response = gc.execute(method, data["bulk_id"], published_max=data["published-max"],
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
                                   start_index=data["start-index"], depth=data["depth"])
         elif "sub_id" in data:
             method = "batch_subscription"
-            response = gc.execute(method=method, subscription_id=data["sub_id"],
+            response = gc.execute(method, subscription_id=data["sub_id"],
                                   published_max=data["published-max"], published_min=data["published-min"],
                                   updated_max=data["updated-max"], updated_min=data["updated-min"],
                                   max_results=data["max-results"], start_index=data["start-index"],
                                   depth=data["depth"])
         elif "customer_id" in data:
             method = "batch_retail"
-            response = gc.execute(method=method, retail_customer_id=data["customer_id"],
+            response = gc.execute(method, retail_customer_id=data["customer_id"],
                                   published_max=data["published-max"], published_min=data["published-min"],
                                   updated_max=data["updated-max"], updated_min=data["updated-min"],
                                   max_results=data["max-results"], start_index=data["start-index"],
                                   depth=data["depth"])
         elif "usage_id" in data and "sub_id" in data:
             method = "batch_subscription_usage"
-            response = gc.execute(method=method, subscription_id=data["sub_id"],
+            response = gc.execute(method, subscription_id=data["sub_id"],
                                   usage_id=data["usage_id"], published_max=data["published-max"],
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
@@ -83,14 +88,14 @@ def main():
         if data["epower_radio"] == "quality":
             if data["summary_id"] == "":
                 method = "electric_power_summary"
-                response = gc.execute(method=method, subscription_id=data["sub_id"],
+                response = gc.execute(method, subscription_id=data["sub_id"],
                                       usagepoint_id=data["usage_id"], published_max=data["published-max"],
                                       published_min=data["published-min"], updated_max=data["updated-max"],
                                       updated_min=data["updated-min"], max_results=data["max-results"],
                                       start_index=data["start-index"], depth=data["depth"])
             else:
                 method = "electric_power_summary_by_id"
-                response = gc.execute(method=method, id=data["summary_id"],
+                response = gc.execute(method, id=data["summary_id"],
                                       subscription_id=data["sub_id"], usagepoint_id=data["usage_id"],
                                       published_max=data["published-max"], published_min=data["published-min"],
                                       updated_max=data["updated-max"], updated_min=data["updated-min"],
@@ -213,7 +218,7 @@ def main():
             context["api_data"] = json.dumps(api_data)
         except:
             print("Problem with parsing XML response.")
-    except ValueError:
+    except UnboundLocalError:
         print("Context does not exist")
 
     if context != {}:
