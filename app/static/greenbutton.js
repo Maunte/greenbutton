@@ -1,5 +1,7 @@
 $(document).ready( function() {
 
+    // Form Error Handling *******************************************************************************************
+
     $(".form_div").submit( function(e) {
         var token = $("#access_token").val();
         if (token == "") {
@@ -66,7 +68,25 @@ $(document).ready( function() {
         }
     });
 
+    //
+
     $(document).on("click", "#toggle_xml", function() {
         $("#xml_div").toggle();
+        var xml_display = $("#xml_div").css("display");
+        var table_display = $("#table_div").css("display");
+        if (xml_display != "none" && table_display != "none") {
+            $("#table_div").toggle();
+        }
     });
+    $(document).on("click", "#toggle_table", function() {
+        $("#table_div").toggle();
+        var table_display = $("#table_div").css("display");
+        var xml_display = $("#xml_div").css("display");
+        if (table_display != "none" && xml_display != "none") {
+            $("#xml_div").toggle();
+        }
+    });
+
+    // Parsing Green Button Response object ***************************************************************************
+
 });

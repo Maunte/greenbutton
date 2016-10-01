@@ -19,15 +19,35 @@
         </div>
     </a>
     <br>
-    <div style="width:100%">
-
+    <div class="m-b-1" style="width:100%">
     {% if response %}
         <div>
-            <button id="toggle_xml" class="btn btn-primary m-x-auto" style="display:block">SHOW/HIDE XML Resposne</button>
-            <div id="xml_div" style="display:none">
-                <pre><code class="language-xml">
-                    {{ response }}
-                </code></pre>
+            <div class="row m-y-1">
+                <button id="toggle_xml" class="btn btn-primary">SHOW/HIDE XML Resposne</button>
+                <button id="toggle_table" class="btn btn-success">SHOW/HIDE JSON Response</button>
+            </div>
+
+            <div class="row m-y-1">
+                <div id="xml_div" class="data_div" style="display:none">
+                    <pre><code class="language-xml">
+                        {{ response }}
+                    </code></pre>
+                </div>
+                <div id="table_div" class="data_div">
+                    <h3 class="text-xs-center">{{ data_json.title|safe }}</h3>
+                    <hr>
+                    <table id="data_div">
+                        {% for entry in data_json.entries %}
+                        <h4 class="text-xs-center">{{ entry.title }}</h4>
+                        <table class="data_table m-y-1 m-x-auto">
+                            <tr><th>Data Type</th><th>Data Value</th></tr>
+                            {% for key, value in entry.items() %}
+                                <tr><td><strong>{{ key }}</strong></td><td>{{ value }}</td></tr>
+                            {% endfor %}
+                        </table>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
     {% endif %}
@@ -626,7 +646,11 @@
     <p class="text-xs-center">&copy; DogPackDesign 2016</p>
 </footer>
 
-<script>var xml = </script>
+<script>
+{% if api_data %}
+var api_data = {{ api_data|safe }};
+{% endif %}
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script>

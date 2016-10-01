@@ -19,7 +19,6 @@ def main():
         else:
             data[key] = value
 
-    print(data)
     # gc = GreenClient(token=data["access_token"])
     gc = GreenClient()
 
@@ -28,18 +27,18 @@ def main():
 
     # Application Information Endpoint: No Application Information Id: GET Requests
     if "app_info_submit" in request.form:
-        response = gc.execute(method="ApplicationInformation", published_max=data["published-max"],
+        response = gc.execute(method="application_information", published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
 
     # Application Information Endpoint with Id. Note that only the Id is taken as a parameter: GET Requests
     elif "app_info_id_submit" in data:
-        response = gc.execute(method="ApplicationInformation", id=data["app_info_id"])
+        response = gc.execute(method="application_information_by_id", id=data["app_info_id"])
 
     # Authorization Endpoints: GET Requests
     elif "auth_submit" in data:
-        response = gc.execute(method="Authorization", id=data["auth_id"], published_max=data["published-max"],
+        response = gc.execute(method="authorization", id=data["auth_id"], published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
@@ -188,7 +187,7 @@ def main():
                                   start_index=data["start-index"], depth=data["depth"])
 
     try:
-        return render_template("indexV2.html", response=response)
+        return render_template("indexV2.html", response=response.text)
     except:
         return render_template("indexV2.html")
 

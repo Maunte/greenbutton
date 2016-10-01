@@ -6,6 +6,22 @@ body {
     border-radius: 10px;
 }
 
+.data_div {
+    background-color: rgb(255,255,240);
+    overflow-x: scroll;
+    overflow-y: scroll;
+    border: 2px solid black;
+    padding: 20px;
+}
+
+.data_table {
+    font-size: 0.8em;
+    background-color: rgb(240,255,240);
+}
+.data_table table, th, td {
+    border: 2px solid black;
+}
+
 label {
     font-size: 12px;
     font-weight: bold;
@@ -35,13 +51,6 @@ label {
 
 .endpoint_links {
     font-size: 14px;
-}
-
-#xml_div {
-    background-color: rgb(255,255,240);
-    overflow-y: scroll;
-    border: 2px solid black;
-    padding: 20px;
 }
 
 .tag {

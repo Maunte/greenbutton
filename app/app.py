@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, request
 
 from GreenButtonRest.clients import GreenButtonClient as gbc
@@ -24,7 +25,7 @@ def fill_params(data, *exclude):
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    data = {}
+    data, context = {}, {}
     for key, value in request.form.items():
         if value != "" or "_submit" in key:
             data[key] = value
@@ -62,7 +63,7 @@ def main():
             paths.append(data["epower_sub_id"])
             paths.append(data["epower_usagepoint_id"])
             if data["epower_radio"] == "quality":
-                if data["epower_summary_id"] == "":
+                if "epower_summary_id" not in data:
                     endpoint = "/espi/1_1/resource/Subscription/ElectricPowerQualitySummary"
                 else:
                     endpoint = "/espi/1_1/resource/Subscription/ElectricPowerQualitySummarybyId"
@@ -133,18 +134,29 @@ def main():
             params = fill_params(data, "access_token", "usagepoint_id", "usagepoint_sub_id")
         else:
             print("No endpoint defined!")
+
         try:
             call = gbc(token, endpoint, *paths, **params)
             response = call.execute()
-            xml = ParseXml(response)
-            # xml.parse()
-            xml.tojson()
+            context["response"] = response.text
+            try:
+                xml = ParseXml(response)
+                api_data = xml.parse()
+                context["data_json"] = api_data
+                context["api_data"] = json.dumps(api_data)
+            except:
+                print("Problem with parsing XML response.")
+
             error = "false"
         except:
             error = "true"
-    try:
-        return render_template("index.html", error=error, response=response)
-    except:
+            print("Problem with API call.")
+
+    if context != {}:
+        print("Has Context")
+        return render_template("index.html", **context)
+    else:
+        print("Does NOT have Context")
         return render_template("index.html")
 
 
