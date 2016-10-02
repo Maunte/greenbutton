@@ -40,13 +40,12 @@ def make_get_call(url_built, headers):
 
 
 class GreenClient:
-    host = None
+    host = "https://services.greenbuttondata.org:443/DataCustodian/espi/1_1/resource"
     token = None
     API_CALLS_MADE = 0
     API_LIMIT = None
 
     def __init__(self, api_limit=None):
-        self.host = "https://services.greenbuttondata.org:443/DataCustodian/espi/1_1/resource"
         self.API_LIMIT = api_limit
 
     def execute(self, method, *args, **kwargs):
