@@ -1,9 +1,12 @@
+import json
+
+
 class GreenException(Exception):
     message = None
     code = None
 
     def __init__(self, result):
-        self.message = result.content[0]
+        self.message = json.loads(result.text)["error_description"]
         self.code = result.status_code
 
     def __str__(self):

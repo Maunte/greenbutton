@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import time
+
 import requests
 
 from greenbuttonrest.exceptions import GreenException
@@ -13,6 +15,28 @@ Usage::
   >>> print(execute)
   >>> print(gc.API_CALLS_MADE)
 """
+
+
+def make_get_call(url_built, headers):
+    """ Helper function to make GET request calls with the url and headers.
+
+    :param url_built: (required) URL to make a get call to
+    :type url_built: date
+    :param headers: (required) Dictionary of header parameters
+    :type headers: dict
+
+    :return: xml result
+    :rtype: text/xsl
+    """
+
+    result = requests.get(url=url_built, headers=headers)
+
+    if result is None:
+        raise Exception("Empty Response")
+    if result.status_code == 403 or result.status_code == 400:
+        raise GreenException(result)
+    elif result.status_code == 200:
+        return result.text
 
 
 class GreenClient:
@@ -52,8 +76,7 @@ class GreenClient:
                 result = method_map[method](*args, **kwargs)
                 self.API_CALLS_MADE += 1
             except GreenException as e:
-                # TODO: Identify authentication errors
-                # TODO: Include handling response codes: 200, 400, 403
+                # If bearer token re-authenticate
                 if e.code in [601, 602]:
                     self.authenticate()
                     continue
@@ -94,6 +117,7 @@ class GreenClient:
         :type start_index: long
         :param depth: (optional) The maximum number of entries to be transferred in the response to this request.
         :type depth: long
+
         :return: dict:headers
         :rtype: dict
         """
@@ -102,22 +126,24 @@ class GreenClient:
         headers = {
             "authorization": self.token
         }
+        try:
+            if published_max is not None and time.strptime(published_max, "%Y-%m-%dT%H:%M:%S"):
+                headers["published-max"] = published_max
+            if published_min is not None and time.strptime(published_min, "%Y-%m-%dT%H:%M:%S"):
+                headers["published-min"] = published_min
+            if updated_max is not None and time.strptime(updated_max, "%Y-%m-%dT%H:%M:%S"):
+                headers["updated-max"] = updated_max
+            if updated_min is not None and time.strptime(updated_min, "%Y-%m-%dT%H:%M:%S"):
+                headers["updated-min"] = updated_min
+            if max_results is not None and isinstance(max_results, int):
+                headers["max-results"] = max_results
+            if start_index is not None and isinstance(start_index, int):
+                headers["start-index"] = start_index
+            if depth is not None and isinstance(depth, int):
+                headers["depth"] = depth
+        except (ValueError, TypeError):
+            raise Exception("Invalid data format for headers")
 
-        # TODO: value validation
-        if published_max is not None:
-            headers["published-max"] = published_max
-        if published_min is not None:
-            headers["published-min"] = published_min
-        if updated_max is not None:
-            headers["updated-max"] = updated_max
-        if updated_min is not None:
-            headers["updated-min"] = updated_min
-        if max_results is not None:
-            headers["max-results"] = max_results
-        if start_index is not None:
-            headers["start-index"] = start_index
-        if depth is not None:
-            headers["depth"] = depth
         return headers
 
     # --------- APPLICATION INFORMATION ---------
@@ -148,12 +174,7 @@ class GreenClient:
         if application_information_id is not None:
             url_built += str(application_information_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- AUTHORIZATION ---------
 
@@ -178,18 +199,12 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        built_url = self.host + "/Authorization"
+        url_built = self.host + "/Authorization/"
 
         if authorization_id is not None:
-            built_url += "/" + str(authorization_id)
-            print(built_url)
+            url_built += str(authorization_id)
 
-        result = requests.get(url=built_url, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- BATCH ---------
 
@@ -214,12 +229,9 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        result = requests.get(url=self.host + "/Batch/Bulk/" + str(bulk_id), headers=headers)
+        url_built = self.host + "/Batch/Bulk/" + str(bulk_id)
 
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     def get_batch_subscription(self,
                                subscription_id,
@@ -242,12 +254,9 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        result = requests.get(url=self.host + "/Batch/Subscription/" + str(subscription_id), headers=headers)
+        url_built = self.host + "/Batch/Subscription/" + str(subscription_id)
 
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     def get_batch_retail_customer(self,
                                   retail_customer_id,
@@ -270,13 +279,9 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        result = requests.get(url=self.host + "/Batch/RetailCustomer/" + str(retail_customer_id) + "/UsagePoint",
-                              headers=headers)
+        url_built = self.host + "/Batch/RetailCustomer/" + str(retail_customer_id) + "/UsagePoint"
 
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     def get_batch_subscription_usage(self,
                                      subscription_id,
@@ -302,14 +307,9 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        result = requests.get(
-            url=self.host + "/Batch/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(usage_point_id),
-            headers=headers)
+        url_built = self.host + "/Batch/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(usage_point_id)
 
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- ELECTRIC POWER QUALITY SUMMARY ---------
 
@@ -340,18 +340,13 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        built_url = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
+        url_built = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
             usage_point_id) + "/ElectricPowerQualitySummary/"
 
         if electric_power_quality_summary_id is not None:
-            built_url += str(electric_power_quality_summary_id)
+            url_built += str(electric_power_quality_summary_id)
 
-        result = requests.get(url=built_url, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- ELECTRIC POWER USAGE SUMMARY ---------
 
@@ -382,18 +377,13 @@ class GreenClient:
         headers = self.build_params(published_max, published_min, updated_max, updated_min, max_results, start_index,
                                     depth)
 
-        built_url = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
+        url_built = self.host + "/Subscription/" + str(subscription_id) + "/UsagePoint/" + str(
             usage_point_id) + "/ElectricPowerUsageSummary/"
 
         if electric_power_usage_summary_id is not None:
-            built_url += str(electric_power_usage_summary_id)
+            url_built += str(electric_power_usage_summary_id)
 
-        result = requests.get(url=built_url, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- INTERVAL BLOCK ---------
 
@@ -422,12 +412,7 @@ class GreenClient:
         if interval_block_id is not None:
             url_built += str(interval_block_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     def get_subscription_meter_usage_interval(self,
                                               subscription_id,
@@ -465,12 +450,7 @@ class GreenClient:
         if interval_block_id is not None:
             url_built += str(interval_block_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- LOCAL TIME PARAMETERS ---------
 
@@ -500,12 +480,7 @@ class GreenClient:
         if local_time_parameter_id is not None:
             url_built += str(local_time_parameter_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- METER READING ---------
 
@@ -535,12 +510,7 @@ class GreenClient:
         if meter_reading_id is not None:
             url_built += str(meter_reading_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     def get_subscription_usage_meter_reading(self,
                                              subscription_id,
@@ -576,12 +546,7 @@ class GreenClient:
         if meter_reading_id is not None:
             url_built += str(meter_reading_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- READING TYPE ---------
 
@@ -610,12 +575,7 @@ class GreenClient:
         if reading_type_id is not None:
             url_built += str(reading_type_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- SERVICE STATUS ---------
 
@@ -634,12 +594,7 @@ class GreenClient:
 
         url_built = self.host + "/ReadServiceStatus"
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     # --------- USAGE POINT ---------
 
@@ -668,12 +623,7 @@ class GreenClient:
         if usage_point_id is not None:
             url_built += str(usage_point_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
 
     def get_usage_point_by_subscription(self,
                                         subscription_id,
@@ -703,9 +653,4 @@ class GreenClient:
         if usage_point_id is not None:
             url_built += str(usage_point_id)
 
-        result = requests.get(url=url_built, headers=headers)
-
-        if result is None: raise Exception("Empty Response")
-        if result.status_code == 403: raise GreenException(result)
-
-        return result.text
+        return make_get_call(url_built=url_built, headers=headers)
