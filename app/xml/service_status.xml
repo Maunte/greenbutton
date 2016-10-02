@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceStatus xmlns="http://naesb.org/espi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://naesb.org/espi espiDerived.xsd">
+  <currentStatus>1</currentStatus>
+</ServiceStatus>

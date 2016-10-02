@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="GreenButtonDataStyleSheet.xslt"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<id>urn:uuid:b424a344-87d6-4e4c-8e91-1d0a814c251c</id>
+<id>urn:uuid:9746fd88-c3de-4404-8308-a98d9ee5da1b</id>
 <title>Green Button Usage Feed</title>
-<updated>2016-10-01T23:49:43Z</updated>
+<updated>2016-10-02T00:26:38Z</updated>
 <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="self"/>
 <entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
     <id>urn:uuid:379c4781-c698-4d5b-9b93-cdf48087dc0a</id>
@@ -194,8 +194,8 @@
 
 <entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
     <id>urn:uuid:d5cb5fac-ec43-4a23-b85d-8294a5a6de0c</id>
-    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/RetailCustomer/15/UsagePoint/15/MeterReading/35/IntervalBlock" rel="up"/>
-    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/RetailCustomer/15/UsagePoint/15/MeterReading/35/IntervalBlock/17266" rel="self"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/2" rel="self"/>
     <title>DST For North America</title>
     <content>
         <espi:LocalTimeParameters>
