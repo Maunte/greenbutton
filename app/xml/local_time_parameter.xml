@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="GreenButtonDataStyleSheet.xslt"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<id>urn:uuid:b424a344-87d6-4e4c-8e91-1d0a814c251c</id>
+<title>Green Button Usage Feed</title>
+<updated>2016-10-01T23:49:43Z</updated>
+<link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="self"/>
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:379c4781-c698-4d5b-9b93-cdf48087dc0a</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/10" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:3bd45706-8317-4301-855a-18c5ffcd69f9</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/4" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:3ce1db9a-3861-49ec-a8dc-d6a8f4e1b20a</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/11" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-14400</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2013-04-04T03:35:38Z</published>
+    <updated>2013-04-04T03:35:38Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:400e9c5b-6e63-462f-bac8-0ff93c9e337c</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/6" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:6a5a6090-70fd-467b-ab23-e881189e676b</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/13" rel="self"/>
+    <title>Eastern Time</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:6e00e6c4-cb34-476a-b5f5-0deb9644d477</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/9" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:70630f0d-2fed-4768-936e-73e4f05f33a0</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/5" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:81fb2010-2a30-4a8e-be0e-5e7e0eaa8760</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/14" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-18000</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2015-05-16T14:54:26Z</published>
+    <updated>2015-05-16T14:54:26Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:863d1283-83c4-4520-997a-d5de383f61a7</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/12" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-18000</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2013-04-04T03:35:38Z</published>
+    <updated>2013-04-04T03:35:38Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:a86af2a1-7d8e-4597-9aab-e85704be0bfe</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/3" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:ba105392-c7f3-4f69-ad73-aff3a895f4a0</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/8" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:d5cb5fac-ec43-4a23-b85d-8294a5a6de0c</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/RetailCustomer/15/UsagePoint/15/MeterReading/35/IntervalBlock" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/RetailCustomer/15/UsagePoint/15/MeterReading/35/IntervalBlock/17266" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-18000</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2013-09-19T04:00:00Z</published>
+    <updated>2013-09-19T04:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:e30ce77d-ec22-4da5-83c2-991ba34c97d6</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/1" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-18000</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2013-09-19T04:00:00Z</published>
+    <updated>2013-09-19T04:00:00Z</updated>
+</entry>
+
+<entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:e91218d4-d663-41e7-aa23-8cfee627699a</id>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters" rel="up"/>
+    <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/LocalTimeParameters/7" rel="self"/>
+    <title>DST For North America</title>
+    <content>
+        <espi:LocalTimeParameters>
+            <espi:dstEndRule>B40E2000</espi:dstEndRule>
+            <espi:dstOffset>3600</espi:dstOffset>
+            <espi:dstStartRule>360E2000</espi:dstStartRule>
+            <espi:tzOffset>-28800</espi:tzOffset>
+        </espi:LocalTimeParameters>
+    </content>
+    <published>2012-10-24T07:00:00Z</published>
+    <updated>2012-10-24T07:00:00Z</updated>
+</entry>
+</feed>

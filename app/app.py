@@ -6,10 +6,17 @@ sys.path.append(os.path.abspath('.'))
 from greenbuttonrest.client import GreenClient
 from greenbuttonrest.parser import ParseXml
 
-app2 = Flask(__name__)
+app = Flask(__name__)
 
 
-@app2.route("/", methods=['GET', 'POST'])
+def id_check(data, data_key):
+    if data_key in data:
+        return data[data_key]
+    else:
+        return None
+
+
+@app.route("/", methods=['GET', 'POST'])
 def main():
     """
     Take form data and put in 'data' dictionary. Ignores submit button name.
@@ -80,114 +87,93 @@ def main():
 
     # Electric Power Summaries, both Quality and Usage, Endpoints: Get Requests
     elif "epower_submit" in data:
+        summary_id = id_check(data, "summary_id")
         if data["epower_radio"] == "quality":
             method = "electric_power_quality_summary"
-            if data["summary_id"] == "":
-                summary_id = None
-            else:
-                summary_id = data["summary_id"]
-                response = gc.execute(method, data["sub_id"], data["usage_id"],
+            response = gc.execute(method, data["sub_id"], data["usage_id"],
                                   electric_power_quality_summary_id=summary_id, published_max=data["published-max"],
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
                                   start_index=data["start-index"], depth=data["depth"])
         else:
-            if data["summary"] == "":
-                response = gc.execute(method="ElectricPowerUsageSummary", subscription_id=data["sub_id"],
-                                      usagepoint_id=data["usage_id"], published_max=data["published-max"],
-                                      published_min=data["published-min"], updated_max=data["updated-max"],
-                                      updated_min=data["updated-min"], max_results=data["max-results"],
-                                      start_index=data["start-index"], depth=data["depth"])
-            else:
-                response = gc.execute(method="ElectricPowerUsageSummarybyId", id=data["summary_id"],
-                                      subscription_id=data["sub_id"], usagepoint_id=data["usage_id"],
-                                      published_max=data["published-max"], published_min=data["published-min"],
-                                      updated_max=data["updated-max"], updated_min=data["updated-min"],
-                                      max_results=data["max-results"], start_index=data["start-index"],
-                                      depth=data["depth"])
+            method = "electric_power_usage_summary"
+            response = gc.execute(method, data["sub_id"], data["usage_id"],
+                                  electric_power_usage_summary_id=summary_id, published_max=data["published-max"],
+                                  published_min=data["published-min"], updated_max=data["updated-max"],
+                                  updated_min=data["updated-min"], max_results=data["max-results"],
+                                  start_index=data["start-index"], depth=data["depth"])
 
     # Interval Block Endpoints: GET Requests
     elif "interval_submit" in data:
+        interval_id = id_check(data, "interval_id")
         if "sub_id" in data:
-            if "interval_id" in data:
-                response = gc.execute(method="Subscription/IntervalBlockbyId", id=data["interval_id"],
-                                      meter_id=data["meter_id"], subscription_id=data["sub_id"],
-                                      usagepoint_id=data["usage_id"], published_max=data["published-max"],
-                                      published_min=data["published-min"], updated_max=data["updated-max"],
-                                      updated_min=data["updated-min"], max_results=data["max-results"],
-                                      start_index=data["start-index"], depth=data["depth"])
-            else:
-                response = gc.execute(method="Subscription/IntervalBlock", meter_id=data["meter_id"],
-                                      subscription_id=data["sub_id"], usagepoint_id=data["usage_id"],
-                                      published_max=data["published-max"], published_min=data["published-min"],
-                                      updated_max=data["updated-max"], updated_min=data["updated-min"],
-                                      max_results=data["max-results"], start_index=data["start-index"],
-                                      depth=data["depth"])
-        else:
-            response = gc.execute(method="IntervalBlock", id=data["interval_id"],
+            method = "interval_block_subscription_meter_usage"
+            response = gc.execute(method, data["sub_id"], data["usage_id"], data["meter_id"], id=data["interval_id"],
                                   published_max=data["published-max"], published_min=data["published-min"],
                                   updated_max=data["updated-max"], updated_min=data["updated-min"],
-                                  max_results=data["max-results"], start_index=data["start-index"],
-                                  depth=data["depth"])
+                                  max_results=data["max-results"], start_index=data["start-index"], depth=data["depth"])
+        else:
+            method = "interval_block"
+            response = gc.execute(method, interval_id, published_max=data["published-max"],
+                                  published_min=data["published-min"], updated_max=data["updated-max"],
+                                  updated_min=data["updated-min"], max_results=data["max-results"],
+                                  start_index=data["start-index"], depth=data["depth"])
 
     # Local Time Parameters Endpoint: GET Requests
     elif "local_time_submit" in data:
-        response = gc.execute(method="LocalTimeParameters", id=data["local_time_id"],
-                              published_max=data["published-max"], published_min=data["published-min"],
-                              updated_max=data["updated-max"], updated_min=data["updated-min"],
-                              max_results=data["max-results"], start_index=data["start-index"], depth=data["depth"])
+        local_time_id = id_check(data, "local_time_id")
+        method = "local_time_parameter"
+        response = gc.execute(method, local_time_id, published_max=data["published-max"],
+                              published_min=data["published-min"], updated_max=data["updated-max"],
+                              updated_min=data["updated-min"], max_results=data["max-results"],
+                              start_index=data["start-index"], depth=data["depth"])
 
     # Meter Reading Endpoints: GET Requests
     elif "meter_submit" in data:
+        meter_id = id_check(data, "meter_id")
         if "sub_id" in data:
+            method = "meter_reading_subscription_usage"
             if "meter_id" in data:
-                response = gc.execute(method="Subscription/MeterReadingId", meter_id=data["meter_id"],
-                                      subscription_id=data["sub_id"], usage_id=data["usage_id"],
+                response = gc.execute(method, data["sub_id"], data["usage_id"], meter_id=meter_id,
                                       published_max=data["published-max"], published_min=data["published-min"],
                                       updated_max=data["updated-max"], updated_min=data["updated-min"],
                                       max_results=data["max-results"], start_index=data["start-index"],
                                       depth=data["depth"])
-            else:
-                response = gc.execute(method="Subscription/MeterReading", subscription_id=data["sub_id"],
-                                      usage_id=data["usage_id"], published_max=data["published-max"],
-                                      published_min=data["published-min"], updated_max=data["updated-max"],
-                                      updated_min=data["updated-min"], max_results=data["max-results"],
-                                      start_index=data["start-index"], depth=data["depth"])
         else:
-            response = gc.execute(method="MeterReading", id=data["meter_id"], published_max=data["published-max"],
+            method = "meter_reading"
+            response = gc.execute(method, meter_id, published_max=data["published-max"],
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
                                   start_index=data["start-index"], depth=data["depth"])
 
     # Reading Type Endpoints: GET Requests
     elif "reading_type_submit" in data:
-        response = gc.execute(method="ReadingType", id=data["reading_type_id"],
-                              published_max=data["published-max"],
+        reading_type_id = id_check(data, "reading_type_id")
+        method = "reading_type"
+        response = gc.execute(method, reading_type_id=reading_type_id, published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
 
     # Service Status Endpoint: GET Request
     elif "server_status_submit" in data:
-        response = gc.execute(method="ReadServiceStatus")
+        method = "service_status"
+        response = gc.execute(method)
 
     # UsagePoint Endpoints: GET Requests
     elif "usagepoint_submit" in data:
+        usage_id = id_check(data, "usage_id")
         if "sub_id" in data:
-            if "usagep_id" in data:
-                response = gc.execute(method="Subscription/UsagePointbyId", subscription_id=data["sub_id"],
-                                      usage_id=data["usage_id"], published_max=data["published-max"],
-                                      published_min=data["published-min"], updated_max=data["updated-max"],
-                                      updated_min=data["updated-min"], max_results=data["max-results"],
-                                      start_index=data["start-index"], depth=data["depth"])
-            else:
-                response = gc.execute(method="Subscription/UsagePoint", subscription_id=data["sub_id"],
+            method = "usage_by_subscription"
+            if "usage_id" in data:
+                response = gc.execute(method, data["sub_id"], usage_point_id=usage_id,
                                       published_max=data["published-max"], published_min=data["published-min"],
                                       updated_max=data["updated-max"], updated_min=data["updated-min"],
                                       max_results=data["max-results"], start_index=data["start-index"],
                                       depth=data["depth"])
         else:
-            response = gc.execute(method="UsagePoint", id=data["usage_id"], published_max=data["published-max"],
+            method = "usage"
+            response = gc.execute(method, usage_point_id=usage_id, published_max=data["published-max"],
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
                                   start_index=data["start-index"], depth=data["depth"])
@@ -219,4 +205,4 @@ def main():
 
 
 if __name__ == "__main__":
-    app2.run(debug=True)
+    app.run(debug=True)

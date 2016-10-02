@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="GreenButtonDataStyleSheet.xslt"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<id>urn:uuid:8a2fcf0d-c28e-46ea-946c-233df3b6bd8b</id>
+<id>urn:uuid:1312b412-b387-4d02-9392-bbd1792dd68a</id>
 <title>Green Button Usage Feed</title>
-<updated>2016-10-01T22:37:58Z</updated>
+<updated>2016-10-02T00:16:29Z</updated>
 <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/Batch/Subscription/1" rel="self"/></feed>
