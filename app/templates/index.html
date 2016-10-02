@@ -28,7 +28,7 @@ Test Page Version: 0.2.1
         <div>
             <div class="row m-y-1">
                 <button id="toggle_xml" class="btn btn-primary">SHOW/HIDE XML Resposne</button>
-                <button id="toggle_table" class="btn btn-success">SHOW/HIDE JSON Response</button>
+                <button id="toggle_table" class="btn btn-success">SHOW/HIDE Parsed Data</button>
             </div>
 
             <div class="row m-y-1">
@@ -43,7 +43,7 @@ Test Page Version: 0.2.1
                     <hr>
                     <table id="data_div">
                         {% for entry in data_json.entries %}
-                        <h4 class="text-xs-center">{{ entry.title }}</h4>
+                        {% if entry.title %}<h4 class="text-xs-center">{{ entry.title }}</h4>{% endif %}
                         <table class="data_table m-y-1 m-x-auto">
                             <tr><th>Data Type</th><th>Data Value</th></tr>
                             {% for key, value in entry.items() %}

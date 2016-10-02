@@ -32,6 +32,17 @@ class ParseXml(object):
                 pass
         return data
 
+    def service_status(self, root, data):
+        data["title"] = "Service Status"
+        for child in root:
+            print(child.tag, child.text)
+            if "currentStatus" in child.tag:
+                data["entries"].append({child.tag.replace("{http://naesb.org/espi}", ""): child.text})
+            else:
+                data["entries"].append({"Status": "No Status Returned"})
+        print(data)
+        return data
+
     def parse(self):
         print("Parsing XML Response: ")
 
@@ -43,8 +54,10 @@ class ParseXml(object):
         elif "entry" in root.tag:
             entry = self.parse_entry(root)
             data["entries"].append(entry)
+        elif "ServiceStatus" in root.tag:
+            data = self.service_status(root, data)
         else:
-            print("Error: Problem with 'root' tag.")
+            print("Error: No 'feed' or 'entry' tags")
             data = {}
         return data
 

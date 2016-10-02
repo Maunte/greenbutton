@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="GreenButtonDataStyleSheet.xslt"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<id>urn:uuid:e9b14aa6-2599-40f7-81e2-dae0760ccb46</id>
+<id>urn:uuid:936544ab-5cd8-47a2-b240-b2fe5ac258da</id>
 <title>Green Button Usage Feed</title>
-<updated>2016-10-02T00:33:22Z</updated>
+<updated>2016-10-02T16:32:30Z</updated>
 <link href="https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/ApplicationInformation" rel="self"/>
 <entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
     <id>urn:uuid:185c9c3f-5b4a-44a9-8959-3ae79e60a9f5</id>

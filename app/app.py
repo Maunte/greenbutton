@@ -136,7 +136,7 @@ def main():
         if "sub_id" in data:
             method = "meter_reading_subscription_usage"
             if "meter_id" in data:
-                response = gc.execute(method, data["sub_id"], data["usage_id"], meter_id=meter_id,
+                response = gc.execute(method, data["sub_id"], data["usage_id"], meter_reading_id=meter_id,
                                       published_max=data["published-max"], published_min=data["published-min"],
                                       updated_max=data["updated-max"], updated_min=data["updated-min"],
                                       max_results=data["max-results"], start_index=data["start-index"],
