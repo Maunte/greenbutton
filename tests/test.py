@@ -12,7 +12,6 @@ def main():
     # execute = gc.execute("application_information")
     # execute = gc.execute("batch_bulk", 1)
     print(execute)
-    print(gc.API_CALLS_MADE)
 
 
 if __name__ == '__main__':

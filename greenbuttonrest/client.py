@@ -3,7 +3,7 @@ import time
 
 import requests
 
-from greenbuttonrest.exceptions import GreenException
+from greenbuttonrest.helper.exceptions import GreenException
 
 """Client for GreenButton RESTful APIs.
 
