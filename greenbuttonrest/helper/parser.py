@@ -10,6 +10,8 @@ class ParseXml(object):
         for items in child:
             if items.tag == "{http://www.w3.org/2005/Atom}title":
                 entry["title"] = items.text
+            elif items.tag == "{http://www.w3.org/2005/Atom}id":
+                entry["uuid"] = items.text.replace("urn:uuid:", "")
             elif items.tag == "{http://www.w3.org/2005/Atom}content":
                 for item in items:
                     for part in item:
@@ -24,6 +26,8 @@ class ParseXml(object):
         for child in root:
             if child.tag == "{http://www.w3.org/2005/Atom}title":
                 data["title"] = child.text
+            elif "id" in child.tag and "urn:uuid" in child.text:
+                data["uuid"] = child.text.replace("urn:uuid:", "")
             elif child.tag == "{http://www.w3.org/2005/Atom}entry":
                 entry = self.parse_entry(child)
                 data["entries"].append(entry)

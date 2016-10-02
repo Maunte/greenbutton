@@ -40,18 +40,25 @@ Test Page Version: 0.2.1
                 <div id="table_div" class="data_div">
                     {% if data_json %}
                     <h3 class="text-xs-center">{{ data_json.title|safe }}</h3>
+                    {% if data_json.uuid %}<h6 class="text-xs-center">UUID: {{ data_json.uuid }}</h6>{% endif %}
+
                     <hr>
-                    <table id="data_div">
+                    <div id="data_div">
                         {% for entry in data_json.entries %}
                         {% if entry.title %}<h4 class="text-xs-center">{{ entry.title }}</h4>{% endif %}
                         <table class="data_table m-y-1 m-x-auto">
                             <tr><th>Data Type</th><th>Data Value</th></tr>
+
+                            {% if entry.title %}<tr><td><strong>title</strong></td><td>{{ entry.title }}</td></tr>{% endif %}
+                            {% if entry.uuid %}<tr><td><strong>uuid</strong></td><td>{{ entry.uuid }}</td></tr>{% endif %}
                             {% for key, value in entry.items() %}
+                                {% if key != "title" and key != "uuid" %}
                                 <tr><td><strong>{{ key }}</strong></td><td>{{ value }}</td></tr>
+                                {% endif %}
                             {% endfor %}
                         </table>
                         {% endfor %}
-                    </table>
+                    </div>
                     {% else %}
                     <h3 class="text-xs-center">Unable to Parse XML</h3>
                     {% endif %}
