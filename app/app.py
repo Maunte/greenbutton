@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+from datetime import datetime
 
 from flask import Flask, render_template, request
 
@@ -31,7 +32,10 @@ def main():
         if value == "":
             data[key] = None
         else:
-            data[key] = value
+            if key in ["published-max", "published-min", "updated-max", "updated-min"]:
+                data[key] = value + "T00:00:00"
+            else:
+                data[key] = value
 
     # gc = GreenClient(token=data["access_token"])
     gc = GreenClient()
