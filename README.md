@@ -19,3 +19,8 @@ gc = GreenClient()
 ```
 Then use gc.execute(method='') to call the various methods (see documentation below) 
 
+Get All ApplicationInformation
+------------------------------
+```python
+result = gc.execute("application_information")
+```
