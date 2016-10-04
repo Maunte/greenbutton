@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import time
 
-import requests
-
 from greenbuttonrest.helper.exceptions import GreenException
+from greenbuttonrest.helper.http_custom import HttpCustom
 
 """Client for GreenButton RESTful APIs.
 
@@ -29,14 +28,7 @@ def make_get_call(url_built, headers):
     :rtype: text/xsl
     """
 
-    result = requests.get(url=url_built, headers=headers)
-
-    if result is None:
-        raise Exception("Empty Response")
-    if result.status_code == 403 or result.status_code == 400:
-        raise GreenException(result)
-    elif result.status_code == 200:
-        return result.text
+    return HttpCustom().get(url_built, headers)
 
 
 class GreenClient:
@@ -94,7 +86,8 @@ class GreenClient:
         """
 
         # TODO: Generate token here
-        self.token = "Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3"
+        # self.token = "Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3"
+        self.token = ""
 
     def build_params(self, published_max=None, published_min=None, updated_max=None, updated_min=None,
                      max_results=None, start_index=None, depth=None):
