@@ -86,8 +86,7 @@ class GreenClient:
         """
 
         # TODO: Generate token here
-        # self.token = "Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3"
-        self.token = ""
+        self.token = "Bearer 2a85f4bd-30db-4b7d-8f41-b046b0566cb3"
 
     def build_params(self, published_max=None, published_min=None, updated_max=None, updated_min=None,
                      max_results=None, start_index=None, depth=None):
