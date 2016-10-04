@@ -2,3 +2,5 @@
 *.pyc
 /python3
 
+/app/xml/xml.json
+/app/xml/xmltojson.py
