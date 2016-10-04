@@ -64,4 +64,3 @@ class ParseXml(object):
             print("Error: No 'feed' or 'entry' tags")
             data = {}
         return data
-

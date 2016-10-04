@@ -1,6 +1,4 @@
 .idea
 *.pyc
 /python3
-/app/templates/test.xml
-/app/templates/test.json
-/app/templates/test2.json
+
