@@ -18,3 +18,22 @@ class ParamForm(forms.Form):
 
 class AppInfobyIdForm(forms.Form):
     app_info_id = forms.IntegerField(label="Application Information Id (required)")
+
+
+class AuthForm(ParamForm):
+    auth_id = forms.IntegerField(label="Authorization Id", required=False)
+
+
+class BatchBulkForm(ParamForm):
+    bulk_id = forms.IntegerField(label="Batch Bulk Id")
+
+class BatchSubForm(ParamForm):
+    sub_id = forms.IntegerField(label="Batch Subscription Id")
+
+class BatchRetailForm(ParamForm):
+    retail_id = forms.IntegerField(label="Batch Retail Customer Id")
+
+class BatchSubUsageForm(ParamForm):
+    sub_id = forms.IntegerField(label="Batch Subscription Id")
+    usage_id = forms.IntegerField(label="Batch UsagePoint Id")
+

@@ -24,9 +24,7 @@ $(document).ready( function() {
                         $("#"+form[i].id+"_alert").append(alert);
                     }
 
-                if ($(form[i]).attr("data-group") == "bulk") {
-                    console.log($(form[i]).attr("data-pair"));
-                }
+
                 }
             }
         }
@@ -68,7 +66,10 @@ $(document).ready( function() {
         }
     });
 
-    //
+    $(document).on("click", ".batch_radio", function() {
+        $(".batch_form").css("display", "none");
+        $("#"+this.id.replace("radio", "form")).toggle();
+    });
 
     $(document).on("click", "#toggle_xml", function() {
         $("#xml_div").toggle();

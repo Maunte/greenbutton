@@ -80,7 +80,7 @@ Test Page Version: 0.2.2
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: app_info_submit  ------------------------------------------------------------------------>
             <h3 class="text-xs-center form_header">Get Application Information by Id</h3>
-            <form id="app_info_id_form" class="form_div" method="post" action="/app-info-id/">
+            <form id="app_info_id_form" class="form_div" method="post" action="app-info-id/">
                 {% csrf_token %}
                 {{ forms.app_info_by_id.as_table }}
                 <button type="submit" name="app_info_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
@@ -105,21 +105,10 @@ Test Page Version: 0.2.2
 
             <!-- Field names: auth_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: auth_submit  -->
-            <form id="auth_form" class="form_div" method="post">
+            <form id="auth_form" class="form_div" method="post" action="auth/">
+                {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Authorization</h3>
-                <div class="form-group row">
-                    <label for="auth_id" class="col-xs-2 col-form-label text-xs-right">Authorization Id (Optional)</label>
-                    <div class="col-xs-10">
-                        <div class="input-group">
-                            <input type="text" name="auth_id" class="form-control form-control-md" id="auth_id"
-                                   placeholder="Authorization Id">
-                        </div>
-                    </div>
-                </div>
-
-                {% with param="auth" %}
-                    {% include "greenbutton/param_form.html" %}
-                {% endwith %}
+                {{ forms.auth.as_table }}
                 <button type="submit" name="auth_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
@@ -148,79 +137,38 @@ Test Page Version: 0.2.2
             <!-- Id names: bulk_id, sub_id, customer_id, usage_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: bulk_submit  -->
-            <form id="bulk_form" class="form_div" method="post">
-                <h3 class="text-xs-center form_header">GET Bulk Tranfer</h3>
-
-                <div class="sub_form_div">
-
-                    <div class="form-group row">
-                        <label for="bulk_id" class="col-xs-2 col-form-label text-xs-right">Bulk Id</label>
-                        <div class="col-xs-8">
-                            <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
-                                       data-pair="bulk_id">
-                            </span>
-                                <input type="text" name="bulk_id" class="form-control form-control-md id_select required"
-                                       id="bulk_id"
-                                       placeholder="Bulk Id" data-group="bulk" data-pair="bulk_id">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="bulk_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id</label>
-                        <div class="col-xs-8">
-                            <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
-                                       data-pair="bulk_sub_id">
-                            </span>
-                                <input type="text" name="sub_id" class="form-control form-control-md id_select required"
-                                       id="bulk_sub_id"
-                                       placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_id">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="bulk_customer_id" class="col-xs-2 col-form-label text-xs-right">Retail Customer
-                            Id</label>
-                        <div class="col-xs-8">
-                            <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
-                                       data-pair="bulk_customer_id">
-                            </span>
-                                <input type="text" name="customer_id"
-                                       class="form-control form-control-md id_select required" id="bulk_customer_id"
-                                       placeholder="Retail Customer Id" data-group="bulk" data-pair="bulk_customer_id">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="bulk_sub_with_usagepoint_id" class="col-xs-2 col-form-label text-xs-right">Subscription
-                            Id / UsagePoint Id</label>
-                        <div class="col-xs-8">
-                            <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="radio" name="bulk_radio" class="id_select" data-group="bulk"
-                                       data-pair="bulk_sub_usage">
-                            </span>
-                                <input type="text" name="sub_id" class="form-control form-control-md id_select required"
-                                       id="bulk_sub_with_usagepoint_id"
-                                       placeholder="Subscription Id" data-group="bulk" data-pair="bulk_sub_usage">
-                                <span>
-                                <input type="text" name="usage_id" class="form-control form-control-md id_select required"
-                                       id="bulk_usagepoint_with_sub_id"
-                                       placeholder="UsagePoint Id" data-group="bulk" data-pair="bulk_sub_usage">
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% with param="bulk" %}
-                    {% include "greenbutton/param_form.html" %}
-                {% endwith %}
+            <h3 class="text-xs-center form_header">GET Bulk Tranfer</h3>
+            <label for="batch_bulk_radio">Batch Bulk Id</label>
+            <input type="radio" name="batch" id="batch_bulk_radio" class="batch_radio" checked>
+            <label for="batch_sub_radio">Batch Subscription Id</label>
+            <input type="radio" name="batch" id="batch_sub_radio" class="batch_radio">
+            <label for="batch_retail_radio">Batch Retail Customer Id</label>
+            <input type="radio" name="batch" id="batch_retail_radio" class="batch_radio">
+            <label for="batch_sub_usage_radio">Batch Subscription&UsagePoint Ids</label>
+            <input type="radio" name="batch" id="batch_sub_usage_radio" class="batch_radio">
+            <br>
+            <form id="batch_bulk_form" class="form_div batch_form" method="post" action="batch-bulk/">
+                {% csrf_token %}
+                <h4 class="text-xs-center">Batch Bulk Form</h4>
+                {{ forms.batch_bulk.as_table }}
+                <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+            </form>
+            <form id="batch_sub_form" class="form_div batch_form" method="post" action="batch-sub/" style="display:none">
+                {% csrf_token %}
+                <h4 class="text-xs-center">Batch Subscription Form</h4>
+                {{ forms.batch_sub.as_table }}
+                <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+            </form>
+            <form id="batch_retail_form" class="form_div batch_form" method="post" action="batch-retail/" style="display:none">
+                {% csrf_token %}
+                <h4 class="text-xs-center">Batch Retail Customer Form</h4>
+                {{ forms.batch_retail.as_table }}
+                <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+            </form>
+            <form id="batch_sub_usage_form" class="form_div batch_form" method="post" action="batch-sub-usage/" style="display:none">
+                {% csrf_token %}
+                <h4 class="text-xs-center">Batch Supscription and UsagePoint Form</h4>
+                {{ forms.batch_sub_usage.as_table }}
                 <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
