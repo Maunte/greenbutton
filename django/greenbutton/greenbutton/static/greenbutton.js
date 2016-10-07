@@ -71,6 +71,17 @@ $(document).ready( function() {
         $("#"+this.id.replace("radio", "form")).toggle();
     });
 
+    $("#epower_form").submit( function() {
+
+        if ($("#epower_quality_radio").is(":checked")) {
+            document.epower_form.action = "electric-power-quality/";
+        } else if ($("#epower_usage_radio").is(":checked")) {
+            document.epower_form.action = "electric-power-usage/";
+        } else {
+            alert("Javascript Error!");
+        }
+    });
+
     $(document).on("click", "#toggle_xml", function() {
         $("#xml_div").toggle();
         var xml_display = $("#xml_div").css("display");

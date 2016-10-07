@@ -196,56 +196,17 @@ Test Page Version: 0.2.2
             <!-- Id names: sub_id, usage_id, summary_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: epower_submit  -->
-            <form id="epower_form" class="form_div" method="post">
+
+            <label for="batch_bulk_radio">Batch Bulk Id</label>
+            <input type="radio" name="epower" id="epower_quality_radio" class="epower_radio" checked>
+            <label for="batch_sub_radio">Batch Subscription Id</label>
+            <input type="radio" name="epower" id="epower_usage_radio" class="epower_radio">
+
+            <form name="epower_form" id="epower_form" class="form_div" method="post">
+                {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Electrical Power Quality and Usage Summaries</h3>
+                {{ forms.electric_power_summary.as_table }}
 
-                <div class="sub_form_div">
-                    <div class="form-group row">
-                        <label for="epower_summary_id" class="col-xs-3 col-form-label text-xs-right">Electrical Power
-                            Summary</label>
-                        <div class="form-check">
-                            <label class="col-xs-2 form-check-label">
-                                Quality: <input type="radio" name="epower_radio" value="quality" checked>
-                                Usage: <input type="radio" name="epower_radio" value="usage">
-                            </label>
-                        </div>
-                        <div class="col-xs-7">
-                            <div class="input-group">
-                                <input type="text" name="summary_id"
-                                       class="form-control form-control-md id_select" id="epower_summary_id"
-                                       placeholder="Summary Id (Optional)">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="epower_sub_id" class="col-xs-4 col-form-label text-xs-right">Subscription Id
-                            (Required)</label>
-                        <div class="col-xs-8">
-                            <div id="epower_sub_id_alert"></div>
-                            <div class="input-group">
-                                <input type="text" name="sub_id" class="required form-control form-control-md"
-                                       id="epower_sub_id"
-                                       placeholder="Subscription Id">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="epower_usagepoint_id" class="col-xs-4 col-form-label text-xs-right">UsagePoint Id
-                            (Required) </label>
-                        <div class="col-xs-8">
-                            <div class="epower_usage_id_alert"></div>
-                            <div class="input-group">
-                                <input type="text" name="usage_id" class="required form-control form-control-md"
-                                       id="epower_usagepoint_id"
-                                       placeholder="UsagePoint Id">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% with param="epower" %}
-                    {% include "greenbutton/param_form.html" %}
-                {% endwith %}
                 <button type="submit" name="epower_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -274,61 +235,22 @@ Test Page Version: 0.2.2
             <!-- Id names: sub_id, usage_id, meter_id, interval_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: interval_submit  -->
-            <form id="interval_form" class="form_div" method="post">
+            <form id="interval_form" class="form_div" method="post" action="interval/">
+                {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Interval Block</h3>
 
-                <div class="sub_form_div">
-                    <div class="form-group row">
-                        <label for="interval_select" class="col-xs-5 offset-xs-2">Include Subscription, UsagePoint, and
-                            Meter Reading Ids?</label>
-                        <input id="interval_select" class="form-check-input" type="checkbox" value="">
-                    </div>
-                    <hr>
-                    <div class="form-group row">
-                        <label for="interval_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id
-                            (Required)</label>
-                        <div class="col-xs-2">
-                            <div class="input-group">
-                                <input type="text" name="sub_id"
-                                       class="form-control form-control-md interval_select_input" id="interval_sub_id"
-                                       placeholder="Subscription Id" disabled>
-                            </div>
-                        </div>
-                        <label for="interval_usagepoint_id" class="col-xs-2 col-form-label text-xs-right">UsagePoint Id
-                            (Required) </label>
-                        <div class="col-xs-2">
-                            <div class="input-group">
-                                <input type="text" name="usage_id"
-                                       class="form-control form-control-md interval_select_input"
-                                       id="interval_usagepoint_id"
-                                       placeholder="UsagePoint Id" disabled>
-                            </div>
-                        </div>
-                        <label for="interval_meter_id" class="col-xs-2 col-form-label text-xs-right">Meter Reading Id
-                            (Required) </label>
-                        <div class="col-xs-2">
-                            <div class="input-group">
-                                <input type="text" name="meter_id"
-                                       class="form-control form-control-md interval_select_input" id="interval_meter_id"
-                                       placeholder="Meter Reading Id" disabled>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{ forms.interval }}
 
-                <div class="form-group row">
-                    <label for="interval_id" class="col-xs-2 col-form-label text-xs-right">Interval Block Id</label>
-                    <div class="col-xs-10">
-                        <div class="input-group">
-                            <input type="text" name="interval_id" class="form-control form-control-md id_select"
-                                   id="interval_id"
-                                   placeholder="Interval Block Id (Optional)">
-                        </div>
-                    </div>
-                </div>
-                {% with param="interval" %}
-                    {% include "greenbutton/param_form.html" %}
-                {% endwith %}
+                <button type="submit" name="interval_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
+                </button>
+            </form>
+            <br>
+            <form id="specific_interval_form" class="form_div" method="post" action="specific-interval/">
+                {% csrf_token %}
+                <h3 class="text-xs-center form_header">GET Interval Block by Subscription, UsagePoint, Meter, and Interval IDs</h3>
+
+                {{ forms.specific_interval }}
+
                 <button type="submit" name="interval_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -355,23 +277,12 @@ Test Page Version: 0.2.2
 
             <!-- Field names: local_time_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: local_time_submit  -->
-            <form id="local_time_form" class="form_div" method="post">
+            <form id="local_time_form" class="form_div" method="post" action="local-time/">
+                {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET local_time Parameter</h3>
-                <div class="form-group row">
-                    <label for="local_time_id" class="col-xs-2 col-form-label text-xs-right">Local Time Parameter
-                        Id</label>
-                    <div class="col-xs-10">
-                        <div class="input-group">
-                            <input type="text" name="local_time_id" class="form-control form-control-md"
-                                   id="local_time_id"
-                                   placeholder="Local Time Parameter Id">
-                        </div>
-                    </div>
-                </div>
 
-                {% with param="local_time" %}
-                    {% include "greenbutton/param_form.html" %}
-                {% endwith %}
+                {{ forms.local_time.as_table }}
+
                 <button type="submit" name="local_time_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -398,49 +309,22 @@ Test Page Version: 0.2.2
             <!-- Id names: sub_id, usage_id, meter_id
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: meter_submit  -->
-            <form id="meter_form" class="form_div" method="post">
+            <form id="meter_form" class="form_div" method="post" action="meter-reading/">
+                {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Meter Readings</h3>
 
-                <div class="sub_form_div">
-                    <div class="form-group row">
-                        <label for="meter_select" class="col-xs-5 offset-xs-2">Include Subscription and UsagePoint Ids?</label>
-                        <input id="meter_select" class="form-check-input" type="checkbox" value="">
-                    </div>
-                    <hr>
-                    <div class="form-group row">
-                        <label for="meter_sub_id" class="col-xs-3 col-form-label text-xs-right">Subscription Id (Required)</label>
-                        <div class="col-xs-3">
-                            <div class="input-group">
-                                <input type="text" name="sub_id"
-                                       class="form-control form-control-md meter_select_input" id="meter_sub_id"
-                                       placeholder="Subscription Id" disabled>
-                            </div>
-                        </div>
-                        <label for="meter_usagepoint_id" class="col-xs-3 col-form-label text-xs-right">UsagePoint Id (Required) </label>
-                        <div class="col-xs-3">
-                            <div class="input-group">
-                                <input type="text" name="usage_id"
-                                       class="form-control form-control-md meter_select_input"
-                                       id="meter_usagepoint_id"
-                                       placeholder="UsagePoint Id" disabled>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{ forms.meter_reading.as_table }}
 
-                <div class="form-group row">
-                    <label for="meter_id" class="col-xs-2 col-form-label text-xs-right">Meter Reading Id</label>
-                    <div class="col-xs-10">
-                        <div class="input-group">
-                            <input type="text" name="meter_id" class="form-control form-control-md id_select"
-                                   id="meter_id"
-                                   placeholder="Meter Reading Id (Optional)">
-                        </div>
-                    </div>
-                </div>
-                {% with param="meter" %}
-                    {% include "greenbutton/param_form.html" %}
-                {% endwith %}
+                <button type="submit" name="meter_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
+                </button>
+            </form>
+            <br>
+            <form id="meter_by_sub_usageform" class="form_div" method="post" action="meter-reading-sub-usage/">
+                {% csrf_token %}
+                <h3 class="text-xs-center form_header">GET Meter Readings by Subscription and UsagePoint</h3>
+
+                {{ forms.meter_reading_sub_usage.as_table }}
+
                 <button type="submit" name="meter_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
             </form>
@@ -465,22 +349,12 @@ Test Page Version: 0.2.2
 
             <!-- Field names: reading_type_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: reading_type_submit  -->
-            <form id="reading_type_form" class="form_div" method="post">
+            <form id="reading_type_form" class="form_div" method="post" action="reading-type/">
+                {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Reading Type</h3>
-                <div class="form-group row">
-                    <label for="reading_type_id" class="col-xs-2 col-form-label text-xs-right">Reading Type Id</label>
-                    <div class="col-xs-10">
-                        <div class="input-group">
-                            <input type="text" name="reading_type_id" class="form-control form-control-md"
-                                   id="reading_type_id"
-                                   placeholder="Reading Type Id">
-                        </div>
-                    </div>
-                </div>
 
-                {% with param="reading_type" %}
-                    {% include "greenbutton/param_form.html" %}
-                {% endwith %}
+                {{ forms.reading_type.as_table }}
+
                 <button type="submit" name="reading_type_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
@@ -502,7 +376,8 @@ Test Page Version: 0.2.2
             </div>
 
 
-                <form id="server_status_form" class="form_div" method="post">
+                <form id="server_status_form" class="form_div" method="post" action="service-status/">
+                    {% csrf_token %}
                     <h3 class="text-xs-center form_header">GET Server Status</h3>
                     <button type="submit" name="server_status_submit" class="btn btn-success btn-md btn-block m-y-1">Click to Get Server Status</button>
                 </form>
@@ -528,32 +403,21 @@ Test Page Version: 0.2.2
 
             <!-- Field names: usage_id, sub_id, published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: usagepoint_submit  -->
-            <form id="usagepoint_form" class="form_div" method="post">
+            <form id="usagepoint_form" class="form_div" method="post" action="usagepoint/">
+                {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET UsagePoint</h3>
-                <div class="form-group row">
-                    <label for="usagepoint_id" class="col-xs-2 col-form-label text-xs-right">UsagePoint Id</label>
-                    <div class="col-xs-10">
-                        <div class="input-group">
-                            <input type="text" name="usage_id" class="form-control form-control-md"
-                                   id="usagepoint_id"
-                                   placeholder="UsagePoint Id">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="usagepoint_sub_id" class="col-xs-2 col-form-label text-xs-right">Subscription Id</label>
-                    <div class="col-xs-10">
-                        <div class="input-group">
-                            <input type="text" name="sub_id" class="form-control form-control-md"
-                                   id="usagepoint_sub_id"
-                                   placeholder="Subscription Id">
-                        </div>
-                    </div>
-                </div>
 
-                {% with param="usagepoint" %}
-                    {% include "greenbutton/param_form.html" %}
-                {% endwith %}
+                {{ forms.usagepoint.as_table }}
+
+                <button type="submit" name="usagepoint_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
+            </form>
+            <br>
+            <form id="usagepoint_by_sub_form" class="form_div" method="post" action="usagepoint-by-sub/">
+                {% csrf_token %}
+                <h3 class="text-xs-center form_header">GET UsagePoint by Subscription</h3>
+
+                {{ forms.usagepoint_by_sub.as_table }}
+
                 <button type="submit" name="usagepoint_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
