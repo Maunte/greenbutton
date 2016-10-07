@@ -114,13 +114,14 @@ def main():
         interval_id = id_check(data, "interval_id")
         if "sub_id" in data:
             method = "interval_block_subscription_meter_usage"
-            response = gc.execute(method, data["sub_id"], data["usage_id"], data["meter_id"], id=data["interval_id"],
+            response = gc.execute(method, data["sub_id"], data["usage_id"], data["meter_id"],
+                                  interval_block_id=data["interval_id"],
                                   published_max=data["published-max"], published_min=data["published-min"],
                                   updated_max=data["updated-max"], updated_min=data["updated-min"],
                                   max_results=data["max-results"], start_index=data["start-index"], depth=data["depth"])
         else:
             method = "interval_block"
-            response = gc.execute(method, interval_id, published_max=data["published-max"],
+            response = gc.execute(method, interval_block_id=interval_id, published_max=data["published-max"],
                                   published_min=data["published-min"], updated_max=data["updated-max"],
                                   updated_min=data["updated-min"], max_results=data["max-results"],
                                   start_index=data["start-index"], depth=data["depth"])
@@ -129,7 +130,7 @@ def main():
     elif "local_time_submit" in data:
         local_time_id = id_check(data, "local_time_id")
         method = "local_time_parameter"
-        response = gc.execute(method, local_time_id, published_max=data["published-max"],
+        response = gc.execute(method, local_time_parameter_id=local_time_id, published_max=data["published-max"],
                               published_min=data["published-min"], updated_max=data["updated-max"],
                               updated_min=data["updated-min"], max_results=data["max-results"],
                               start_index=data["start-index"], depth=data["depth"])
