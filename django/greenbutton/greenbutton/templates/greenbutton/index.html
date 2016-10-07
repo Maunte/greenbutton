@@ -73,7 +73,7 @@ Test Page Version: 0.3.1
             <h3 class="text-xs-center form_header">Get Application Information</h3>
             <form id="app_info_form" class="form_div" method="post" action="app-info/">
                 {% csrf_token %}
-            <table>{{ forms.app_info.as_table }}</table>
+            <table class="m-x-auto">{{ forms.app_info.as_table }}</table>
             <button type="submit" name="app_info_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
 
@@ -82,7 +82,7 @@ Test Page Version: 0.3.1
             <h3 class="text-xs-center form_header">Get Application Information by Id</h3>
             <form id="app_info_id_form" class="form_div" method="post" action="app-info-id/">
                 {% csrf_token %}
-                <table>{{ forms.app_info_by_id.as_table }}</table>
+                <table class="m-x-auto">{{ forms.app_info_by_id.as_table }}</table>
                 <button type="submit" name="app_info_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
@@ -108,7 +108,7 @@ Test Page Version: 0.3.1
             <form id="auth_form" class="form_div" method="post" action="auth/">
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Authorization</h3>
-                <table>{{ forms.auth.as_table }}</table>
+                <table class="m-x-auto">{{ forms.auth.as_table }}</table>
                 <button type="submit" name="auth_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
@@ -150,25 +150,25 @@ Test Page Version: 0.3.1
             <form id="batch_bulk_form" class="form_div batch_form" method="post" action="batch-bulk/">
                 {% csrf_token %}
                 <h4 class="text-xs-center">Batch Bulk Form</h4>
-                <table>{{ forms.batch_bulk.as_table }}</table>
+                <table class="m-x-auto">{{ forms.batch_bulk.as_table }}</table>
                 <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
             <form id="batch_sub_form" class="form_div batch_form" method="post" action="batch-sub/" style="display:none">
                 {% csrf_token %}
                 <h4 class="text-xs-center">Batch Subscription Form</h4>
-                <table>{{ forms.batch_sub.as_table }}</table>
+                <table class="m-x-auto">{{ forms.batch_sub.as_table }}</table>
                 <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
             <form id="batch_retail_form" class="form_div batch_form" method="post" action="batch-retail/" style="display:none">
                 {% csrf_token %}
                 <h4 class="text-xs-center">Batch Retail Customer Form</h4>
-                <table>{{ forms.batch_retail.as_table }}</table>
+                <table class="m-x-auto">{{ forms.batch_retail.as_table }}</table>
                 <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
             <form id="batch_sub_usage_form" class="form_div batch_form" method="post" action="batch-sub-usage/" style="display:none">
                 {% csrf_token %}
                 <h4 class="text-xs-center">Batch Supscription and UsagePoint Form</h4>
-                <table>{{ forms.batch_sub_usage.as_table }}</table>
+                <table class="m-x-auto">{{ forms.batch_sub_usage.as_table }}</table>
                 <button type="submit" name="bulk_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
         </div>
@@ -205,7 +205,7 @@ Test Page Version: 0.3.1
             <form name="epower_form" id="epower_form" class="form_div" method="post">
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Electrical Power Quality and Usage Summaries</h3>
-                <table>{{ forms.electric_power_summary.as_table }}</table>
+                <table class="m-x-auto">{{ forms.electric_power_summary.as_table }}</table>
 
                 <button type="submit" name="epower_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
@@ -239,7 +239,7 @@ Test Page Version: 0.3.1
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Interval Block</h3>
 
-                <table>{{ forms.interval }}</table>
+                <table class="m-x-auto">{{ forms.interval }}</table>
 
                 <button type="submit" name="interval_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
@@ -249,7 +249,7 @@ Test Page Version: 0.3.1
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Interval Block by Subscription, UsagePoint, Meter, and Interval IDs</h3>
 
-                <table>{{ forms.specific_interval }}</table>
+                <table class="m-x-auto">{{ forms.specific_interval }}</table>
 
                 <button type="submit" name="interval_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
@@ -281,7 +281,7 @@ Test Page Version: 0.3.1
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET local_time Parameter</h3>
 
-                <table>{{ forms.local_time.as_table }}</table>
+                <table class="m-x-auto">{{ forms.local_time.as_table }}</table>
 
                 <button type="submit" name="local_time_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
@@ -313,7 +313,7 @@ Test Page Version: 0.3.1
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Meter Readings</h3>
 
-                <table>{{ forms.meter_reading.as_table }}</table>
+                <table class="m-x-auto">{{ forms.meter_reading.as_table }}</table>
 
                 <button type="submit" name="meter_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
@@ -323,7 +323,7 @@ Test Page Version: 0.3.1
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Meter Readings by Subscription and UsagePoint</h3>
 
-                <table>{{ forms.meter_reading_sub_usage.as_table }}</table>
+                <table class="m-x-auto">{{ forms.meter_reading_sub_usage.as_table }}</table>
 
                 <button type="submit" name="meter_submit" class="btn btn-success btn-md btn-block m-y-1">Submit
                 </button>
@@ -353,7 +353,7 @@ Test Page Version: 0.3.1
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET Reading Type</h3>
 
-                <table>{{ forms.reading_type.as_table }}</table>
+                <table class="m-x-auto">{{ forms.reading_type.as_table }}</table>
 
                 <button type="submit" name="reading_type_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
@@ -407,7 +407,7 @@ Test Page Version: 0.3.1
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET UsagePoint</h3>
 
-                <table>{{ forms.usagepoint.as_table }}</table>
+                <table class="m-x-auto">{{ forms.usagepoint.as_table }}</table>
 
                 <button type="submit" name="usagepoint_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>
@@ -416,7 +416,7 @@ Test Page Version: 0.3.1
                 {% csrf_token %}
                 <h3 class="text-xs-center form_header">GET UsagePoint by Subscription</h3>
 
-                <table>{{ forms.usagepoint_by_sub.as_table }}</table>
+                <table class="m-x-auto">{{ forms.usagepoint_by_sub.as_table }}</table>
 
                 <button type="submit" name="usagepoint_submit" class="btn btn-success btn-md btn-block m-y-1">Submit</button>
             </form>

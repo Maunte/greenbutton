@@ -43,7 +43,7 @@ def data_set(request):
         if input == "":
             data[field] = None
         else:
-            if field in ["published-max", "published-min", "updated-max", "updated-min"]:
+            if field in ["published_max", "published_min", "updated_max", "updated_min"]:
                 data[field] = datetime_converter(input)
             else:
                 data[field] = input
