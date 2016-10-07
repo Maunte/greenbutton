@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views import View
 from .forms import *
 from greenbuttonrest.client import GreenClient
 
@@ -50,12 +51,16 @@ def data_set(request):
     return data, GreenClient()
 
 
+def default_params(data):
+    return {"published_max": data["published_max"], "published_min": data["published_min"],
+            "updated_max": data["updated_max"], "updated_min": data["updated_min"],
+            "max_results": data["max_results"], "start_index": data["start_index"], "depth": data["depth"]}
+
+
 def app_info_view(request):
     data, gc = data_set(request)
-    response = gc.execute("application_information", published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("application_information", **params)
     request.session["response"] = response
     return redirect("/")
 
@@ -69,134 +74,107 @@ def app_info_by_id_view(request):
 
 def auth_view(request):
     data, gc = data_set(request)
-    response = gc.execute("authorization", authorization_id=data["auth_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("authorization", authorization_id=data["auth_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def batch_bulk_view(request):
     data, gc = data_set(request)
-    response = gc.execute("batch_bulk", data["bulk_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("batch_bulk", data["bulk_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def batch_sub_view(request):
     data, gc = data_set(request)
-    response = gc.execute("batch_subscription", data["sub_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("batch_subscription", data["sub_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def batch_retail_view(request):
     data, gc = data_set(request)
-    response = gc.execute("batch_retail", data["retail_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("batch_retail", data["retail_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def batch_sub_usage_view(request):
     data, gc = data_set(request)
-    response = gc.execute("batch_subscription_usage", data["sub_id"], data["usage_id"],
-                          published_max=data["published_max"], published_min=data["published_min"],
-                          updated_max=data["updated_max"], updated_min=data["updated_min"],
-                          max_results=data["max_results"], start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("batch_subscription_usage", data["sub_id"], data["usage_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def electric_power_quality_view(request):
     data, gc = data_set(request)
+    params = default_params(data)
     response = gc.execute("electric_power_quality_summary", data["sub_id"], data["usage_id"],
-                          electric_power_quality_summary_id=data["summary_id"],
-                          published_max=data["published_max"], published_min=data["published_min"],
-                          updated_max=data["updated_max"], updated_min=data["updated_min"],
-                          max_results=data["max_results"], start_index=data["start_index"], depth=data["depth"])
+                          electric_power_quality_summary_id=data["summary_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def electric_power_usage_view(request):
     data, gc = data_set(request)
+    params = default_params(data)
     response = gc.execute("electric_power_usage_summary", data["sub_id"], data["usage_id"],
-                          electric_power_usage_summary_id=data["summary_id"],
-                          published_max=data["published_max"], published_min=data["published_min"],
-                          updated_max=data["updated_max"], updated_min=data["updated_min"],
-                          max_results=data["max_results"], start_index=data["start_index"], depth=data["depth"])
+                          electric_power_usage_summary_id=data["summary_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def interval_view(request):
     data, gc = data_set(request)
-    response = gc.execute("interval_block", interval_block_id=data["interval_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("interval_block", interval_block_id=data["interval_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def specific_interval_view(request):
     data, gc = data_set(request)
+    params = default_params(data)
     response = gc.execute("interval_block_subscription_meter_usage", data["sub_id"], data["usage_id"], data["meter_id"],
-                          interval_block_id=data["summary_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+                          interval_block_id=data["summary_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def local_time_view(request):
     data, gc = data_set(request)
-    response = gc.execute("local_time_parameter", local_time_parameter_id=data["local_time_id"],
-                          published_max=data["published_max"], published_min=data["published_min"],
-                          updated_max=data["updated_max"], updated_min=data["updated_min"],
-                          max_results=data["max_results"], start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("local_time_parameter", local_time_parameter_id=data["local_time_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def meter_reading_view(request):
     data, gc = data_set(request)
-    response = gc.execute("meter_reading", meter_reading_id=data["meter_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("meter_reading", meter_reading_id=data["meter_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def meter_reading_sub_usage_view(request):
     data, gc = data_set(request)
-    response = gc.execute("meter_reading_subscription_usage", data["sub_id"], data["usage_id"],
-                          meter_reading_id=data["meter_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("meter_reading_subscription_usage", data["sub_id"], data["usage_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def reading_type_view(request):
     data, gc = data_set(request)
-    response = gc.execute("reading_type", reading_type_id=data["reading_type_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("reading_type", reading_type_id=data["reading_type_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
@@ -210,19 +188,15 @@ def service_status_view(request):
 
 def usagepoint_view(request):
     data, gc = data_set(request)
-    response = gc.execute("usage", usage_point_id=data["usage_id"], published_max=data["published_max"],
-                          published_min=data["published_min"], updated_max=data["updated_max"],
-                          updated_min=data["updated_min"], max_results=data["max_results"],
-                          start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("usage", usage_point_id=data["usage_id"], **params)
     request.session["response"] = response
     return redirect("/")
 
 
 def usagepoint_by_sub_view(request):
     data, gc = data_set(request)
-    response = gc.execute("usage_by_subscription", data["sub_id"], usage_point_id=data["usage_id"],
-                          published_max=data["published_max"], published_min=data["published_min"],
-                          updated_max=data["updated_max"], updated_min=data["updated_min"],
-                          max_results=data["max_results"], start_index=data["start_index"], depth=data["depth"])
+    params = default_params(data)
+    response = gc.execute("usage_by_subscription", data["sub_id"], usage_point_id=data["usage_id"], **params)
     request.session["response"] = response
     return redirect("/")
