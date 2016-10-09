@@ -1,5 +1,7 @@
+{% load staticfiles i18n %}
+
 <!--
-Test Page Version: 0.3.1
+Test Page Version: 0.3.2
 -->
 
 <!DOCTYPE html>
@@ -26,7 +28,7 @@ Test Page Version: 0.3.1
         {% if context.response %}
         <div class="row m-y-1">
             <button id="toggle_xml" class="btn btn-primary">SHOW/HIDE XML Resposne</button>
-            <!--<button id="toggle_table" class="btn btn-success">SHOW/HIDE Parsed Data</button>-->
+            <button id="toggle_table" class="btn btn-success">SHOW/HIDE Parsed Data</button>
         </div>
         <br>
         <div class="row m-b-1" style="width:100%">
@@ -34,6 +36,11 @@ Test Page Version: 0.3.1
                 <pre><code class="language-xml">
                     {{ context.response }}
                 </code></pre>
+            </div>
+            <div id="table_div" class="data_div" style="display:none">
+                {% if context.parsed_xml %}
+                    {% include "greenbutton/parsed_xml.html" %}
+                {% endif %}
             </div>
         </div>
         {% endif %}
@@ -197,9 +204,9 @@ Test Page Version: 0.3.1
             <!-- Field names: published-min, publshed-max, updated-min, updated-max, max-results, start-index, depth -->
             <!-- Button name: epower_submit  -->
 
-            <label for="batch_bulk_radio">Batch Bulk Id</label>
+            <label for="batch_bulk_radio">Electric Power Quality</label>
             <input type="radio" name="epower" id="epower_quality_radio" class="epower_radio" checked>
-            <label for="batch_sub_radio">Batch Subscription Id</label>
+            <label for="batch_sub_radio">Electirc Power Usage</label>
             <input type="radio" name="epower" id="epower_usage_radio" class="epower_radio">
 
             <form name="epower_form" id="epower_form" class="form_div" method="post">

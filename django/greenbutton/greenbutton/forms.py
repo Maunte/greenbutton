@@ -22,7 +22,7 @@ class AppInfobyIdForm(forms.Form):
 
 
 class AuthForm(ParamForm):
-    auth_id = forms.IntegerField(label="Authorization Id", required=False)
+    auth_id = forms.IntegerField(label="Authorization Id (optional)", required=False)
     field_order = ["auth_id"]
 
 
@@ -51,7 +51,7 @@ class ElectricPowerSummaryForm(ParamForm):
     sub_id = forms.IntegerField(label="Subscription Id (required)")
     usage_id = forms.IntegerField(label="UsagePoint Id (required)")
     summary_id = forms.IntegerField(label="Electric Power Summary Id (optional)", required=False)
-    field_order = ["sub_id", "usage_id", "summary_id (required)"]
+    field_order = ["sub_id", "usage_id", "summary_id"]
 
 
 class IntervalForm(ParamForm):

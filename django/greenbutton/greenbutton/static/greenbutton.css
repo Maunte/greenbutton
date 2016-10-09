@@ -21,6 +21,9 @@ body {
 .data_table table, th, td {
     border: 2px solid black;
 }
+.sub_data_table {
+    background-color: rgb(255,255,240);
+}
 
 label {
     font-size: 12px;

@@ -1,0 +1,522 @@
+{% if context.parsed_xml.method == "app_info" %}
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td>
+    {% for entry in context.parsed_xml.entries %}
+        <h4 class="m-x-1">{{ entry.title }}</h4>
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+        {% for entrykey, entryval in entry.items %}
+        {% if entry != "uuid" and entry != "title" %}
+            <tr><td>{{ entrykey }}</td><td>{{ entryval }}</td></tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "app_info_by_id" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.entry.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.entry.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.entry.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+</table>
+
+{% elif context.parsed_xml.method == "auth" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td colspan="2">
+    {% for entry in context.parsed_xml.entries %}
+        <h4 class="m-x-1">{{ entry.title }}</h4>
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+        {% for entrykey, entryval in entry.items %}
+        {% if entrykey != "uuid" and entrykey != "title" %}
+            {% if entrykey != "publishedPeriod" and entrykey != "authorizedPeriod" %}
+            <tr><td>{{ entrykey }}</td><td colspan="4">{{ entryval }}</td></tr>
+            {% else %}
+            <tr><td>{{ entrykey }}</td>
+            {% for items in entryval %}
+                {% for item in items %}
+                <td>{{ item }}</td>
+                {% endfor %}
+            {% endfor %}
+            </tr>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "auth_id" %}
+
+<h3 class="text-xs-center">Authorization ID</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.entries.uuid }}</h5>
+<br>
+    <table class="data_table m-a-1">
+    {% for entrykey, entryval in context.parsed_xml.entries.items %}
+    {% if entrykey != "uuid" and entrykey != "title" %}
+        {% if entrykey != "publishedPeriod" and entrykey != "authorizedPeriod" %}
+        <tr><td>{{ entrykey }}</td><td colspan="4">{{ entryval }}</td></tr>
+        {% else %}
+        <tr><td>{{ entrykey }}</td>
+        {% for items in entryval %}
+            {% for item in items %}
+            <td>{{ item }}</td>
+            {% endfor %}
+        {% endfor %}
+        </tr>
+        {% endif %}
+    {% endif %}
+    {% endfor %}
+    </table>
+{% elif context.parsed_xml.method == "batch" %}
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<table>
+    {% for key, value in context.parsed_xml.items %}
+    {% if key != "title" and key != "uuid"  and key != "method"%}
+    <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
+    {% endif %}
+    {% endfor %}
+</table>
+
+{% elif context.parsed_xml.method == "batch_retail" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td colspan="2">
+    {% for entry in context.parsed_xml.entries %}
+        {% if entry.title != None %}<h4 class="m-x-1">{{ entry.title }}</h4>{% endif %}
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+        {% for entrykey, entryval in entry.items %}
+        {% if entrykey != "uuid" and entrykey != "title" %}
+            {% if entrykey != "interval" and entrykey != "IntervalReading" %}
+            <tr><td>{{ entrykey }}</td><td colspan="4">{{ entryval }}</td></tr>
+            {% else %}
+                <tr><td>{{ entrykey }}</td>
+                {% for items in entryval %}
+                    {% for item in items %}
+                    <td>{{ item }}</td>
+                    {% endfor %}
+                {% endfor %}
+                </tr>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        </table>
+        <br>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "epower_usage" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td colspan="2">
+    {% for entry in context.parsed_xml.entries %}
+        <h4 class="m-x-1">{{ entry.title }}</h4>
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+        {% for entrykey, entryval in entry.items %}
+        {% if entrykey != "uuid" and entrykey != "title" %}
+            {% if entrykey != "overallConsumptionLastPeriod" and entrykey != "currentBillingPeriodOverAllConsumption" and entrykey != "billingPeriod" %}
+            <tr><td>{{ entrykey }}</td><td colspan="4">{{ entryval }}</td></tr>
+            {% else %}
+            <tr><td>{{ entrykey }}</td>
+                <td>
+                    <table>
+            {% for items in entryval %}
+                        <tr>
+                {% for item in items %}
+                <td>{{ item }}</td>
+                {% endfor %}
+                        </tr>
+            {% endfor %}
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "epower_usage_summary" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.entries.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.entries.uuid }}</h5>
+<br>
+<table class="data_table m-a-1">
+{% for entrykey, entryval in context.parsed_xml.entries.items %}
+{% if entrykey != "uuid" and entrykey != "title"  and entrykey != "method"%}
+    {% if entrykey != "overallConsumptionLastPeriod" and entrykey != "currentBillingPeriodOverAllConsumption" and entrykey != "billingPeriod" %}
+    <tr><td>{{ entrykey }}</td><td colspan="4">{{ entryval }}</td></tr>
+    {% else %}
+    <tr><td>{{ entrykey }}</td>
+        <td>
+            <table>
+    {% for items in entryval %}
+                <tr>
+        {% for item in items %}
+        <td>{{ item }}</td>
+        {% endfor %}
+                </tr>
+    {% endfor %}
+            </table>
+        </td>
+    </tr>
+    {% endif %}
+{% endif %}
+{% endfor %}
+</table>
+
+{% elif context.parsed_xml.method == "local_time" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td colspan="2">
+    {% for entry in context.parsed_xml.entries %}
+        <h4 class="m-x-1">{{ entry.title }}</h4>
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+            <tr><td colspan="2"><strong>Local Time Parameters</strong></td></tr>
+        {% for entrykey, entryval in entry.items %}
+        {% if entrykey != "uuid" and entrykey != "title" %}
+            {% if entrykey != "LocalTimeParameters"%}
+            <tr><td>{{ entrykey }}</td><td colspan="4">{{ entryval }}</td></tr>
+            {% else %}
+            <tr><td>{{ entrykey }}</td>
+                <td>
+                    <table>
+            {% for items in entryval %}
+                        <tr>
+                {% for item in items %}
+                <td>{{ item }}</td>
+                {% endfor %}
+                        </tr>
+            {% endfor %}
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "local_time_id" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.entries.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.entries.uuid }}</h5>
+<br>
+<table class="data_table m-a-1">
+    <tr><td colspan="2"><strong>Local Time Parameters</strong></td></tr>
+{% for entrykey, entryval in context.parsed_xml.entries.items %}
+{% if entrykey != "uuid" and entrykey != "title"  and entrykey != "method"%}
+    {% if entrykey != "LocalTimeParameters" %}
+    <tr><td>{{ entrykey }}</td><td colspan="4">{{ entryval }}</td></tr>
+    {% else %}
+    <tr><td>{{ entrykey }}</td>
+        <td>
+            <table>
+    {% for items in entryval %}
+                <tr>
+        {% for item in items %}
+        <td>{{ item }}</td>
+        {% endfor %}
+                </tr>
+    {% endfor %}
+            </table>
+        </td>
+    </tr>
+    {% endif %}
+{% endif %}
+{% endfor %}
+</table>
+
+{% elif context.parsed_xml.method == "meter_reading" %}
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td>
+    {% for entry in context.parsed_xml.entries %}
+        <h4 class="m-x-1">{{ entry.title }}</h4>
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+        {% for entrykey, entryval in entry.items %}
+        {% if entrykey != "uuid" and entrykey != "title" %}
+            <tr><td>{{ entrykey }}</td><td>{{ entryval }}</td></tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "meter_reading_id" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "method" and rootkey != "entries" and rootkey != "content" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    {% for entrykey, entryval in context.parsed_xml.entries.items %}
+    {% if entrytkey != "title" and entrykey != "uuid" and entrykey != "method" and entrykey != "entries" and entrykey != "content" %}
+        <tr><td>entrykey</td><td>entryval</td></tr>
+    {% endif %}
+    {% endfor %}
+</table>
+
+{% elif context.parsed_xml.method == "reading_type" %}
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td>
+    {% for entry in context.parsed_xml.entries %}
+        <h4 class="m-x-1">{{ entry.title }}</h4>
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+        {% for entrykey, entryval in entry.items %}
+        {% if entry != "uuid" and entry != "title" %}
+            <tr><td>{{ entrykey }}</td><td>{{ entryval }}</td></tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "reading_type_by_id" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.entry.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.entry.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.entry.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+</table>
+
+{% elif context.parsed_xml.method == "service_status" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<br>
+<table class="data_table">
+    <tr><td>Current Status</td><td>{{ context.parsed_xml.status }}</td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "usagepoint" %}
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td>
+    {% for entry in context.parsed_xml.entries %}
+        <h4 class="m-x-1">{{ entry.title }}</h4>
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+        {% for entrykey, entryval in entry.items %}
+        {% if entrykey != "uuid" and entrykey != "title" %}
+            <tr>
+                <td>{{ entrykey }}</td>
+                {% for items in entryval %}
+                <td>
+                    <table class="sub_data_table">
+                        {% for items in entryval %}
+                        <tr>
+                            {% for item in items %}
+                            <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+                {% endfor %}
+            </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "usagepoint_by_id" %}
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="sub_data_table m-a-1">
+    <tr>
+        <td><strong>Service Category</strong></td>
+        <td>{{ context.parsed_xml.ServiceCategory.0.0 }}: {{ context.parsed_xml.ServiceCategory.0.1 }}</td>
+    </tr>
+</table>
+
+{% elif context.parsed_xml.method == "usagepoint_sub" %}
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+<table class="data_table">
+    {% for rootkey, rootval in context.parsed_xml.items %}
+    {% if rootkey != "title" and rootkey != "uuid" and rootkey != "entries" and rootkey != "method" %}
+        <tr><td>{{ rootkey }}</td><td>{{ rootval }}</td></tr>
+    {% endif %}
+    {% endfor %}
+    <tr><td>
+    {% for entry in context.parsed_xml.entries %}
+        <h4 class="m-x-1">{{ entry.title }}</h4>
+        <h6 class="m-x-1">UUID: {{ entry.uuid }}</h6>
+        <table class="sub_data_table m-a-1">
+        {% for entrykey, entryval in entry.items %}
+        {% if entrykey != "uuid" and entrykey != "title" %}
+            <tr>
+                <td>{{ entrykey }}</td>
+                <td>
+                    <table class="data_table">
+                        {% for items in entryval %}
+                        <tr>
+                            {% for item in items %}
+                            <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+            </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+    </td></tr>
+</table>
+
+{% elif context.parsed_xml.method == "usagepoint_sub_by_id" %}
+<h3 class="text-xs-center">{{ context.parsed_xml.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.uuid }}</h5>
+<br>
+
+<table class="data_table">
+    {% for key, value in context.parsed_xml.items %}
+    {% if key != "uuid" and key != "title" and key != "method" %}
+    <tr>
+        <td>{{ key }}</td>
+        <td>
+            <table class="sub_data_table">
+                {% for items in value %}
+                <tr>
+                    {% for item in items %}
+                    <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+
+{% elif context.parsed_xml.method == "epower_quality_summary" %}
+
+<h3 class="text-xs-center">{{ context.parsed_xml.entries.title }}</h3>
+<h5 class="text-xs-center">UUID: {{ context.parsed_xml.entries.uuid }}</h5>
+<br>
+<table class="data_table m-a-1">
+{% for entrykey, entryval in context.parsed_xml.entries.items %}
+{% if entrykey != "uuid" and entrykey != "title"  and entrykey != "method"%}
+    {% if entrykey != "overallConsumptionLastPeriod" and entrykey != "currentBillingPeriodOverAllConsumption" and entrykey != "billingPeriod" %}
+    <tr><td>{{ entrykey }}</td><td colspan="4">{{ entryval }}</td></tr>
+    {% else %}
+    <tr><td>{{ entrykey }}</td>
+        <td>
+            <table>
+    {% for items in entryval %}
+                <tr>
+        {% for item in items %}
+        <td>{{ item }}</td>
+        {% endfor %}
+                </tr>
+    {% endfor %}
+            </table>
+        </td>
+    </tr>
+    {% endif %}
+{% endif %}
+{% endfor %}
+</table>
+
+{% endif %}
