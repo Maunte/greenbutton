@@ -29,14 +29,16 @@ def index(request):
 
     context = {}
     if "response" in request.session:
-        context["response"] = request.session["response"]
-        if "parsed_xml" in request.session:
-            context["parsed_xml"] = request.session["parsed_xml"]
-            # del request.session["response"]
-            # del request.session["parsed_xml"]
+        if request.session["response"] is not None:
+            xml = Parser(request.session["response"])
+            context["json"] = xml.parser()
+            print(context["json"])
         else:
-            context["parsed_xml"] = ""
-
+            context["response"] = "Failed"
+            context["json"] = ""
+        context["response"] = request.session["response"]
+    else:
+        pass
     return render(request, "greenbutton/index.html", {"forms": forms, "context": context})
 
 
@@ -69,11 +71,6 @@ def app_info_view(request):
     params = default_params(data)
     response = gc.execute("application_information", **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        request.session["parsed_xml"] = xml.app_info()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -81,11 +78,6 @@ def app_info_by_id_view(request):
     data, gc = data_set(request)
     response = gc.execute("application_information", application_information_id=data["app_info_id"])
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        request.session["parsed_xml"] = xml.app_info_by_id()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -94,14 +86,6 @@ def auth_view(request):
     params = default_params(data)
     response = gc.execute("authorization", authorization_id=data["auth_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["auth_id"] is None:
-            request.session["parsed_xml"] = xml.auth()
-        else:
-            request.session["parsed_xml"] = xml.auth_id()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -110,11 +94,6 @@ def batch_bulk_view(request):
     params = default_params(data)
     response = gc.execute("batch_bulk", data["bulk_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        request.session["parsed_xml"] = xml.batch()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -123,11 +102,6 @@ def batch_sub_view(request):
     params = default_params(data)
     response = gc.execute("batch_subscription", data["sub_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        request.session["parsed_xml"] = xml.batch()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -136,11 +110,6 @@ def batch_retail_view(request):
     params = default_params(data)
     response = gc.execute("batch_retail", data["retail_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        request.session["parsed_xml"] = xml.batch_retail()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -149,11 +118,6 @@ def batch_sub_usage_view(request):
     params = default_params(data)
     response = gc.execute("batch_subscription_usage", data["sub_id"], data["usage_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        request.session["parsed_xml"] = xml.batch()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -163,14 +127,6 @@ def electric_power_quality_view(request):
     response = gc.execute("electric_power_quality_summary", data["sub_id"], data["usage_id"],
                           electric_power_quality_summary_id=data["summary_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["summary_id"] is None:
-            request.session["parsed_xml"] = xml.batch()
-        else:
-            request.session["parsed_xml"] = xml.electric_power_quality_summary()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -180,14 +136,6 @@ def electric_power_usage_view(request):
     response = gc.execute("electric_power_usage_summary", data["sub_id"], data["usage_id"],
                           electric_power_usage_summary_id=data["summary_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["summary_id"] is None:
-            request.session["parsed_xml"] = xml.electric_power_usage()
-        else:
-            request.session["parsed_xml"] = xml.electric_power_usage_summary()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -196,14 +144,6 @@ def interval_view(request):
     params = default_params(data)
     response = gc.execute("interval_block", interval_block_id=data["interval_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["interval_id"] is None:
-            request.session["parsed_xml"] = xml.batch()
-        else:
-            request.session["parsed_xml"] = xml.specific_interval()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -213,14 +153,6 @@ def specific_interval_view(request):
     response = gc.execute("interval_block_subscription_meter_usage", data["sub_id"], data["usage_id"], data["meter_id"],
                           interval_block_id=data["interval_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["interval_id"] is None:
-            request.session["parsed_xml"] = xml.batch()
-        else:
-            request.session["parsed_xml"] = xml.specific_interval()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -229,14 +161,6 @@ def local_time_view(request):
     params = default_params(data)
     response = gc.execute("local_time_parameter", local_time_parameter_id=data["local_time_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["local_time_id"] is None:
-            request.session["parsed_xml"] = xml.local_time()
-        else:
-            request.session["parsed_xml"] = xml.local_time_id()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -245,14 +169,6 @@ def meter_reading_view(request):
     params = default_params(data)
     response = gc.execute("meter_reading", meter_reading_id=data["meter_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["meter_id"] is None:
-            request.session["parsed_xml"] = xml.meter_reading()
-        else:
-            request.session["parsed_xml"] = xml.meter_reading_id()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -261,11 +177,6 @@ def meter_reading_sub_usage_view(request):
     params = default_params(data)
     response = gc.execute("meter_reading_subscription_usage", data["sub_id"], data["usage_id"], meter_reading_id=data["meter_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        request.session["parsed_xml"] = xml.batch()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -274,14 +185,6 @@ def reading_type_view(request):
     params = default_params(data)
     response = gc.execute("reading_type", reading_type_id=data["reading_type_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["reading_type_id"] is None:
-            request.session["parsed_xml"] = xml.reading_type()
-        else:
-            request.session["parsed_xml"] = xml.reading_type_by_id()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -289,11 +192,6 @@ def service_status_view(request):
     gc = GreenClient()
     response = gc.execute("service_status")
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        request.session["parsed_xml"] = xml.service_status()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -302,14 +200,6 @@ def usagepoint_view(request):
     params = default_params(data)
     response = gc.execute("usage", usage_point_id=data["usage_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["usage_id"] is None:
-            request.session["parsed_xml"] = xml.usagepoint()
-        else:
-            request.session["parsed_xml"] = xml.usagepoint_by_id()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")
 
 
@@ -318,12 +208,4 @@ def usagepoint_by_sub_view(request):
     params = default_params(data)
     response = gc.execute("usage_by_subscription", data["sub_id"], usage_point_id=data["usage_id"], **params)
     request.session["response"] = response
-    if response is not None:
-        xml = Parser(response)
-        if data["usage_id"] is None:
-            request.session["parsed_xml"] = xml.usagepoint_sub()
-        else:
-            request.session["parsed_xml"] = xml.usagepoint_sub_by_id()
-    else:
-        request.session["response"] = "Failed"
     return redirect("/")

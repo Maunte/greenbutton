@@ -1,7 +1,7 @@
 {% load staticfiles i18n %}
 
 <!--
-Test Page Version: 0.4.1
+Test Page Version: 0.4.2
 -->
 
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ Test Page Version: 0.4.1
                 </code></pre>
             </div>
             <div id="table_div" class="data_div" style="display:none">
-                {% if context.parsed_xml %}
+                {% if context.json %}
                     {% include "greenbutton/parsed_xml.html" %}
                 {% endif %}
             </div>

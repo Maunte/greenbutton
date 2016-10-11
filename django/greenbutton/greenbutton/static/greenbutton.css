@@ -9,7 +9,6 @@ body {
 .data_div {
     background-color: rgb(255,255,240);
     overflow-x: scroll;
-    overflow-y: scroll;
     border: 2px solid black;
     padding: 20px;
 }
@@ -17,14 +16,18 @@ body {
 .data_table {
     font-size: 0.8em;
     background-color: rgb(240,255,240);
-    width: 50%;
+    width: 100%;
 }
 .data_table table, th, td {
     border: 2px solid black;
 }
 .sub_data_table {
     background-color: rgb(255,255,240);
-    width: 50%;
+    width: 100%;
+}
+
+.data_entry {
+    border: 3px solid black;
 }
 
 label {
