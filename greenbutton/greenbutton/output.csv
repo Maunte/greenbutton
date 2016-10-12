@@ -1,0 +1,3 @@
+*****Main Header*****
+title,uuid,published,updated,link1,link2,link3,link4
+Monthly Electricity Consumption,4234ae39-fb6d-48ca-8856-ac9f41fb3d34,2013-09-19T04:00:00Z,2013-09-19T04:00:00Z,https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/Subscription/1/UsagePoint/1/MeterReading,https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/Subscription/1/UsagePoint/1/MeterReading/1,https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/Subscription/1/UsagePoint/1/MeterReading/1/IntervalBlock,https://services.greenbuttondata.org//DataCustodian/espi/1_1/resource/ReadingType/1
