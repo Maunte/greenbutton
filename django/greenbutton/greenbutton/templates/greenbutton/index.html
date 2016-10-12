@@ -26,9 +26,16 @@ Test Page Version: 0.4.2
     </a>
     <div>
         {% if context.response and context.response != "Failed" %}
-        <div class="row m-y-1">
-            <button id="toggle_xml" class="btn btn-primary">SHOW/HIDE XML Resposne</button>
-            <button id="toggle_table" class="btn btn-success">SHOW/HIDE Parsed Data</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <button id="toggle_xml" class="btn btn-primary">SHOW/HIDE XML Resposne</button>
+                    <button id="toggle_table" class="btn btn-success">SHOW/HIDE Parsed Data</button>
+                </div>
+                <div class="col-xs-6">
+                    <form method="get" action="download-csv/"><button type="submit" class="btn btn-info">Download CSV</button></form>
+                </div>
+            </div>
         </div>
         <br>
         <div class="row m-b-1" style="width:100%">

@@ -1,11 +1,12 @@
-import json
+import json, csv
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import *
 from greenbuttonrest.client import GreenClient
-from greenbuttonrest.helper.parser import Parser
+from greenbuttonrest.helper.parser import Parser, CsvWriter
 
 
-def index(request):
+def index(request, **kwargs):
     # Define forms to render
     forms = {
         "app_info": ParamForm,
@@ -29,13 +30,19 @@ def index(request):
 
     context = {}
     if "response" in request.session:
+        try:
+            return kwargs["csv"]
+        except KeyError:
+            pass
+
         if request.session["response"] is not None:
             xml = Parser(request.session["response"])
             context["json"] = xml.parser()
-            print(context["json"])
+            request.session["json"] = context["json"]
         else:
             context["response"] = "Failed"
             context["json"] = ""
+
         context["response"] = request.session["response"]
     else:
         pass
@@ -64,6 +71,26 @@ def default_params(data):
     return {"published_max": data["published_max"], "published_min": data["published_min"],
             "updated_max": data["updated_max"], "updated_min": data["updated_min"],
             "max_results": data["max_results"], "start_index": data["start_index"], "depth": data["depth"]}
+
+
+def create_csv(jsonfile):
+    writer = CsvWriter(jsonfile)
+    writer.writecsv()
+
+
+def download_csv_view(request):
+    create_csv(request.session["json"])
+
+    csvresponse = HttpResponse(content_type="text/csv")
+    csvresponse['Content-Disposition'] = 'attachment; filename="greenbutton.csv"'
+
+    readfile = open("greenbutton/csv/output.csv", "r")
+    writer = csv.writer(csvresponse)
+
+    for line in readfile:
+        writer.writerow([line])
+
+    return csvresponse
 
 
 def app_info_view(request):

@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^service-status/', views.service_status_view, name="service-status"),
     url(r'^usagepoint/', views.usagepoint_view, name="usagepoint"),
     url(r'^usagepoint-by-sub/', views.usagepoint_by_sub_view, name="usagepoint-by-sub"),
+    url(r'^download-csv/', views.download_csv_view, name="download-csv"),
     url(r'^admin/', admin.site.urls),
 ]

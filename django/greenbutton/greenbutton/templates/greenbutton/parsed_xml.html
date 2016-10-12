@@ -1,3 +1,9 @@
+{% if "currentStatus" in context.json %}
+    {% for key, value in context.json.items %}
+    <h1>{{ key }}: {{ value }}</h1>
+    {% endfor %}
+{% else %}
+
 <h2 class="text-xs-center">{{ context.json.title }}</h2>
 <h4 class="text-xs-center">UUID: {{ context.json.uuid }}</h4>
 <br>
@@ -95,4 +101,6 @@
     {% endfor %}
     </div>
 {% endfor %}
+{% endif %}
+
 {% endif %}
