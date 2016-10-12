@@ -1,15 +1,18 @@
 import xml.etree.ElementTree as ET
+import json, csv
 
 
 class Parser(object):
     def __init__(self, xml):
         self.xml_text = xml
-        self.data = {}
         self.root = ET.fromstring(self.xml_text)
 
     def parser(self):
-        data = self.method_select(self.root)
-        return(data)
+        if self.rm_namespace(self.root.tag) == "ServiceStatus":
+            data = self.server_status_parse()
+        else:
+            data = self.method_select(self.root)
+        return data
 
     def root_type(self, root):
         return self.rm_namespace(root.tag)
@@ -114,6 +117,11 @@ class Parser(object):
                 resources.append(self.resource_parse(subitem))
             return {resourcetag: resources, "var_type": "list"}
 
+    def server_status_parse(self):
+        for child in self.root:
+            data =  {self.rm_namespace(child.tag): child.text}
+        return data
+
     def rm_namespace(self, name):
         if "{http://www.w3.org/2005/Atom}" in name:
             new_name = name.replace("{http://www.w3.org/2005/Atom}", "")
@@ -128,3 +136,103 @@ class Parser(object):
             return uuid.replace("urn:uuid:", "")
         else:
             return uuid
+
+
+class CsvWriter():
+    def __init__(self, jsonfile):
+        self.json = jsonfile
+        self.output = "greenbutton/output.csv"
+
+    def writecsv(self):
+        header = self.get_header(self.json)
+        self.section_header("w", "*****Main Header*****")
+        if "currentStatus" in self.json:
+            self.server_writer(self.json)
+        else:
+            self.head_writer(header)
+            if "entries" in self.json:
+                self.entry_write()
+            else:
+                pass
+
+
+    def server_writer(self, status):
+        with open(self.output, "a") as csvfile:
+            csvwriter = csv.writer(csvfile)
+            for key, value in status.items():
+                csvwriter.writerow([key, value])
+
+    def section_header(self, mode, *caption):
+        with open(self.output, mode) as csvfile:
+            csvwriter = csv.writer(csvfile)
+            csvwriter.writerow((caption))
+
+    def entry_write(self):
+        entry_head_list = self.get_entry()
+        for entry_head in entry_head_list:
+            self.section_header("a", "*****Entry Header*****")
+            self.head_append(entry_head)
+
+    def head_writer(self, head):
+        with open(self.output, "a") as csvfile:
+            csvwriter = csv.writer(csvfile)
+            csvwriter.writerow(head["keys"])
+            csvwriter.writerow(head["values"])
+
+    def head_append(self, head):
+        with open(self.output, "a") as csvfile:
+            csvwriter = csv.writer(csvfile)
+            csvwriter.writerow(head["keys"])
+            csvwriter.writerow(head["values"])
+
+    def link_test(self, head, links):
+        i = 1
+        for link in links:
+            head["keys"].append("link" + str(i))
+            head["values"].append(link)
+            i += 1
+        return head
+
+    def key_test(self, dict, *keys):
+        head = {"keys": [], "values": []}
+        for key in keys:
+            if key in dict:
+                head["keys"].append(key)
+                head["values"].append(dict[key])
+            else:
+                pass
+        if "links" in dict:
+            head = self.link_test(head, dict["links"])
+        if "content" in dict:
+            self.get_content(head, dict["content"][0])
+        return head
+
+    def get_header(self, dict):
+        head = self.key_test(dict, "title", "uuid", "published", "updated")
+        return head
+
+    def get_entry(self):
+        entry_head_list = []
+        for entry in self.json["entries"]:
+            entry_head_list.append(self.get_header(entry))
+        return entry_head_list
+
+    def get_content(self, head, content):
+        for contentkey, contentval in content.items():
+            head = self.content_prop(head, contentval)
+        return head
+
+    def content_prop(self, head, contentval):
+        for pair in contentval:
+            type = "none"
+            for key, value in pair.items():
+                if key == "var_type":
+                    type = value
+                else:
+                    datakey = key
+            if type == "str":
+                head["keys"].append(datakey)
+                head["values"].append(pair[datakey])
+            else:
+                self.content_prop(head, pair[datakey])
+        return head
